@@ -10,11 +10,14 @@ function DevDetailsSidebar({ user }) {
   return (
     <div className="border bg-white rounded p-4 h-[700px] w-[25%]">
       <div className="flex justify-center">
-      {personal_details?.profile_url !== "" ? (
-        <img src={personal_details?.profile_url} className="rounded-full w-40 h-40" />
-      ) : (
-        <Avatar name={personal_details?.fullName} round={true} size={95} />
-      )}
+        {personal_details?.profile_url !== "" ? (
+          <img
+            src={personal_details?.profile_url}
+            className="rounded-full w-40 h-40"
+          />
+        ) : (
+          <Avatar name={personal_details?.fullName} round={true} size={95} />
+        )}
       </div>
 
       <p className="text-center text-sm mt-2">Expertise in</p>
@@ -22,7 +25,7 @@ function DevDetailsSidebar({ user }) {
         {personal_details?.expertise_in}
       </p>
       <p className="mt-2 font-bold text-2xl text-center my-4">
-        {personal_details?.name}
+        {personal_details?.fullName}
       </p>
       <p className="text-gray-500 font-bold text-normal mb-2">
         Username : @{personal_details?.username}
@@ -39,7 +42,9 @@ function DevDetailsSidebar({ user }) {
       <p className="my-2 font-bold mt-4 border-b-2">Skills</p>
       <div className="flex flex-row">
         {personal_details?.skills.split(",").map((skill, id) => (
-          <p className="border p-1 my-1 mr-1 text-xs rounded" key={id}>{skill}</p>
+          <p className="border p-1 my-1 mr-1 text-xs rounded" key={id}>
+            {skill}
+          </p>
         ))}
       </div>
 
