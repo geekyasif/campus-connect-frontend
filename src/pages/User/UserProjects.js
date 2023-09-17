@@ -1,0 +1,232 @@
+import React, { useState } from "react";
+import TextInput from "../../components/UserProfile/TextInput";
+import TextArea from "../../components/UserProfile/TextArea";
+import InputRow from "../../components/UserProfile/InputRow";
+import { useDispatch, useSelector } from "react-redux";
+import Thumbnail from "../../components/Thumbnail/Thumbnail";
+import { Toaster, toast } from "react-hot-toast";
+import { arrayUnion, doc, updateDoc } from "firebase/firestore";
+import { db, storage } from "../../services/firebase";
+import { getDownloadURL, uploadBytes, ref } from "firebase/storage";
+import { v4 as uuid4 } from "uuid";
+import { updateUserData } from "../../features/authSlice";
+import useLoading from "../../hooks/useLoading";
+import SubmitButton from "../../components/UserProfile/SubmitButton";
+import UserProjectCard from "../../components/UserProfile/UserMyProfile/UserProject/UserProjectCard";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
+
+function UserProjects() {
+  const { loading, startLoading, stopLoading } = useLoading();
+  const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.auth);
+  const [projectImage, setProjectImage] = useState({
+    uploadImage: "",
+    prevImage: "",
+    downloadUrl: "",
+  });
+  const [projectData, setProjectData] = useState({
+    project_title: "",
+    project_image: "",
+    project_source_code_link: "",
+    project_deployment_link: "",
+    project_demo_link: "",
+    project_tech_stack: "",
+    project_date: "",
+    project_description: "",
+  });
+
+  const handleProjectImage = (e) => {
+    const projectFile = e.target.files[0];
+    const projectImagePrev = URL.createObjectURL(projectFile);
+
+    if (projectFile.type === "image/jpeg" || projectFile.type === "image/png") {
+      setProjectImage({
+        uploadImage: projectFile,
+        prevImage: projectImagePrev,
+        downloadUrl: "",
+      });
+    } else {
+      toast.error("Invalid file type!");
+    }
+  };
+
+  const handleUserProjectInputChange = (e) => {
+    const { name, value } = e.target;
+    setProjectData({
+      ...projectData,
+      [name]: value,
+    });
+  };
+
+  const handleProjectFromData = async (e) => {
+    e.preventDefault();
+
+    try {
+      startLoading();
+      const storageRef = ref(
+        storage,
+        `projects/${user?.personal_details.email.split("@")[0]}/${
+          projectImage.uploadImage.name
+        }`
+      );
+      const snapshot = await uploadBytes(storageRef, projectImage.uploadImage);
+      const url = await getDownloadURL(storageRef);
+      if (url) {
+        const userDocRef = doc(
+          db,
+          "users",
+          user?.personal_details.email.split("@")[0]
+        );
+        await updateDoc(
+          userDocRef,
+          {
+            projects: arrayUnion({
+              project_title: projectData.project_title,
+              project_image: url,
+              project_source_code_link: projectData.project_source_code_link,
+              project_deployment_link: projectData.project_deployment_link,
+              project_demo_link: projectData.project_demo_link,
+              project_tech_stack: projectData.project_tech_stack,
+              project_date: projectData.project_date,
+              project_description: projectData.project_description,
+              project_id: uuid4(),
+            }),
+          },
+          { merge: true }
+        );
+
+        dispatch(updateUserData(user?.personal_details.email.split("@")[0]));
+        toast.success("Project added successfully!");
+        setProjectData({
+          project_title: "",
+          project_image: "",
+          project_source_code_link: "",
+          project_deployment_link: "",
+          project_demo_link: "",
+          project_tech_stack: "",
+          project_date: "",
+          project_description: "",
+        });
+      }
+      stopLoading();
+    } catch (error) {
+      console.log(error);
+      toast.error("Something went wrong!");
+      stopLoading();
+    }
+  };
+
+  const handleDeleteProject = async (id) => {
+    console.log(id);
+  };
+
+  return (
+    <div>
+      <div className="bg-white p-2 shadow">
+        <Toaster position="top-right" reverseOrder={false} />
+        <form onSubmit={handleProjectFromData}>
+          <Thumbnail
+            thumbnail={projectImage.prevImage}
+            onChange={handleProjectImage}
+          />
+          <InputRow>
+            <TextInput
+              labelText="Project Title"
+              typeText="text"
+              placeholderText="Project title"
+              name="project_title"
+              value={projectData.project_title}
+              onChange={handleUserProjectInputChange}
+            />
+
+            <TextInput
+              labelText="Source Code Link"
+              typeText="text"
+              placeholderText="source code link"
+              name="project_source_code_link"
+              value={projectData.project_source_code_link}
+              onChange={handleUserProjectInputChange}
+            />
+          </InputRow>
+          <InputRow>
+            <TextInput
+              labelText="Deployment Link"
+              typeText="text"
+              placeholderText="Deployment link"
+              name="project_deployment_link"
+              value={projectData.project_deployment_link}
+              onChange={handleUserProjectInputChange}
+            />
+
+            <TextInput
+              labelText="Demo Link"
+              typeText="text"
+              placeholderText="demo link"
+              name="project_demo_link"
+              value={projectData.project_demo_link}
+              onChange={handleUserProjectInputChange}
+            />
+          </InputRow>
+
+          <InputRow>
+            <TextInput
+              labelText="Tech Stack"
+              typeText="text"
+              placeholderText="tech stack"
+              name="project_tech_stack"
+              value={projectData.project_tech_stack}
+              onChange={handleUserProjectInputChange}
+            />
+
+            <TextInput
+              labelText="Project Start Date"
+              typeText="date"
+              placeholderText="Project Date"
+              name="project_date"
+              value={projectData.project_date}
+              onChange={handleUserProjectInputChange}
+            />
+          </InputRow>
+
+          <TextArea
+            labelText="Description"
+            typeText="text"
+            placeholderText="description"
+            name="project_description"
+            value={projectData.project_description}
+            onChange={handleUserProjectInputChange}
+          />
+
+          <SubmitButton loading={loading} />
+        </form>
+      </div>
+
+      <div className="my-4 bg-white border p-4">
+        {user?.projects.length === 0 && (
+          <p className="text-center">No Project found!</p>
+        )}
+        {user?.projects?.map((project) => (
+          <div className=" mb-4" key={project.project_id}>
+            <div className="flex justify-end">
+              <FontAwesomeIcon
+                icon={faTrash}
+                width={12}
+                onClick={() => handleDeleteProject(project.project_id)}
+                className="mx-2 text-red-600 cursor-pointer"
+              />
+              <FontAwesomeIcon
+                icon={faPen}
+                width={12}
+                className="mx-2 text-indigo-500"
+              />
+            </div>
+            <UserProjectCard project={project} />
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+export default UserProjects;
