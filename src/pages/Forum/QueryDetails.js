@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClock, faComment, faUser } from "@fortawesome/free-solid-svg-icons";
 import { queryData } from "../../services/queryData";
+import CommentContainer from "../../components/Forum/CommentContainer";
 
 function QueryDetails() {
   const { user, authToken } = useSelector((state) => state.auth);
@@ -61,15 +62,7 @@ function QueryDetails() {
           <p className="text-center my-4">Login to comment</p>
         )}
 
-        {query?.comments?.map((c) => (
-          <div key={c.commentId}>
-            <UserComment
-              user={c.user}
-              comment={c.comment}
-              replies={c.replies}
-            />
-          </div>
-        ))}
+        <CommentContainer comments={query?.comments} />
       </div>
     </div>
   );

@@ -143,7 +143,7 @@ export const queryData = [
     date: "2023-09-16T10:30:00Z",
     comments: [
       {
-        commentId: "201",
+        commentId: "2011111",
         user: {
           userId: "2",
           profileUrl: "https://example.com/user2.jpg",
@@ -161,7 +161,29 @@ export const queryData = [
               userName: "Harish",
               userEmail: "john.doe@example.com",
             },
-            reply: "Thanks! That helps a lot.",
+            comment: "Thanks! That helps a lot.",
+            replies: [
+              {
+                replyId: "302",
+                user: {
+                  userId: "2",
+                  profileUrl: "https://example.com/user2.jpg",
+                  userName: "Jane Smith",
+                  userEmail: "jane.smith@example.com",
+                },
+                comment: "Got it! Thanks for the explanation.",
+              },
+              {
+                replyId: "3011",
+                user: {
+                  userId: "1",
+                  profileUrl: "https://example.com/user1.jpg",
+                  userName: "John Doe",
+                  userEmail: "john.doe@example.com",
+                },
+                comment: "Got it! Thanks for the explanation",
+              },
+            ],
           },
           {
             replyId: "3011",
@@ -171,7 +193,7 @@ export const queryData = [
               userName: "John Doe",
               userEmail: "john.doe@example.com",
             },
-            reply: "Got it! Thanks for the explanation",
+            comment: "Got it! Thanks for the explanation",
           },
           {
             replyId: "3012",
@@ -181,12 +203,12 @@ export const queryData = [
               userName: "Asif",
               userEmail: "john.doe@example.com",
             },
-            reply: "Thanks! That helps a lot.",
+            comment: "Thanks! That helps a lot.",
           },
         ],
       },
       {
-        commentId: "203",
+        commentId: "2019083",
         user: {
           userId: "1",
           profileUrl: "https://example.com/user1.jpg",
@@ -204,7 +226,19 @@ export const queryData = [
               userName: "Jane Smith",
               userEmail: "jane.smith@example.com",
             },
-            reply: "Got it! Thanks for the explanation.",
+            comment: "Got it! Thanks for the explanation.",
+            replies: [
+              {
+                replyId: "302",
+                user: {
+                  userId: "2",
+                  profileUrl: "https://example.com/user2.jpg",
+                  userName: "Jane Smith",
+                  userEmail: "jane.smith@example.com",
+                },
+                comment: "Got it! Thanks for the explanation.",
+              },
+            ],
           },
         ],
       },
@@ -225,7 +259,7 @@ export const queryData = [
     date: "2023-09-16T11:00:00Z",
     comments: [
       {
-        commentId: "203",
+        commentId: "2033",
         user: {
           userId: "1",
           profileUrl: "https://example.com/user1.jpg",
@@ -243,7 +277,7 @@ export const queryData = [
               userName: "Jane Smith",
               userEmail: "jane.smith@example.com",
             },
-            reply: "Got it! Thanks for the explanation.",
+            comment: "Got it! Thanks for the explanation.",
           },
         ],
       },
@@ -265,7 +299,7 @@ export const queryData = [
     date: "2023-09-16T10:30:00Z",
     comments: [
       {
-        commentId: "201",
+        commentId: "1111",
         user: {
           userId: "2",
           profileUrl: "https://example.com/user2.jpg",
@@ -283,7 +317,7 @@ export const queryData = [
               userName: "John Doe",
               userEmail: "john.doe@example.com",
             },
-            reply: "Thanks! That helps a lot.",
+            comment: "Thanks! That helps a lot.",
           },
         ],
       },
@@ -304,7 +338,7 @@ export const queryData = [
     date: "2023-09-16T11:00:00Z",
     comments: [
       {
-        commentId: "203",
+        commentId: "21203",
         user: {
           userId: "1",
           profileUrl: "https://example.com/user1.jpg",
@@ -322,7 +356,19 @@ export const queryData = [
               userName: "Jane Smith",
               userEmail: "jane.smith@example.com",
             },
-            reply: "Got it! Thanks for the explanation.",
+            comment: "Got it! Thanks for the explanation.",
+            replies: [
+              {
+                replyId: "302",
+                user: {
+                  userId: "2",
+                  profileUrl: "https://example.com/user2.jpg",
+                  userName: "Jane Smith",
+                  userEmail: "jane.smith@example.com",
+                },
+                comment: "Got it! Thanks for the explanation.",
+              },
+            ],
           },
         ],
       },
@@ -362,7 +408,7 @@ export const queryData = [
               userName: "Sarah Johnson",
               userEmail: "sarah.johnson@example.com",
             },
-            reply: "Thank you! I'll check it out.",
+            comment: "Thank you! I'll check it out.",
           },
         ],
       },
@@ -384,7 +430,7 @@ export const queryData = [
     date: "2023-09-16T10:30:00Z",
     comments: [
       {
-        commentId: "201",
+        commentId: "2011",
         user: {
           userId: "2",
           profileUrl: "https://example.com/user2.jpg",
@@ -402,7 +448,7 @@ export const queryData = [
               userName: "John Doe",
               userEmail: "john.doe@example.com",
             },
-            reply: "Thanks! That helps a lot.",
+            comment: "Thanks! That helps a lot.",
           },
         ],
       },
@@ -423,7 +469,7 @@ export const queryData = [
     date: "2023-09-16T11:00:00Z",
     comments: [
       {
-        commentId: "203",
+        commentId: "211203",
         user: {
           userId: "1",
           profileUrl: "https://example.com/user1.jpg",
@@ -441,7 +487,7 @@ export const queryData = [
               userName: "Jane Smith",
               userEmail: "jane.smith@example.com",
             },
-            reply: "Got it! Thanks for the explanation.",
+            comment: "Got it! Thanks for the explanation.",
           },
         ],
       },
@@ -481,7 +527,7 @@ export const queryData = [
               userName: "Sarah Johnson",
               userEmail: "sarah.johnson@example.com",
             },
-            reply: "Thank you! I'll check it out.",
+            comment: "Thank you! I'll check it out.",
           },
         ],
       },
@@ -521,7 +567,7 @@ export const queryData = [
               userName: "Michael Johnson",
               userEmail: "michael.johnson@example.com",
             },
-            reply: "Thank you for the suggestions!",
+            comment: "Thank you for the suggestions!",
           },
         ],
       },
@@ -561,7 +607,7 @@ export const queryData = [
               userName: "Emily Davis",
               userEmail: "emily.davis@example.com",
             },
-            reply: "Thanks! I'll give those a try.",
+            comment: "Thanks! I'll give those a try.",
           },
         ],
       },
@@ -601,7 +647,7 @@ export const queryData = [
               userName: "Daniel Kim",
               userEmail: "daniel.kim@example.com",
             },
-            reply: "Thank you for the advice!",
+            comment: "Thank you for the advice!",
           },
         ],
       },
@@ -641,7 +687,7 @@ export const queryData = [
               userName: "Olivia Martinez",
               userEmail: "olivia.martinez@example.com",
             },
-            reply: "Thank you! I'll keep that in mind.",
+            comment: "Thank you! I'll keep that in mind.",
           },
         ],
       },
@@ -681,7 +727,7 @@ export const queryData = [
               userName: "Ethan Williams",
               userEmail: "ethan.williams@example.com",
             },
-            reply: "Thank you for sharing! I'll look into those.",
+            comment: "Thank you for sharing! I'll look into those.",
           },
         ],
       },
@@ -721,7 +767,7 @@ export const queryData = [
               userName: "Ava Johnson",
               userEmail: "ava.johnson@example.com",
             },
-            reply: "Thank you! I'll follow those steps.",
+            comment: "Thank you! I'll follow those steps.",
           },
         ],
       },
@@ -761,7 +807,7 @@ export const queryData = [
               userName: "Liam Davis",
               userEmail: "liam.davis@example.com",
             },
-            reply: "Thank you! I'll try those steps.",
+            comment: "Thank you! I'll try those steps.",
           },
         ],
       },

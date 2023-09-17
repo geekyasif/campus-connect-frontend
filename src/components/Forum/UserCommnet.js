@@ -28,10 +28,10 @@ const UserComment = ({ user, comment, replies }) => {
   };
 
   return (
-    <div className="bg-white p-4 rounded border-t-2 mb-2">
+    <div className="bg-white px-4 pt-2 rounded border-t-2">
       <div className="flex items-center ">
         <img
-          src={user.profileUrl}
+          src="https://assets.leetcode.com/users/sithis/avatar_1566406146.png"
           alt="User Avatar"
           className="h-4 w-4 rounded-full"
         />
@@ -79,15 +79,6 @@ const UserComment = ({ user, comment, replies }) => {
           )}
         </div>
       )}
-      <div className="ml-6">
-        {replies?.map((rep) => (
-          // <UserComment comment={rep} user={rep.user} />
-          <div className="my-2">
-            <p className="text-xs">{rep?.user?.userName}</p>
-            <p className="text-sm">{rep.reply}</p>
-          </div>
-        ))}
-      </div>
     </div>
   );
 };
