@@ -1,21 +1,20 @@
+import { faClock, faUser } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import { Link } from "react-router-dom";
 
 function QueryCard({
-  id,
-  userid,
-  username,
-  timedate,
+  date,
   title,
-  slug,
   tags,
   category,
   description,
-  imageURL,
+  user,
+  queryId,
 }) {
   return (
     <div className="border-b-2 my-2 px-4 py-2">
-      <Link to={`/forum/${slug}`} className="font-semibold">
+      <Link to={`/forum/${queryId}`} className="font-semibold">
         {title} | <span>{category}</span>{" "}
       </Link>
       <div className="flex">
@@ -35,10 +34,11 @@ function QueryCard({
         {description}
       </p>
       <div className="flex justify-between items-center">
-        <div>
-          <p className="text-xs my-2">
-            {username} created at {timedate}
-          </p>
+        <div className="flex items-center">
+          <FontAwesomeIcon icon={faUser} className="rounded-full w-2" />
+          <p className="text-xs my-2 mx-2"> {user.userName} </p>
+          <FontAwesomeIcon icon={faClock} className="w-3 text-gray-600" />
+          <p className="text-xs my-2 mx-2">{date}</p>
         </div>
         <div></div>
       </div>

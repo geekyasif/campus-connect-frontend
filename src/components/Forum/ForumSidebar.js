@@ -3,7 +3,7 @@ import ForumSidebarTag from "./ForumSidebarTag";
 
 function ForumSidebar() {
   return (
-    <div className="w-full lg:w-[20%] bg-white border rounded p-2 h-full">
+    <div className="bg-white border rounded p-2 ">
       <p className="font-semibold border-b-2  mb-4 pb-2 ">Tags</p>
       <div className="mb-4">
         <input
@@ -12,7 +12,7 @@ function ForumSidebar() {
           placeholder="Search for tags..."
         />
       </div>
-      <div className="flex flex-wrap gap-4">
+      <div className="flex flex-wrap gap-2">
         <ForumSidebarTag text="React" />
         <ForumSidebarTag text="Javascript" />
         <ForumSidebarTag text="Java" />
@@ -52,7 +52,6 @@ function ForumSidebar() {
         <ForumSidebarTag text="Graphql" />
         <ForumSidebarTag text="Sql" />
         <ForumSidebarTag text="Mongodb" />
-        
       </div>
     </div>
   );

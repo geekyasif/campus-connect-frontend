@@ -1,3 +1,131 @@
+export const queryCategory = [
+  {
+    id: "123",
+    slug: "frontend-development",
+    title: "Frontend Development",
+  },
+  {
+    id: "124",
+    slug: "backend-development",
+    title: "Backend Development",
+  },
+  {
+    id: "162",
+    slug: "data-analytics",
+    title: "Data Analytics",
+  },
+  {
+    id: "163",
+    slug: "cloud-security",
+    title: "Cloud Security",
+  },
+  {
+    id: "164",
+    slug: "game-design",
+    title: "Game Design",
+  },
+  {
+    id: "165",
+    slug: "blockchain-technology",
+    title: "Blockchain Technology",
+  },
+  {
+    id: "167",
+    slug: "mobile-gaming",
+    title: "Mobile Gaming",
+  },
+  {
+    id: "170",
+    slug: "cloud-computing-services",
+    title: "Cloud Computing Services",
+  },
+  {
+    id: "172",
+    slug: "computer-networks",
+    title: "Computer Networks",
+  },
+  {
+    id: "173",
+    slug: "programming-languages",
+    title: "Programming Languages",
+  },
+  {
+    id: "179",
+    slug: "operating-systems",
+    title: "Operating Systems",
+  },
+  {
+    id: "180",
+    slug: "software-development",
+    title: "Software Development",
+  },
+  {
+    id: "184",
+    slug: "cloud-storage",
+    title: "Cloud Storage",
+  },
+  {
+    id: "185",
+    slug: "database-design",
+    title: "Database Design",
+  },
+  {
+    id: "186",
+    slug: "ui-ux-design",
+    title: "UI/UX Design",
+  },
+  {
+    id: "187",
+    slug: "software-testing",
+    title: "Software Testing",
+  },
+  {
+    id: "189",
+    slug: "internet-of-things-iot",
+    title: "Internet of Things (IoT)",
+  },
+  {
+    id: "190",
+    slug: "cloud-architecture",
+    title: "Cloud Architecture",
+  },
+  {
+    id: "192",
+    slug: "machine-vision",
+    title: "Machine Vision",
+  },
+  {
+    id: "193",
+    slug: "software-engineering",
+    title: "Software Engineering",
+  },
+  {
+    id: "196",
+    slug: "computer-vision",
+    title: "Computer Vision",
+  },
+  {
+    id: "197",
+    slug: "human-computer-interaction",
+    title: "Human-Computer Interaction",
+  },
+  {
+    id: "198",
+    slug: "cloud-migration",
+    title: "Cloud Migration",
+  },
+  {
+    id: "200",
+    slug: "iot-security",
+    title: "IoT Security",
+  },
+  {
+    id: "2010",
+    slug: "other",
+    title: "Other",
+  },
+];
+
 export const queryData = [
   {
     queryId: "101",
@@ -30,10 +158,53 @@ export const queryData = [
             user: {
               userId: "1",
               profileUrl: "https://example.com/user1.jpg",
-              userName: "John Doe",
+              userName: "Harish",
               userEmail: "john.doe@example.com",
             },
             reply: "Thanks! That helps a lot.",
+          },
+          {
+            replyId: "3011",
+            user: {
+              userId: "1",
+              profileUrl: "https://example.com/user1.jpg",
+              userName: "John Doe",
+              userEmail: "john.doe@example.com",
+            },
+            reply: "Got it! Thanks for the explanation",
+          },
+          {
+            replyId: "3012",
+            user: {
+              userId: "1",
+              profileUrl: "https://example.com/user1.jpg",
+              userName: "Asif",
+              userEmail: "john.doe@example.com",
+            },
+            reply: "Thanks! That helps a lot.",
+          },
+        ],
+      },
+      {
+        commentId: "203",
+        user: {
+          userId: "1",
+          profileUrl: "https://example.com/user1.jpg",
+          userName: "John Doe",
+          userEmail: "john.doe@example.com",
+        },
+        comment:
+          "You can use the JOIN clause to combine rows from two or more tables based on a related column between them.",
+        replies: [
+          {
+            replyId: "302",
+            user: {
+              userId: "2",
+              profileUrl: "https://example.com/user2.jpg",
+              userName: "Jane Smith",
+              userEmail: "jane.smith@example.com",
+            },
+            reply: "Got it! Thanks for the explanation.",
           },
         ],
       },
@@ -79,7 +250,7 @@ export const queryData = [
     ],
   },
   {
-    queryId: "101",
+    queryId: "1111",
     user: {
       userId: "1",
       profileUrl: "https://example.com/user1.jpg",
@@ -119,7 +290,126 @@ export const queryData = [
     ],
   },
   {
-    queryId: "102",
+    queryId: "105",
+    user: {
+      userId: "2",
+      profileUrl: "https://example.com/user2.jpg",
+      userName: "Jane Smith",
+      userEmail: "jane.smith@example.com",
+    },
+    title: "How to perform a JOIN in SQL?",
+    description: "I need to retrieve data from two tables using a SQL JOIN.",
+    tags: ["SQL", "database"],
+    category: "Database",
+    date: "2023-09-16T11:00:00Z",
+    comments: [
+      {
+        commentId: "203",
+        user: {
+          userId: "1",
+          profileUrl: "https://example.com/user1.jpg",
+          userName: "John Doe",
+          userEmail: "john.doe@example.com",
+        },
+        comment:
+          "You can use the JOIN clause to combine rows from two or more tables based on a related column between them.",
+        replies: [
+          {
+            replyId: "302",
+            user: {
+              userId: "2",
+              profileUrl: "https://example.com/user2.jpg",
+              userName: "Jane Smith",
+              userEmail: "jane.smith@example.com",
+            },
+            reply: "Got it! Thanks for the explanation.",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    queryId: "106",
+    user: {
+      userId: "3",
+      profileUrl: "https://example.com/user3.jpg",
+      userName: "Sarah Johnson",
+      userEmail: "sarah.johnson@example.com",
+    },
+    title: "How to deploy a React app on Netlify?",
+    description:
+      "I want to deploy my React app on Netlify. Can someone provide step-by-step instructions?",
+    tags: ["React", "deployment", "Netlify"],
+    category: "Frontend Development",
+    date: "2023-09-16T12:00:00Z",
+    comments: [
+      {
+        commentId: "204",
+        user: {
+          userId: "4",
+          profileUrl: "https://example.com/user4.jpg",
+          userName: "Michael Johnson",
+          userEmail: "michael.johnson@example.com",
+        },
+        comment:
+          "You can follow the official Netlify documentation for deploying React apps. It provides detailed instructions.",
+        replies: [
+          {
+            replyId: "303",
+            user: {
+              userId: "3",
+              profileUrl: "https://example.com/user3.jpg",
+              userName: "Sarah Johnson",
+              userEmail: "sarah.johnson@example.com",
+            },
+            reply: "Thank you! I'll check it out.",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    queryId: "107",
+    user: {
+      userId: "1",
+      profileUrl: "https://example.com/user1.jpg",
+      userName: "John Doe",
+      userEmail: "john.doe@example.com",
+    },
+    title: "How to use React hooks?",
+    description:
+      "I'm trying to understand how to use React hooks in my project.",
+    tags: ["React", "hooks"],
+    category: "Frontend Development",
+    date: "2023-09-16T10:30:00Z",
+    comments: [
+      {
+        commentId: "201",
+        user: {
+          userId: "2",
+          profileUrl: "https://example.com/user2.jpg",
+          userName: "Jane Smith",
+          userEmail: "jane.smith@example.com",
+        },
+        comment:
+          "You can use the useState and useEffect hooks to manage state and side effects in functional components.",
+        replies: [
+          {
+            replyId: "301",
+            user: {
+              userId: "1",
+              profileUrl: "https://example.com/user1.jpg",
+              userName: "John Doe",
+              userEmail: "john.doe@example.com",
+            },
+            reply: "Thanks! That helps a lot.",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    queryId: "108",
     user: {
       userId: "2",
       profileUrl: "https://example.com/user2.jpg",
@@ -198,126 +488,7 @@ export const queryData = [
     ],
   },
   {
-    queryId: "101",
-    user: {
-      userId: "1",
-      profileUrl: "https://example.com/user1.jpg",
-      userName: "John Doe",
-      userEmail: "john.doe@example.com",
-    },
-    title: "How to use React hooks?",
-    description:
-      "I'm trying to understand how to use React hooks in my project.",
-    tags: ["React", "hooks"],
-    category: "Frontend Development",
-    date: "2023-09-16T10:30:00Z",
-    comments: [
-      {
-        commentId: "201",
-        user: {
-          userId: "2",
-          profileUrl: "https://example.com/user2.jpg",
-          userName: "Jane Smith",
-          userEmail: "jane.smith@example.com",
-        },
-        comment:
-          "You can use the useState and useEffect hooks to manage state and side effects in functional components.",
-        replies: [
-          {
-            replyId: "301",
-            user: {
-              userId: "1",
-              profileUrl: "https://example.com/user1.jpg",
-              userName: "John Doe",
-              userEmail: "john.doe@example.com",
-            },
-            reply: "Thanks! That helps a lot.",
-          },
-        ],
-      },
-    ],
-  },
-  {
-    queryId: "102",
-    user: {
-      userId: "2",
-      profileUrl: "https://example.com/user2.jpg",
-      userName: "Jane Smith",
-      userEmail: "jane.smith@example.com",
-    },
-    title: "How to perform a JOIN in SQL?",
-    description: "I need to retrieve data from two tables using a SQL JOIN.",
-    tags: ["SQL", "database"],
-    category: "Database",
-    date: "2023-09-16T11:00:00Z",
-    comments: [
-      {
-        commentId: "203",
-        user: {
-          userId: "1",
-          profileUrl: "https://example.com/user1.jpg",
-          userName: "John Doe",
-          userEmail: "john.doe@example.com",
-        },
-        comment:
-          "You can use the JOIN clause to combine rows from two or more tables based on a related column between them.",
-        replies: [
-          {
-            replyId: "302",
-            user: {
-              userId: "2",
-              profileUrl: "https://example.com/user2.jpg",
-              userName: "Jane Smith",
-              userEmail: "jane.smith@example.com",
-            },
-            reply: "Got it! Thanks for the explanation.",
-          },
-        ],
-      },
-    ],
-  },
-  {
-    queryId: "103",
-    user: {
-      userId: "3",
-      profileUrl: "https://example.com/user3.jpg",
-      userName: "Sarah Johnson",
-      userEmail: "sarah.johnson@example.com",
-    },
-    title: "How to deploy a React app on Netlify?",
-    description:
-      "I want to deploy my React app on Netlify. Can someone provide step-by-step instructions?",
-    tags: ["React", "deployment", "Netlify"],
-    category: "Frontend Development",
-    date: "2023-09-16T12:00:00Z",
-    comments: [
-      {
-        commentId: "204",
-        user: {
-          userId: "4",
-          profileUrl: "https://example.com/user4.jpg",
-          userName: "Michael Johnson",
-          userEmail: "michael.johnson@example.com",
-        },
-        comment:
-          "You can follow the official Netlify documentation for deploying React apps. It provides detailed instructions.",
-        replies: [
-          {
-            replyId: "303",
-            user: {
-              userId: "3",
-              profileUrl: "https://example.com/user3.jpg",
-              userName: "Sarah Johnson",
-              userEmail: "sarah.johnson@example.com",
-            },
-            reply: "Thank you! I'll check it out.",
-          },
-        ],
-      },
-    ],
-  },
-  {
-    queryId: "104",
+    queryId: "114",
     user: {
       userId: "4",
       profileUrl: "https://example.com/user4.jpg",
@@ -357,7 +528,7 @@ export const queryData = [
     ],
   },
   {
-    queryId: "105",
+    queryId: "1105",
     user: {
       userId: "5",
       profileUrl: "https://example.com/user5.jpg",
@@ -397,7 +568,7 @@ export const queryData = [
     ],
   },
   {
-    queryId: "106",
+    queryId: "1106",
     user: {
       userId: "6",
       profileUrl: "https://example.com/user6.jpg",
@@ -437,7 +608,7 @@ export const queryData = [
     ],
   },
   {
-    queryId: "107",
+    queryId: "1107",
     user: {
       userId: "7",
       profileUrl: "https://example.com/user7.jpg",
@@ -477,7 +648,7 @@ export const queryData = [
     ],
   },
   {
-    queryId: "108",
+    queryId: "2108",
     user: {
       userId: "8",
       profileUrl: "https://example.com/user8.jpg",
@@ -517,7 +688,7 @@ export const queryData = [
     ],
   },
   {
-    queryId: "109",
+    queryId: "1209",
     user: {
       userId: "9",
       profileUrl: "https://example.com/user9.jpg",
@@ -557,7 +728,7 @@ export const queryData = [
     ],
   },
   {
-    queryId: "110",
+    queryId: "1210",
     user: {
       userId: "10",
       profileUrl: "https://example.com/user10.jpg",

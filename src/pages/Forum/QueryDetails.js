@@ -7,6 +7,7 @@ import { dummyComments } from "../../services/userCommentData";
 import { useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClock, faComment, faUser } from "@fortawesome/free-solid-svg-icons";
+import { queryData } from "../../services/queryData";
 
 function QueryDetails() {
   const { user, authToken } = useSelector((state) => state.auth);
@@ -14,8 +15,8 @@ function QueryDetails() {
   const [query, setQuery] = useState({});
 
   const fetchQueryDetails = (slug) => {
-    interviewData.map((q) => {
-      if (q.slug === slug) {
+    queryData?.map((q) => {
+      if (q.queryId === slug) {
         setQuery(q);
         return;
       }
@@ -27,7 +28,7 @@ function QueryDetails() {
   }, []);
 
   return (
-    <div className="w-full lg:w-[70%] md:w-[70%] flex-grow bg-white rounded shadow ">
+    <div className="w-full lg:w-[70%] md:w-[70%] flex-grow bg-white rounded shadow h-full">
       <div className="p-4">
         <p to={`/forum/${slug}`} className="font-semibold">
           {query?.title} | <span>{query?.category}</span>{" "}
@@ -41,9 +42,9 @@ function QueryDetails() {
         <div className="flex justify-between items-center">
           <div className="flex items-center ">
             <FontAwesomeIcon icon={faUser} className="rounded-full w-2" />
-            <p className="text-xs my-2 mx-2">{query?.username}</p>
+            <p className="text-xs my-2 mx-2">{query?.user?.userName}</p>
             <FontAwesomeIcon icon={faClock} className="w-3 text-gray-600" />
-            <p className="text-xs my-2 mx-2">{query?.timedate}</p>
+            <p className="text-xs my-2 mx-2">{query?.date}</p>
           </div>
         </div>
       </div>
@@ -60,12 +61,14 @@ function QueryDetails() {
           <p className="text-center my-4">Login to comment</p>
         )}
 
-        {dummyComments.map((c) => (
-          <UserComment
-            username={c.username}
-            timestamp={c.timestamp}
-            comment={c.comment}
-          />
+        {query?.comments?.map((c) => (
+          <div key={c.commentId}>
+            <UserComment
+              user={c.user}
+              comment={c.comment}
+              replies={c.replies}
+            />
+          </div>
         ))}
       </div>
     </div>

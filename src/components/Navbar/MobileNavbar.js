@@ -107,10 +107,10 @@ function MobileNavbar() {
                 <NavLink
                   to={`/my-profile/${user?.personal_details?.username}`}
                   className={({ isActive }) =>
-                  isActive
-                    ? "bg-indigo-500 text-white my-2 rounded p-2"
-                    : "text-gray-700  my-2 p-2"
-                }
+                    isActive
+                      ? "bg-indigo-500 text-white my-2 rounded p-2"
+                      : "text-gray-700  my-2 p-2"
+                  }
                 >
                   <FontAwesomeIcon
                     className="text-gray-700 mr-2"
@@ -118,11 +118,14 @@ function MobileNavbar() {
                   />
                   My Profile
                 </NavLink>
-                <NavLink to={`/edit-profile/${user?.personal_details?.username}`} className={({ isActive }) =>
-                isActive
-                  ? "bg-indigo-500 text-white my-2 rounded p-2"
-                  : "text-gray-700  my-2 p-2"
-              }>
+                <NavLink
+                  to={`/edit-profile/${user?.personal_details?.username}`}
+                  className={({ isActive }) =>
+                    isActive
+                      ? "bg-indigo-500 text-white my-2 rounded p-2"
+                      : "text-gray-700  my-2 p-2"
+                  }
+                >
                   <FontAwesomeIcon
                     className="text-gray-700 mr-2"
                     icon={faEdit}

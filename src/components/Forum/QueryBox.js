@@ -1,6 +1,8 @@
+import { faMultiply } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState } from "react";
 
-const QueryBox = () => {
+const QueryBox = ({ handleIsModalOpen }) => {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
   const [category, setCategory] = useState("");
@@ -23,7 +25,12 @@ const QueryBox = () => {
 
   return (
     <div className="mx-auto p-6 bg-white rounded shadow mb-4">
-      <h2 className="text-2xl font-bold mb-4">Ask a Question</h2>
+      <div className="flex justify-between items-center">
+        <h2 className="text-xl font-bold mb-4">Ask a Question</h2>
+        <button onClick={handleIsModalOpen}>
+          <FontAwesomeIcon icon={faMultiply} />
+        </button>
+      </div>
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
           <label
@@ -46,7 +53,10 @@ const QueryBox = () => {
           />
         </div>
         <div className="mb-4">
-          <label htmlFor="body" className="block text-gray-700 font-bold text-sm">
+          <label
+            htmlFor="body"
+            className="block text-gray-700 font-bold text-sm"
+          >
             Body
           </label>
           <small>
@@ -64,7 +74,10 @@ const QueryBox = () => {
         </div>
 
         <div className="mb-4">
-          <label htmlFor="tags" className="block text-gray-700 font-bold text-sm">
+          <label
+            htmlFor="tags"
+            className="block text-gray-700 font-bold text-sm"
+          >
             Tags
           </label>
           <small>
@@ -98,7 +111,6 @@ const QueryBox = () => {
             <option value="React">React</option>
             <option value="JavaScript">JavaScript</option>
             <option value="CSS">CSS</option>
-            {/* Add more category options as needed */}
           </select>
         </div>
 

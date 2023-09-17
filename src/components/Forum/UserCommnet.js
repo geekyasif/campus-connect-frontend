@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 
-const UserComment = ({ username, comment, timestamp }) => {
+const UserComment = ({ user, comment, replies }) => {
   const { authToken } = useSelector((state) => state.auth);
   const [replying, setReplying] = useState(false);
   const [replyText, setReplyText] = useState("");
@@ -31,14 +31,14 @@ const UserComment = ({ username, comment, timestamp }) => {
     <div className="bg-white p-4 rounded border-t-2 mb-2">
       <div className="flex items-center ">
         <img
-          src="https://assets.leetcode.com/users/avatars/avatar_1666959405.png"
+          src={user.profileUrl}
           alt="User Avatar"
           className="h-4 w-4 rounded-full"
         />
 
-        <p className="text-xs my-2 mx-2">{username}</p>
+        <p className="text-xs my-2 mx-2">{user.userName}</p>
         <FontAwesomeIcon icon={faClock} className="w-3 text-gray-600" />
-        <p className="text-xs my-2 mx-2">{timestamp}</p>
+        <p className="text-xs my-2 mx-2">1233</p>
       </div>
 
       <div className="text-gray-800 mb-1 ml-6 text-sm">{comment}</div>
@@ -79,6 +79,15 @@ const UserComment = ({ username, comment, timestamp }) => {
           )}
         </div>
       )}
+      <div className="ml-6">
+        {replies?.map((rep) => (
+          // <UserComment comment={rep} user={rep.user} />
+          <div className="my-2">
+            <p className="text-xs">{rep?.user?.userName}</p>
+            <p className="text-sm">{rep.reply}</p>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
