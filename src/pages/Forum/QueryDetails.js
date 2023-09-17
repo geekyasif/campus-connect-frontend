@@ -26,10 +26,8 @@ function QueryDetails() {
     fetchQueryDetails(slug);
   }, []);
 
-  //   console.log(query)
-
   return (
-    <div className=" w-[70%] flex-grow bg-white rounded shadow ">
+    <div className="w-full lg:w-[70%] md:w-[70%] flex-grow bg-white rounded shadow ">
       <div className="p-4">
         <p to={`/forum/${slug}`} className="font-semibold">
           {query?.title} | <span>{query?.category}</span>{" "}

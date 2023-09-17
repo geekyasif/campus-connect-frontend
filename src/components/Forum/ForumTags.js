@@ -3,7 +3,7 @@ import ForumTag from './ForumTag'
 
 function ForumTags() {
   return (
-    <div className='flex flex-wrap gap-4 my-2'>
+    <div className='flex flex-wrap gap-2 lg:gap-4 my-2 p-2 lg:p-0'>
         <ForumTag text="Interview Experience" />
         <ForumTag text="General Discuss" />
         <ForumTag text="Career" />

@@ -14,7 +14,7 @@ import { Link, useLocation } from "react-router-dom";
 
 function NewMobileNavbar() {
   const location = useLocation();
-  const { user } = useSelector((state) => state.auth);
+  const { user, authToken } = useSelector((state) => state.auth);
   const [toggle, setToggle] = useState(false);
 
   const handleToggle = () => {
@@ -25,7 +25,7 @@ function NewMobileNavbar() {
     <div className="md:hidden lg:hidden">
       <button onClick={handleToggle}>
         {!toggle ? (
-          <FontAwesomeIcon icon={faBars} />
+          <FontAwesomeIcon icon={faBars} className="text-xl"/>
         ) : (
           <FontAwesomeIcon icon={faMultiply} />
         )}
@@ -33,7 +33,7 @@ function NewMobileNavbar() {
       <div
         className={`${
           toggle ? " bg-[rgb(0,0,0)] bg-[rgba(0,0,0,0.4)]" : ""
-        } absolute top-[41px] -left-[16px] w-screen transition ease-in-out delay-200`}
+        } absolute top-[1px] -left-[16px] w-screen transition ease-in-out delay-200`}
       >
         <div
           className={`${
@@ -51,19 +51,21 @@ function NewMobileNavbar() {
 
           <div className="h-0.5 border w-full bg-black my-2"></div>
 
-          <Link
-            to={`/my-profile/${user?.personal_details.username}`}
-            className="text-gray-700 my-2"
-          >
-            <FontAwesomeIcon className="text-gray-700 mr-2" icon={faUser} />
-            My Profile
-          </Link>
-          <Link to="/edit-profile" className="text-gray-700 my-2">
-            <FontAwesomeIcon className="text-gray-700 mr-2" icon={faEdit} />
-            Edit Profile
-          </Link>
+          {authToken && (
+            <>
+              <Link
+                to={`/my-profile/${user?.personal_details.username}`}
+                className="text-gray-700 my-2"
+              >
+                <FontAwesomeIcon className="text-gray-700 mr-2" icon={faUser} />
+                My Profile
+              </Link>
+              <Link to={`/edit-profile/${user?.personal_details.username}`} className="text-gray-700 my-2">
+                <FontAwesomeIcon className="text-gray-700 mr-2" icon={faEdit} />
+                Edit Profile
+              </Link>
 
-          <Link
+              {/* <Link
             className={
               location.pathname === `/edit-profile/${user?.personal_details.username}`
                 ? "bg-indigo-500 text-sm text-white cursor-pointer p-2 rounded my-2"
@@ -131,12 +133,17 @@ function NewMobileNavbar() {
             to={`/edit-profile/${user?.personal_details.username}/change-password`}
           >
             Change Password
-          </Link>
+          </Link> */}
 
-          <p className="text-gray-700 my-2">
-            <FontAwesomeIcon className="text-gray-700 mr-2" icon={faSignOut} />
-            Logout
-          </p>
+              <p className="text-gray-700 my-2">
+                <FontAwesomeIcon
+                  className="text-gray-700 mr-2"
+                  icon={faSignOut}
+                />
+                Logout
+              </p>
+            </>
+          )}
 
           <div className="fixed bottom-0 left-0 flex flex-row items-center border-t-2 py-2 px-4 bg-white w-[73%] transition ease-in delay-300">
             <div className="rounded-full w-[50px] h-[50px]">
@@ -151,7 +158,9 @@ function NewMobileNavbar() {
             </div>
             <div className="ml-4">
               <p className="text-lg font-bold">{user?.personal_details.name}</p>
-              <p className="text-gray-500">@{user?.personal_details.username}</p>
+              <p className="text-gray-500">
+                @{user?.personal_details.username}
+              </p>
             </div>
           </div>
         </div>

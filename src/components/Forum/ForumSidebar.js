@@ -3,7 +3,7 @@ import ForumSidebarTag from "./ForumSidebarTag";
 
 function ForumSidebar() {
   return (
-    <div className="w-[20%] bg-white border rounded p-2 h-full">
+    <div className="w-full lg:w-[20%] bg-white border rounded p-2 h-full">
       <p className="font-semibold border-b-2  mb-4 pb-2 ">Tags</p>
       <div className="mb-4">
         <input

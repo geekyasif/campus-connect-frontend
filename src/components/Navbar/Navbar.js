@@ -16,7 +16,7 @@ function Navbar() {
 
   return (
     <div className="bg-white p-4 border-b-2 sticky top-0">
-      <div className="container mx-auto flex flex-row justify-between items-center relative">
+      <div className="container mx-auto flex flex-row justify-between items-center relative flex-wrap">
         <LeftNavbar />
         {pathname.split("/")[1] === "find-dev" && (
           <div className="relative flex items-center">
@@ -32,12 +32,12 @@ function Navbar() {
           </div>
         )}
 
-        <div className="flex items-center">
+        <div className="flex items-center ">
           <MidNavbar />
           <RightNavbar />
         </div>
-        {/* <MobileNavbar /> */}
-        {/* <NewMobileNavbar/> */}
+        {/* <NewMobileNavbar /> */}
+        <MobileNavbar />
       </div>
     </div>
   );

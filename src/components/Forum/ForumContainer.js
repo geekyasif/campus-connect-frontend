@@ -5,7 +5,7 @@ import QueryBox from "./QueryBox";
 
 function ForumContainer() {
   return (
-    <div className=" w-[70%] flex-grow bg-white rounded">
+    <div className="w-full lg:w-[70%] flex-grow bg-white rounded">
       <QueryBox/>
       <div className="bg-gray-100  flex justify-end py-2 border">
         <input
