@@ -6,13 +6,14 @@ const Users = [
       email: "jsmith@example.com",
       phone: "+1-555-123-4567",
       city: "New York",
-      profile_url: "https://findcoder.fra1.digitaloceanspaces.com/61d2e592d137c80012e89477/avatar/61d2e592d137c80012e894771662286028383.jpeg",
+      profile_url:
+        "https://findcoder.fra1.digitaloceanspaces.com/61d2e592d137c80012e89477/avatar/61d2e592d137c80012e894771662286028383.jpeg",
       expertise_in: "Web Development",
       skills: ["HTML", "CSS", "JavaScript", "React", "Node.js", "MongoDB"],
       about:
         "I am a full-stack developer with experience in building web applications using React and Node.js.",
     },
-    
+
     academics: {
       university_name: "New York University",
       location: "New York",
@@ -68,14 +69,14 @@ const Users = [
       username: "mjohnson",
       email: "mjohnson@example.com",
       phone: "+1-555-987-6543",
-      profile_url: "https://findcoder.fra1.digitaloceanspaces.com/61d2e592d137c80012e89477/avatar/61d2e592d137c80012e894771662286028383.jpeg",
+      profile_url:
+        "https://findcoder.fra1.digitaloceanspaces.com/61d2e592d137c80012e89477/avatar/61d2e592d137c80012e894771662286028383.jpeg",
       expertise_in: "Data Science",
       skills: ["Python", "R", "SQL", "Machine Learning", "Data Visualization"],
       about:
         "I am a data scientist with experience in Python and R programming languages.",
       city: "San Francisco",
     },
-    
 
     academics: {
       university_name: "University of California, Berkeley",
@@ -133,7 +134,8 @@ const Users = [
       username: "esmith",
       email: "esmith@example.com",
       phone: "+1-555-123-4567",
-      profile_url: "https://findcoder.fra1.digitaloceanspaces.com/b4bca6a36ca5f82b0b995df19c6e8b5a",
+      profile_url:
+        "https://findcoder.fra1.digitaloceanspaces.com/b4bca6a36ca5f82b0b995df19c6e8b5a",
       expertise_in: "Front-end Development",
       skills: ["HTML", "CSS", "JavaScript", "React", "Bootstrap"],
       about:
@@ -195,14 +197,14 @@ const Users = [
       username: "jdavis",
       email: "jdavis@example.com",
       phone: "+1-555-234-5678",
-      profile_url: "https://findcoder.fra1.digitaloceanspaces.com/3a8fd0746a912dfa1e6bdc509348aefa",
+      profile_url:
+        "https://findcoder.fra1.digitaloceanspaces.com/3a8fd0746a912dfa1e6bdc509348aefa",
       expertise_in: "Full-stack Development",
       skills: ["JavaScript", "React", "Node.js", "Express", "MongoDB"],
       about:
         "I am a full-stack developer with experience in JavaScript, React, Node.js, Express, and MongoDB.",
       city: "San Francisco",
     },
-    
 
     academics: {
       university_name: "University of California, Berkeley",
@@ -335,14 +337,14 @@ const Users = [
       username: "mjohnson",
       email: "mjohnson@example.com",
       phone: "+1-555-987-6543",
-      profile_url: "https://findcoder.fra1.digitaloceanspaces.com/61d2e592d137c80012e89477/avatar/61d2e592d137c80012e894771662286028383.jpeg",
+      profile_url:
+        "https://findcoder.fra1.digitaloceanspaces.com/61d2e592d137c80012e89477/avatar/61d2e592d137c80012e894771662286028383.jpeg",
       expertise_in: "Data Science",
       skills: ["Python", "R", "SQL", "Machine Learning", "Data Visualization"],
       about:
         "I am a data scientist with experience in Python and R programming languages.",
       city: "San Francisco",
     },
-    
 
     academics: {
       university_name: "University of California, Berkeley",
@@ -400,14 +402,14 @@ const Users = [
       username: "esmith",
       email: "esmith@example.com",
       phone: "+1-555-123-4567",
-      profile_url: "https://findcoder.fra1.digitaloceanspaces.com/b4bca6a36ca5f82b0b995df19c6e8b5a",
+      profile_url:
+        "https://findcoder.fra1.digitaloceanspaces.com/b4bca6a36ca5f82b0b995df19c6e8b5a",
       expertise_in: "Front-end Development",
       skills: ["HTML", "CSS", "JavaScript", "React", "Bootstrap"],
       about:
         "I am a front-end developer with experience in HTML, CSS, JavaScript, and React.",
       city: "New York City",
     },
-    
 
     academics: {
       university_name: "New York University",
@@ -464,14 +466,14 @@ const Users = [
       username: "jdavis",
       email: "jdavis@example.com",
       phone: "+1-555-234-5678",
-      profile_url: "https://findcoder.fra1.digitaloceanspaces.com/3a8fd0746a912dfa1e6bdc509348aefa",
+      profile_url:
+        "https://findcoder.fra1.digitaloceanspaces.com/3a8fd0746a912dfa1e6bdc509348aefa",
       expertise_in: "Full-stack Development",
       skills: ["JavaScript", "React", "Node.js", "Express", "MongoDB"],
       about:
         "I am a full-stack developer with experience in JavaScript, React, Node.js, Express, and MongoDB.",
       city: "San Francisco",
     },
-    
 
     academics: {
       university_name: "University of California, Berkeley",
@@ -549,7 +551,6 @@ const Users = [
       about:
         "I am a full-stack developer with experience in building web applications using React and Node.js.",
     },
-    
 
     academics: {
       university_name: "New York University",
@@ -606,14 +607,14 @@ const Users = [
       username: "mjohnson",
       email: "mjohnson@example.com",
       phone: "+1-555-987-6543",
-      profile_url: "https://findcoder.fra1.digitaloceanspaces.com/61d2e592d137c80012e89477/avatar/61d2e592d137c80012e894771662286028383.jpeg",
+      profile_url:
+        "https://findcoder.fra1.digitaloceanspaces.com/61d2e592d137c80012e89477/avatar/61d2e592d137c80012e894771662286028383.jpeg",
       expertise_in: "Data Science",
       skills: ["Python", "R", "SQL", "Machine Learning", "Data Visualization"],
       about:
         "I am a data scientist with experience in Python and R programming languages.",
       city: "San Francisco",
     },
-    
 
     academics: {
       university_name: "University of California, Berkeley",
@@ -671,14 +672,14 @@ const Users = [
       username: "esmith",
       email: "esmith@example.com",
       phone: "+1-555-123-4567",
-      profile_url: "https://findcoder.fra1.digitaloceanspaces.com/b4bca6a36ca5f82b0b995df19c6e8b5a",
+      profile_url:
+        "https://findcoder.fra1.digitaloceanspaces.com/b4bca6a36ca5f82b0b995df19c6e8b5a",
       expertise_in: "Front-end Development",
       skills: ["HTML", "CSS", "JavaScript", "React", "Bootstrap"],
       about:
         "I am a front-end developer with experience in HTML, CSS, JavaScript, and React.",
       city: "New York City",
     },
-    
 
     academics: {
       university_name: "New York University",
@@ -735,14 +736,14 @@ const Users = [
       username: "jdavis",
       email: "jdavis@example.com",
       phone: "+1-555-234-5678",
-      profile_url: "https://findcoder.fra1.digitaloceanspaces.com/3a8fd0746a912dfa1e6bdc509348aefa",
+      profile_url:
+        "https://findcoder.fra1.digitaloceanspaces.com/3a8fd0746a912dfa1e6bdc509348aefa",
       expertise_in: "Full-stack Development",
       skills: ["JavaScript", "React", "Node.js", "Express", "MongoDB"],
       about:
         "I am a full-stack developer with experience in JavaScript, React, Node.js, Express, and MongoDB.",
       city: "San Francisco",
     },
-
 
     academics: {
       university_name: "University of California, Berkeley",
