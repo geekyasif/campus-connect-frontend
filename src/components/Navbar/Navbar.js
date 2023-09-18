@@ -8,12 +8,37 @@ import NewMobileNavbar from "./NewMobileNavbar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPerson, faSearch, faUser } from "@fortawesome/free-solid-svg-icons";
 import { useLocation } from "react-router-dom";
+import SearchInput from "./SearchInput";
+import SuggestionContainer from "./SuggestionContainer";
+import useDev from "../../hooks/dev/useDev";
 
 function Navbar() {
   const { pathname } = useLocation();
   const { user, authToken } = useSelector((state) => state.auth);
-  const [search, setSearch] = useState("");
   const [isSuggestionBoxOpen, setIsSuggestionBoxOpen] = useState(false);
+  const { fetchDevs } = useDev();
+  const [devs, setDevs] = useState([]);
+  const [filterResults, setFilterResults] = useState([]);
+
+  const handleSearchDevs = (args) => {
+    if (args) {
+      const _results = devs?.filter((d) =>
+        d.data.personal_details.fullName
+          .toLowerCase()
+          .includes(args.toLowerCase())
+      );
+      setFilterResults(_results);
+    }
+  };
+
+  const handleFetchDevs = async () => {
+    const res = await fetchDevs();
+    setDevs(res);
+  };
+
+  useEffect(() => {
+    handleFetchDevs();
+  }, []);
 
   return (
     <div className="bg-white p-4 border-b-2 sticky top-0">
@@ -21,58 +46,11 @@ function Navbar() {
         <LeftNavbar />
         {pathname.split("/")[1] === "find-dev" && (
           <div>
-            <div className="relative flex items-center">
-              <FontAwesomeIcon
-                icon={faSearch}
-                className="absolute mr-2 left-2 text-gray-400"
-              />
-              <input
-                onFocus={() => setIsSuggestionBoxOpen(true)}
-                onBlur={() => setIsSuggestionBoxOpen(false)}
-                type="text"
-                placeholder="Find Dev..."
-                className="focus:outline-none border w-[250px] focus:border  focus:bg-gray-100 text-black p-1 rounded-lg px-2 transition-all placeholder:text-sm pl-8"
-              />
-            </div>
-            {isSuggestionBoxOpen && (
-              <div className="bg-white rouneded border absolute w-[250px] ">
-                <p className="p-2 hover:bg-gray-100 hover:rounded my-2 text-xs cursor-pointer">
-                  <FontAwesomeIcon
-                    icon={faUser}
-                    className=" mr-2 left-2 text-gray-400"
-                  />
-                  Mohammad ASif
-                </p>
-                <p className="p-2 hover:bg-gray-100 hover:rounded my-2 text-xs cursor-pointer">
-                  <FontAwesomeIcon
-                    icon={faUser}
-                    className=" mr-2 left-2 text-gray-400"
-                  />
-                  Geekyasif
-                </p>
-                <p className="p-2 hover:bg-gray-100 hover:rounded my-2 text-xs cursor-pointer">
-                  <FontAwesomeIcon
-                    icon={faUser}
-                    className=" mr-2 left-2 text-gray-400"
-                  />
-                  Prabhat Kumar Tiwari
-                </p>
-                <p className="p-2 hover:bg-gray-100 hover:rounded my-2 text-xs cursor-pointer">
-                  <FontAwesomeIcon
-                    icon={faUser}
-                    className=" mr-2 left-2 text-gray-400"
-                  />
-                  Akash Kumar Goutam
-                </p>
-                <p className="p-2 hover:bg-gray-100 hover:rounded my-2 text-xs cursor-pointer">
-                  <FontAwesomeIcon
-                    icon={faUser}
-                    className=" mr-2 left-2 text-gray-400"
-                  />
-                  Irshad Akram
-                </p>
-              </div>
-            )}
+            <SearchInput
+              handleSearchDevs={handleSearchDevs}
+              setIsSuggestionBoxOpen={setIsSuggestionBoxOpen}
+            />
+            {isSuggestionBoxOpen && <SuggestionContainer results={filterResults}/>}
           </div>
         )}
 

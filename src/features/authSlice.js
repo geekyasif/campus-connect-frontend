@@ -53,7 +53,7 @@ export const updateUserData = (username) => async (dispatch) => {
       dispatch(setUser(doc.data()));
     });
 
-    console.log("updated")
+    console.log("updated");
   } catch (error) {
     console.log(error);
   }
