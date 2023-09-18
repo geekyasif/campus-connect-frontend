@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { interviewData } from "../../services/InterviewData";
 import CommentBox from "../../components/Forum/CommentBox";
-import UserComment from "../../components/Forum/UserCommnet";
-import { dummyComments } from "../../services/userCommentData";
 import { useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClock, faComment, faUser } from "@fortawesome/free-solid-svg-icons";
@@ -25,6 +22,7 @@ function QueryDetails() {
   };
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     fetchQueryDetails(slug);
   }, []);
 

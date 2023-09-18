@@ -14,7 +14,7 @@ import { Link } from "react-router-dom";
 
 function DevCard({ user }) {
   return (
-    <div className="border shadow m-2 p-4 rounded bg-white lg:w-[48%] md:w-full">
+    <div className="border shadow m-2 px-4 pt-2 rounded bg-white lg:w-[48%] md:w-full">
       <div className="flex flex-row items-center">
         <div className=" md:w-[140px] md:h-[100px] w-[80px] h-[60px] flex justify-center items-center md:mr-8 mr-4 ">
           {user?.personal_details?.profile_url === "" ? (
@@ -114,15 +114,15 @@ function DevCard({ user }) {
           <p className="my-2 text-xs">{user?.personal_details?.about}</p>
         </div>
 
-        <div className="flex flex-col md:flex md:flex-row md:justify-end border-t-2 md:border-t-0">
+        <div className="flex flex-row lg:justify-end justify-between items-center">
           <Link
             to={`/find-dev/${user?.personal_details?.username}`}
-            className="border rounded p-2 md:mr-2 text-xs md:text-xs bg-indigo-500 md:mb-0 mb-1 mr-0 mt-1 md:mt-0 text-center text-white "
+            className="border rounded p-2 md:mr-2 text-xs  bg-indigo-500 mr-0  md:mt-0 text-center text-white w-full lg:w-1/5"
           >
             <FontAwesomeIcon icon={faUser} className="mr-2" />
             View Details
           </Link>
-          <Link className="border rounded p-2 text-xs md:text-xs bg-indigo-500 text-center text-white">
+          <Link className="border rounded p-2 text-xs  bg-indigo-500 text-center text-white w-full lg:w-1/5">
             <FontAwesomeIcon icon={faMessage} className="mr-2" />
             Request Chat
           </Link>

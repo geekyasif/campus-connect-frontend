@@ -8,7 +8,7 @@ function AuthButton({ loading, title }) {
       <button
         className={`${
           loading ? "bg-indigo-400" : "bg-indigo-500"
-        } text-white border rounded p-2 w-full`}
+        } text-white border rounded p-1 lg:p-2 w-full text-sm lg:text-base`}
         disabled={loading}
       >
         {loading ? <Loader size={25} /> : title}

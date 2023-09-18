@@ -67,8 +67,8 @@ function MobileNavbar() {
               to="/"
               className={({ isActive }) =>
                 isActive
-                  ? "bg-indigo-500 text-white my-2 rounded p-2"
-                  : "text-gray-700  my-2 p-2"
+                  ? "bg-indigo-500 text-white my-2 rounded p-2 text-sm"
+                  : "text-gray-700  my-2 p-2 text-sm"
               }
             >
               <FontAwesomeIcon className="text-gray-700 mr-2" icon={faHome} />
@@ -78,8 +78,8 @@ function MobileNavbar() {
               to="/find-dev"
               className={({ isActive }) =>
                 isActive
-                  ? "bg-indigo-500 text-white my-2 rounded p-2"
-                  : "text-gray-700  my-2 p-2"
+                  ? "bg-indigo-500 text-white my-2 rounded p-2 text-sm"
+                  : "text-gray-700  my-2 p-2 text-sm"
               }
             >
               <FontAwesomeIcon className="text-gray-700 mr-2" icon={faUsers} />
@@ -90,12 +90,12 @@ function MobileNavbar() {
               to="/forum"
               className={({ isActive }) =>
                 isActive
-                  ? "bg-indigo-500 text-white my-2 rounded p-2"
-                  : "text-gray-700  my-2 p-2"
+                  ? "bg-indigo-500 text-white my-2 rounded p-2 text-sm"
+                  : "text-gray-700  my-2 p-2 text-sm"
               }
             >
               <FontAwesomeIcon
-                className="text-gray-700 mr-2"
+                className="text-black mr-2"
                 icon={faPeopleGroup}
               />
               Forum
@@ -108,8 +108,8 @@ function MobileNavbar() {
                   to={`/my-profile/${user?.personal_details?.username}`}
                   className={({ isActive }) =>
                     isActive
-                      ? "bg-indigo-500 text-white my-2 rounded p-2"
-                      : "text-gray-700  my-2 p-2"
+                      ? "bg-indigo-500 text-white my-2 rounded p-2 text-sm"
+                      : "text-gray-700  my-2 p-2 text-sm"
                   }
                 >
                   <FontAwesomeIcon
@@ -122,8 +122,8 @@ function MobileNavbar() {
                   to={`/edit-profile/${user?.personal_details?.username}`}
                   className={({ isActive }) =>
                     isActive
-                      ? "bg-indigo-500 text-white my-2 rounded p-2"
-                      : "text-gray-700  my-2 p-2"
+                      ? "bg-indigo-500 text-white my-2 rounded p-2 text-sm"
+                      : "text-gray-700  my-2 p-2 text-sm"
                   }
                 >
                   <FontAwesomeIcon
@@ -135,7 +135,7 @@ function MobileNavbar() {
 
                 <p className="text-gray-700 my-2  p-2">
                   <FontAwesomeIcon
-                    className="text-gray-700 mr-2"
+                    className="text-gray-700 mr-2 text-sm"
                     icon={faSignOut}
                   />
                   Logout

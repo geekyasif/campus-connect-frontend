@@ -9,6 +9,8 @@ import Loader from "react-js-loader";
 import { doc, setDoc } from "firebase/firestore";
 import { setAuthToken } from "../../features/authSlice";
 import { v4 as uuid4 } from "uuid";
+import AuthInput from "../../components/AuthenticationForm/AuthInput";
+import AuthButton from "../../components/AuthenticationForm/AuthButton";
 
 const Register = () => {
   const dispatch = useDispatch();
@@ -122,68 +124,54 @@ const Register = () => {
   }
 
   return (
-    <div className=" container mx-auto p-8 m-8">
+    <div className=" container mx-auto p-8 m-8 h-full lg:h-screen">
       <Toaster position="top-right" reverseOrder={false} />
       <div className="bg-gray-100 flex flex-col justify-center md:w-1/3 mx-auto p-4 rounded">
-        <h2 className="text-center">Sign up</h2>
+        <h2 className="text-center text-base lg:text-xl  text-indigo-600 font-bold">
+          Register
+        </h2>
         <form onSubmit={handleRegistrationFormData}>
           <div className="form-group">
-            <label>Full Name</label>
-            <br />
-            <input
+            <AuthInput
+              label="Full Name"
               type="text"
               name="fullName"
-              className="form-control w-full focus:outline-none rounded p-2 my-2"
               value={userRegistration.fullName}
               onChange={handleUserRegistration}
             />
           </div>
 
           <div className="form-group">
-            <label>Email</label>
-            <br />
-            <input
+            <AuthInput
+              label="Email"
               type="email"
               name="email"
-              className="form-control w-full focus:outline-none rounded p-2 my-2"
               value={userRegistration.email}
               onChange={handleUserRegistration}
             />
           </div>
           <div className="form-group">
-            <label>Password</label>
-            <br />
-            <input
+            <AuthInput
+              label="Password"
               type="password"
               name="password"
-              className="form-control w-full focus:outline-none rounded p-2 my-2"
               value={userRegistration.password}
               onChange={handleUserRegistration}
             />
           </div>
           <br />
           <div className="form-group">
-            <label>Confirm Password</label>
-            <br />
-            <input
+            <AuthInput
+              label="Confirm Password"
               type="password"
               name="confirm_password"
-              className="form-control w-full focus:outline-none rounded p-2 my-2"
               value={userRegistration.confirm_password}
               onChange={handleUserRegistration}
             />
           </div>
-          <br />
-          <button
-            className={`${
-              loading ? "bg-indigo-400" : "bg-indigo-500"
-            } text-white border rounded p-2 w-full`}
-            disabled={loading}
-          >
-            {loading ? <Loader size={25} /> : "Sign up"}
-          </button>
+          <AuthButton loading={loading} title="Register" />
         </form>
-        <p className="text-center mt-2">
+        <p className="text-center mt-2 text-sm lg:text-base">
           Already have an account?{" "}
           <Link to="/login" className="text-indigo-500">
             Login

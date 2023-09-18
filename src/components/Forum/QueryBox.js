@@ -24,7 +24,7 @@ const QueryBox = ({ handleIsModalOpen }) => {
   };
 
   return (
-    <div className="mx-auto p-6 bg-white rounded shadow mb-4">
+    <div className="mx-auto p-6 bg-white rounded shadow ">
       <div className="flex justify-between items-center">
         <h2 className="text-xl font-bold mb-4">Ask a Question</h2>
         <button onClick={handleIsModalOpen}>

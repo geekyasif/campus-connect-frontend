@@ -53,10 +53,12 @@ const Login = () => {
   }
 
   return (
-    <div className="container mx-auto p-8 m-8">
+    <div className="container mx-auto p-8 m-8 h-full lg:h-screen">
       <Toaster position="top-right" reverseOrder={false} />
       <div className="bg-gray-100 flex flex-col justify-center md:w-1/3 mx-auto p-4 rounded">
-        <h2 className="text-center">Login</h2>
+        <h2 className="text-center font-bold text-base lg:text-xl  text-indigo-600">
+          Login
+        </h2>
         <form onSubmit={handleFormSubmit}>
           <div className="form-group">
             <AuthInput
@@ -80,13 +82,13 @@ const Login = () => {
         </form>
         <Link
           to="/forgot-password"
-          className="text-right text-sm text-indigo-500 my-1"
+          className="text-right text-xs lg:text-sm text-indigo-500 my-2"
         >
           Forgot Password?
         </Link>
-        <p className="text-center mt-2">
+        <p className="text-center mt-1 text-sm lg:text-base">
           Don't have an account?{" "}
-          <Link to="/register" className="text-indigo-500">
+          <Link to="/register" className="text-indigo-500 ">
             Register
           </Link>
         </p>

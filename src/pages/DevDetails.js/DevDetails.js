@@ -52,7 +52,7 @@ function DevDetails() {
       {Object.keys(devData).length === 0 ? (
         <DevDetailShimmer />
       ) : (
-        <div className="flex flex-wrap gap-4">
+        <div className="flex flex-col lg:flex-row flex-wrap gap-4 p-2 lg:p-0">
           <DevDetailsSidebar user={devData} />
           <DevDetailsContainer user={devData} />
         </div>

@@ -41,7 +41,7 @@ function Navbar() {
   }, []);
 
   return (
-    <div className="bg-white p-4 border-b-2 sticky top-0">
+    <div className="bg-white p-4 border-b-2 sticky top-0 z-10">
       <div className="container mx-auto flex flex-row justify-between items-center relative flex-wrap">
         <LeftNavbar />
         {pathname.split("/")[1] === "find-dev" && (
@@ -50,7 +50,9 @@ function Navbar() {
               handleSearchDevs={handleSearchDevs}
               setIsSuggestionBoxOpen={setIsSuggestionBoxOpen}
             />
-            {isSuggestionBoxOpen && <SuggestionContainer results={filterResults}/>}
+            {isSuggestionBoxOpen && (
+              <SuggestionContainer results={filterResults} />
+            )}
           </div>
         )}
 
