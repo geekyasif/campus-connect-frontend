@@ -1,82 +1,41 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { Link, useLocation } from "react-router-dom";
+import UserSidebarLink from "./UserSidebarLink";
 
 function UserSidebarLinks() {
   const { user } = useSelector((state) => state.auth);
-  const location = useLocation();
 
+  // md:mr-4 md:w-64 rounded mb-4 md:flex md:flex-col p-2 flex-wrap
   return (
-    <div className="bg-white shadow md:mr-4 md:w-64 rounded mb-4 md:flex md:flex-col h-[325px] p-2 hidden">
-      <Link
-        className={
-          location.pathname === `/edit-profile/${user?.personal_details?.username}`
-            ? "bg-indigo-500 text-sm text-white cursor-pointer p-2 rounded my-2"
-            : "cursor-pointer p-2 rounded my-2 text-sm"
-        }
-        to={`/edit-profile/${user?.personal_details?.username}`}
-      >
-        Personal Details
-      </Link>
-      <Link
-        className={
-          location.pathname ===
-          `/edit-profile/${user?.personal_details?.username}/academics`
-            ? "bg-indigo-500 text-sm text-white cursor-pointer p-2 rounded my-2"
-            : "cursor-pointer p-2 rounded my-2 text-sm"
-        }
-        to={`/edit-profile/${user?.personal_details?.username}/academics`}
-      >
-        Academics
-      </Link>
+    <div className="bg-white shadow lg:w-[15%] w-full h-full p-2 flex flex-row lg:flex-col flex-wrap">
+      <UserSidebarLink
+        url={`${user?.personal_details?.username}`}
+        label="Personal Details"
+      />
 
-      <Link
-        className={
-          location.pathname ===
-          `/edit-profile/${user?.personal_details?.username}/social-links`
-            ? "bg-indigo-500 text-sm text-white cursor-pointer p-2 rounded my-2"
-            : "cursor-pointer p-2 rounded my-2 text-sm"
-        }
-        to={`/edit-profile/${user?.personal_details?.username}/social-links`}
-      >
-        Social Links
-      </Link>
+      <UserSidebarLink
+        url={`${user?.personal_details?.username}/academics`}
+        label="Academics"
+      />
 
-      <Link
-        className={
-          location.pathname ===
-          `/edit-profile/${user?.personal_details?.username}/certificates`
-            ? "bg-indigo-500 text-sm text-white cursor-pointer p-2 rounded my-2"
-            : "cursor-pointer p-2 rounded my-2 text-sm"
-        }
-        to={`/edit-profile/${user?.personal_details?.username}/certificates`}
-      >
-        Certificates
-      </Link>
+      <UserSidebarLink
+        url={`${user?.personal_details?.username}/social-links`}
+        label="Social Links"
+      />
 
-      <Link
-        className={
-          location.pathname ===
-          `/edit-profile/${user?.personal_details?.username}/projects`
-            ? "bg-indigo-500 text-sm text-white cursor-pointer p-2 rounded my-2"
-            : "cursor-pointer p-2 rounded my-2 text-sm"
-        }
-        to={`/edit-profile/${user?.personal_details?.username}/projects`}
-      >
-        Projects
-      </Link>
+      <UserSidebarLink
+        url={`${user?.personal_details?.username}/certificates`}
+        label="Certificates"
+      />
+      <UserSidebarLink
+        url={`${user?.personal_details?.username}/projects`}
+        label="Projects"
+      />
 
-      <Link
-        className={
-          location.pathname ===
-          `/edit-profile/${user?.personal_details?.username}/change-password`
-            ? "bg-indigo-500 text-sm text-white cursor-pointer p-2 rounded my-2"
-            : "cursor-pointer p-2 rounded my-2 text-sm"
-        }
-        to={`/edit-profile/${user?.personal_details?.username}/change-password`}
-      >
-        Change Password
-      </Link>
+      <UserSidebarLink
+        url={`${user?.personal_details?.username}/change-password`}
+        label="Change Password"
+      />
     </div>
   );
 }

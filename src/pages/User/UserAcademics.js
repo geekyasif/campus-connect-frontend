@@ -60,7 +60,7 @@ function UserAcademics() {
   };
 
   return (
-    <div className="bg-white shadow p-2">
+    <div className="bg-white shadow p-2 h-full">
       <Toaster position="top-right" reverseOrder={false} />
       <form onSubmit={handleUserAcademicsFormData}>
         <InputRow>
