@@ -5,8 +5,6 @@ import MidNavbar from "./MidNavbar";
 import RightNavbar from "./RightNavbar";
 import MobileNavbar from "./MobileNavbar";
 import NewMobileNavbar from "./NewMobileNavbar";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPerson, faSearch, faUser } from "@fortawesome/free-solid-svg-icons";
 import { useLocation } from "react-router-dom";
 import SearchInput from "./SearchInput";
 import SuggestionContainer from "./SuggestionContainer";
@@ -50,8 +48,11 @@ function Navbar() {
               handleSearchDevs={handleSearchDevs}
               setIsSuggestionBoxOpen={setIsSuggestionBoxOpen}
             />
-            {isSuggestionBoxOpen && (
-              <SuggestionContainer results={filterResults} />
+            {isSuggestionBoxOpen && filterResults.length > 0 && (
+              <SuggestionContainer
+                results={filterResults}
+                setIsSuggestionBoxOpen={setIsSuggestionBoxOpen}
+              />
             )}
           </div>
         )}

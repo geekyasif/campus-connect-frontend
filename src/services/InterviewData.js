@@ -63,7 +63,7 @@ export const interviewData = [
     timedate: "2023-09-16T12:30:00Z",
     title: "Interview with EFG Solutions for Data Engineer",
     tags: ["Python", "SQL", "Big Data"],
-    category: "Data Engineering",
+    category: "Other",
     description: `Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur.`,
     imageURL: "https://example.com/image5.jpg",
     slug: "interview-with-efg-solutions-for-data-engineer",

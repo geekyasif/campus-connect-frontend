@@ -5,7 +5,7 @@ import InputRow from "../../components/UserProfile/InputRow";
 import { useDispatch, useSelector } from "react-redux";
 import Thumbnail from "../../components/Thumbnail/Thumbnail";
 import { Toaster, toast } from "react-hot-toast";
-import { arrayUnion, doc, updateDoc } from "firebase/firestore";
+import { arrayRemove, arrayUnion, doc, updateDoc } from "firebase/firestore";
 import { db, storage } from "../../services/firebase";
 import { getDownloadURL, uploadBytes, ref } from "firebase/storage";
 import { v4 as uuid4 } from "uuid";
@@ -17,6 +17,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
 
 function UserProjects() {
+  const [isUpdateOn, setIsUpdateOn] = useState(false);
   const { loading, startLoading, stopLoading } = useLoading();
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
@@ -70,7 +71,8 @@ function UserProjects() {
           projectImage.uploadImage.name
         }`
       );
-      const snapshot = await uploadBytes(storageRef, projectImage.uploadImage);
+
+      await uploadBytes(storageRef, projectImage.uploadImage);
       const url = await getDownloadURL(storageRef);
       if (url) {
         const userDocRef = doc(
@@ -117,15 +119,81 @@ function UserProjects() {
     }
   };
 
+  const handleUpdateProjectFormData = async (e) => {
+    e.preventDefault();
+    toast.success("Project Updated successfully!");
+    setProjectData({
+      project_title: "",
+      project_image: "",
+      project_source_code_link: "",
+      project_deployment_link: "",
+      project_demo_link: "",
+      project_tech_stack: "",
+      project_date: "",
+      project_description: "",
+    });
+    setProjectImage({
+      uploadImage: "",
+      prevImage: "",
+      downloadUrl: "",
+    });
+    setIsUpdateOn(false);
+  };
+
   const handleDeleteProject = async (id) => {
-    console.log(id);
+    const filteredProject = user?.projects.filter((p) => p.project_id != id);
+
+    const userDocRef = doc(
+      db,
+      "users",
+      user?.personal_details.email.split("@")[0]
+    );
+
+    await updateDoc(userDocRef, {
+      projects: filteredProject,
+    });
+
+    dispatch(updateUserData(user?.personal_details.email.split("@")[0]));
+  };
+
+  const handleEditProject = async (project) => {
+    setIsUpdateOn(true);
+    setProjectData(project);
+    setProjectImage({
+      uploadImage: project.project_image,
+      prevImage: project.project_image,
+      downloadUrl: "",
+    });
+  };
+
+  const handleClearForm = () => {
+    setProjectData({
+      project_title: "",
+      project_image: "",
+      project_source_code_link: "",
+      project_deployment_link: "",
+      project_demo_link: "",
+      project_tech_stack: "",
+      project_date: "",
+      project_description: "",
+    });
+    setProjectImage({
+      uploadImage: "",
+      prevImage: "",
+      downloadUrl: "",
+    });
+    setIsUpdateOn(false);
   };
 
   return (
     <div>
       <div className="bg-white p-2 shadow">
         <Toaster position="top-right" reverseOrder={false} />
-        <form onSubmit={handleProjectFromData}>
+        <form
+          onSubmit={
+            isUpdateOn ? handleUpdateProjectFormData : handleProjectFromData
+          }
+        >
           <Thumbnail
             thumbnail={projectImage.prevImage}
             onChange={handleProjectImage}
@@ -198,7 +266,28 @@ function UserProjects() {
             onChange={handleUserProjectInputChange}
           />
 
-          <SubmitButton loading={loading} />
+          {isUpdateOn ? (
+            <div className="flex justify-center">
+              <button
+                className={` ${
+                  loading ? "bg-indigo-400" : "bg-indigo-500"
+                } border  px-6 py-2 rounded text-white hover:bg-indigo-600 transition-all`}
+                type="submit"
+              >
+                Update
+              </button>
+              <button
+                onClick={handleClearForm}
+                className={` ${
+                  loading ? "bg-indigo-400" : "bg-indigo-500"
+                } border  px-6 py-2 rounded text-white hover:bg-indigo-600 transition-all`}
+              >
+                Cancel
+              </button>
+            </div>
+          ) : (
+            <SubmitButton loading={loading} />
+          )}
         </form>
       </div>
 
@@ -218,7 +307,8 @@ function UserProjects() {
               <FontAwesomeIcon
                 icon={faPen}
                 width={12}
-                className="mx-2 text-indigo-500"
+                onClick={() => handleEditProject(project)}
+                className="mx-2 text-indigo-500 cursor-pointer"
               />
             </div>
             <UserProjectCard project={project} />

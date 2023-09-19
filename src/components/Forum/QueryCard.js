@@ -14,7 +14,10 @@ function QueryCard({
 }) {
   return (
     <div className="border-b-2 my-2 px-4 py-2">
-      <Link to={`/forum/${queryId}`} className="font-semibold">
+      <Link
+        to={`/forum/${category.split(" ").join("-").toLowerCase()}/${queryId}`}
+        className="font-semibold"
+      >
         {title} | <span>{category}</span>{" "}
       </Link>
       <div className="flex">

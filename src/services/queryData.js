@@ -70,29 +70,14 @@ export const queryCategory = [
     title: "Database Design",
   },
   {
-    id: "186",
-    slug: "ui-ux-design",
-    title: "UI/UX Design",
-  },
-  {
     id: "187",
     slug: "software-testing",
     title: "Software Testing",
   },
   {
-    id: "189",
-    slug: "internet-of-things-iot",
-    title: "Internet of Things (IoT)",
-  },
-  {
     id: "190",
     slug: "cloud-architecture",
     title: "Cloud Architecture",
-  },
-  {
-    id: "192",
-    slug: "machine-vision",
-    title: "Machine Vision",
   },
   {
     id: "193",
@@ -103,11 +88,6 @@ export const queryCategory = [
     id: "196",
     slug: "computer-vision",
     title: "Computer Vision",
-  },
-  {
-    id: "197",
-    slug: "human-computer-interaction",
-    title: "Human-Computer Interaction",
   },
   {
     id: "198",

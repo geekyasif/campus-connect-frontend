@@ -68,7 +68,7 @@ function UserPersonalDetails() {
       await updateDoc(docRef, {
         "personal_details.profile_url": url,
       });
-      dispatch(updateUserData(user?.personal_details?.email));
+      dispatch(updateUserData(user?.personal_details.email.split("@")[0]));
       toast.success("Profile picture uploaded successfully!");
     } catch (error) {
       toast.error("Something went wrong! Try again");

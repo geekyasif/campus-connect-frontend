@@ -19,6 +19,7 @@ import Forum from "./pages/Forum/Forum";
 import ForgotPassword from "./pages/Authentication/ForgotPassword";
 import ForumContainer from "./components/Forum/ForumContainer";
 import QueryDetails from "./pages/Forum/QueryDetails";
+import ForumCategory from "./pages/Forum/ForumCategory";
 
 function App() {
   return (
@@ -28,8 +29,9 @@ function App() {
       <Routes>
         <Route path="find-dev" element={<FindDev />} />
         <Route path="forum" element={<Forum />}>
-          <Route index element={<ForumContainer />} />
-          <Route path=":slug" element={<QueryDetails />} />
+          <Route index element={<ForumContainer title="Recent Queries" />} />
+          <Route path=":category" element={<ForumCategory />} />
+          <Route path=":category/:slug" element={<QueryDetails />} />
         </Route>
         <Route element={<AuthRoute />}>
           <Route path="find-dev/:username" element={<DevDetails />} />

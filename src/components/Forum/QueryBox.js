@@ -1,26 +1,77 @@
 import { faMultiply } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useState } from "react";
+import { getAuth } from "firebase/auth";
+import { doc, getDoc } from "firebase/firestore";
+import { comment } from "postcss";
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { db } from "../../services/firebase";
+
+const post = {
+  postId: 1,
+  // user: {
+  //   username: "",
+  //   profile_pic: "",
+  //   fullName: "",
+  // },
+  title: "thi sis title",
+  tags: "React, hook, nextjs",
+  description: "THi sis descripito",
+  category: "Frontend Development",
+  date: "",
+  comments: [
+    {
+      commentId: 1,
+      comment: "this is comment",
+      user: {},
+      replies: [
+        {
+          repId: "",
+          rep: "",
+          comment: "",
+          user: {},
+        },
+      ],
+    },
+  ],
+};
 
 const QueryBox = ({ handleIsModalOpen }) => {
-  const [title, setTitle] = useState("");
-  const [body, setBody] = useState("");
-  const [category, setCategory] = useState("");
-  const [tags, setTags] = useState([]);
+  const { user } = useSelector((state) => state.auth);
+  const { username, fullName, profile_url } = user?.personal_details;
 
-  const handleTagChange = (e) => {
-    const selectedTags = Array.from(
-      e.target.selectedOptions,
-      (option) => option.value
-    );
-    setTags(selectedTags);
+  const [query, setQuery] = useState({
+    title: "",
+    description: "",
+    tags: "",
+    category: "",
+  });
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setQuery({
+      ...query,
+      [name]: value,
+    });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Process the form submission here
-    console.log({ title, body, category, tags });
+    const _query = {
+      user: {
+        username,
+        fullName,
+        profile_url,
+      },
+      title: query.title,
+      description: query.description,
+      tags: query.tags,
+      category: query.category,
+      comments: [],
+    };
+
+    console.log(_query);
   };
 
   return (
@@ -46,9 +97,10 @@ const QueryBox = ({ handleIsModalOpen }) => {
             placeholder="e.g. Is there an R function for finding the index of an element in a vector?"
             type="text"
             id="title"
+            name="title"
             className="w-full border rounded px-3 py-2 placeholder:text-xs"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
+            value={query.title}
+            onChange={handleInputChange}
             required
           />
         </div>
@@ -57,18 +109,19 @@ const QueryBox = ({ handleIsModalOpen }) => {
             htmlFor="body"
             className="block text-gray-700 font-bold text-sm"
           >
-            Body
+            Description
           </label>
           <small>
             Include all the information someone would need to answer your
             question
           </small>
           <textarea
-            id="body"
+            id="description"
+            name="description"
             className="w-full border rounded px-3 py-2"
             rows="5"
-            value={body}
-            onChange={(e) => setBody(e.target.value)}
+            value={query.description}
+            onChange={handleInputChange}
             required
           ></textarea>
         </div>
@@ -85,11 +138,12 @@ const QueryBox = ({ handleIsModalOpen }) => {
           </small>
           <input
             type="text"
-            id="title"
+            id="tags"
+            name="tags"
             placeholder="e.g. (xml typescript wordpress)"
             className="w-full border rounded px-3 py-2 placeholder:text-xs"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
+            value={query.tags}
+            onChange={handleInputChange}
             required
           />
         </div>
@@ -102,9 +156,10 @@ const QueryBox = ({ handleIsModalOpen }) => {
           </label>
           <select
             id="category"
+            name="category"
             className="w-full border rounded px-3 py-2 text-xs"
-            value={category}
-            onChange={(e) => setCategory(e.target.value)}
+            value={query.category}
+            onChange={handleInputChange}
             required
           >
             <option value="">Select a Category</option>

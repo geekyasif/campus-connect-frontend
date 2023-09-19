@@ -4,17 +4,8 @@ import InputRow from "../../components/UserProfile/InputRow";
 import { useDispatch, useSelector } from "react-redux";
 import Thumbnail from "../../components/Thumbnail/Thumbnail";
 import { Toaster, toast } from "react-hot-toast";
-import {
-  FieldValue,
-  arrayRemove,
-  arrayUnion,
-  deleteDoc,
-  deleteField,
-  doc,
-  setDoc,
-  updateDoc,
-} from "firebase/firestore";
-import { auth, db, storage } from "../../services/firebase";
+import { arrayUnion, doc, updateDoc } from "firebase/firestore";
+import { db, storage } from "../../services/firebase";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import "firebase/firestore";
 import { updateUserData } from "../../features/authSlice";
@@ -26,6 +17,7 @@ import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
 import uuid4 from "uuid4";
 
 function UserCertificates() {
+  const [isUpdateOn, setIsUpdateOn] = useState(false);
   const { loading, startLoading, stopLoading } = useLoading();
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
@@ -142,33 +134,84 @@ function UserCertificates() {
     }
   };
 
+  const handleUpdateCertficateFormData = async (e) => {
+    e.preventDefault();
+    toast.success("Project Updated successfully!");
+    setCertificateData({
+      certificate_title: "",
+      certificate_url: "",
+      certificate_issue_date: "",
+      certificate_expire_date: "",
+      credential_verification_link: "",
+    });
+    setCertificateImage({
+      uploadImage: "",
+      prevImage: "",
+      downloadUrl: "",
+    });
+    setIsUpdateOn(false);
+  };
+
   // deleting certicifate
   const handleDeleteCertificate = async (id) => {
     try {
-      console.log(id);
+      const filteredCertificates = user?.certificates.filter(
+        (c) => c.certificate_id != id
+      );
+
       const userDocRef = doc(
         db,
         "users",
         user?.personal_details.email.split("@")[0]
       );
 
-      await updateDoc(
-        userDocRef,
-        {
-          certificates: arrayRemove(id),
-        }
-      );
+      await updateDoc(userDocRef, {
+        certificates: filteredCertificates,
+      });
+
       dispatch(updateUserData(user?.personal_details.email.split("@")[0]));
     } catch (error) {
       console.log(error);
     }
   };
 
+  const handleEditCertificate = async (certificate) => {
+    setIsUpdateOn(true);
+    setCertificateData(certificate);
+    setCertificateImage({
+      uploadImage: certificate.certificate_image,
+      prevImage: certificate.certificate_image,
+      downloadUrl: "",
+    });
+  };
+
+  const handleClearForm = () => {
+    setCertificateData({
+      certificate_title: "",
+      certificate_url: "",
+      certificate_issue_date: "",
+      certificate_expire_date: "",
+      credential_verification_link: "",
+    });
+    setCertificateImage({
+      uploadImage: "",
+      prevImage: "",
+      downloadUrl: "",
+    });
+    setIsUpdateOn(false);
+  };
+
   return (
     <div>
       <div className="bg-white p-4 shadow">
         <Toaster position="top-right" reverseOrder={false} />
-        <form onSubmit={handleCertficateFormData}>
+        <form
+          onSubmit={
+            isUpdateOn
+              ? handleUpdateCertficateFormData
+              : handleCertficateFormData
+          }
+        >
           <Thumbnail
             thumbnail={certificateImage.prevImage}
             onChange={handleCertificateImage}
@@ -224,7 +267,28 @@ function UserCertificates() {
             onChange={handleCertificateDataInputChange}
           />
 
-          <SubmitButton loading={loading} />
+          {isUpdateOn ? (
+            <div className="flex justify-center">
+              <button
+                className={` ${
+                  loading ? "bg-indigo-400" : "bg-indigo-500"
+                } border  px-6 py-2 rounded text-white hover:bg-indigo-600 transition-all`}
+                type="submit"
+              >
+                Update
+              </button>
+              <button
+                onClick={handleClearForm}
+                className={` ${
+                  loading ? "bg-indigo-400" : "bg-indigo-500"
+                } border  px-6 py-2 rounded text-white hover:bg-indigo-600 transition-all`}
+              >
+                Cancel
+              </button>
+            </div>
+          ) : (
+            <SubmitButton loading={loading} />
+          )}
         </form>
       </div>
       <div className="my-2 bg-white border p-4">
@@ -245,7 +309,8 @@ function UserCertificates() {
               <FontAwesomeIcon
                 icon={faPen}
                 width={12}
-                className="mx-2 text-indigo-500"
+                className="mx-2 text-indigo-500 cursor-pointer"
+                onClick={() => handleEditCertificate(certificate)}
               />
             </div>
             <UserCertificateCard certificate={certificate} />
