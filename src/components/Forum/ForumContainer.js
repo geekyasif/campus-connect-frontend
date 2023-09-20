@@ -10,7 +10,9 @@ function ForumContainer({ title, type }) {
   const { user } = useSelector((state) => state.auth);
   const [loading, setLoading] = useState(true);
   const [queries, setQueries] = useState([]);
+  const [filteredQueries, setFilteredQueries] = useState([])
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [searchQueryText, setSearchQueryText] = useState("");
 
   function handleIsModalOpen() {
     try {
@@ -38,7 +40,7 @@ function ForumContainer({ title, type }) {
         });
 
         setQueries(_queries);
-        setLoading(false);
+        setFilteredQueries(_queries)
       } else if (type === "category") {
         const _queries = [];
         const querySnapshot = await getDocs(collection(db, "users"));
@@ -63,7 +65,7 @@ function ForumContainer({ title, type }) {
         });
 
         setQueries(_queries);
-        setLoading(false);
+        setFilteredQueries(_queries)
       } else {
         const _queries = [];
         const querySnapshot = await getDocs(collection(db, "users"));
@@ -84,19 +86,60 @@ function ForumContainer({ title, type }) {
         });
 
         setQueries(_queries);
-        setLoading(false);
+        setFilteredQueries(_queries)
       }
     } catch (error) {
       console.log(error);
+    }finally{
+      setLoading(false)
     }
   };
 
-  console.log(queries);
+  const handleSearchQueryText = async (args) => {
+    try {
+      if (args) {
+        console.log("searching....");
+
+        const _queries = [];
+        const querySnapshot = await getDocs(collection(db, "users"));
+        querySnapshot.forEach((doc) => {
+          const _data = doc.data();
+          const _userQueries = {};
+
+          if (_data.queries) {
+            _userQueries["user"] = _data.personal_details;
+            const _filterByTag = _data.queries.filter((q) =>
+              q.title.toLowerCase().includes(args.toLowerCase())
+            );
+            _userQueries["queries"] = _filterByTag;
+            if (_filterByTag.length !== 0) {
+              _queries.unshift(_userQueries);
+            }
+          }
+        });
+        setFilteredQueries(_queries)
+      }else{
+        setFilteredQueries(queries)
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
     window.scrollTo(0, 0);
     fetchQueries();
   }, [title, user]);
+
+  useEffect(() => {
+    let timer = setTimeout(() => {
+      handleSearchQueryText(searchQueryText);
+    }, 300);
+
+    return () => clearTimeout(timer);
+  }, [searchQueryText]);
 
   return (
     <div className="w-full lg:w-[78%] bg-white rounded">
@@ -105,6 +148,8 @@ function ForumContainer({ title, type }) {
         <div className="flex justify-between w-full lg:justify-end">
           <input
             type="text"
+            value={searchQueryText}
+            onChange={(e) => setSearchQueryText(e.target.value)}
             placeholder="Search topics..."
             className="p-1 rounded placeholder:text-sm focus:outline-none mr-3 px-2 bg-white"
           />
@@ -127,12 +172,12 @@ function ForumContainer({ title, type }) {
               </div>
             ))}
 
-        {queries?.length === 0 && loading === false ? (
+        {filteredQueries?.length === 0 && loading === false ? (
           <div className="text-center my-2">
             <p>No Query Found !</p>
           </div>
         ) : (
-          queries?.map((data) =>
+          filteredQueries?.map((data) =>
             data?.queries.map((query) => (
               <div key={query.id}>
                 <QueryCard query={query} user={data.user} />
