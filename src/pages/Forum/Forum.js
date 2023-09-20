@@ -2,8 +2,16 @@ import React, { useEffect, useState } from "react";
 import ForumSidebar from "../../components/Forum/ForumSidebar";
 import { Outlet } from "react-router-dom";
 import QueryCategories from "../../components/Forum/QueryCategories";
+import { useDispatch, useSelector } from "react-redux";
+import { handleIsSideNavbarOpen } from "../../features/authSlice";
 
 function Forum() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(handleIsSideNavbarOpen());
+  }, []);
+
   return (
     <div className="container mx-auto h-full">
       <div className="flex flex-col-reverse lg:flex-row lg:flex-wrap gap-4 m-4 h-full">

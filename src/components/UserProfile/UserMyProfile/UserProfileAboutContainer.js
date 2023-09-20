@@ -5,26 +5,26 @@ function UserProfileAboutContainer() {
   const { user } = useSelector((state) => state.auth);
   return (
     <div className="">
-      <p className="text-2xl font-bold mb-2">Personal Info</p>
+      {/* <p className="text-lg lg:text-2xl font-bold mb-1">Personal Info</p> */}
       <div className="flex flex-row">
         <div className="w-1/2">
-          <p className="font-bold mb-2 mt-4">Full Name</p>
-          <p>{user?.personal_details?.fullName}</p>
-          <p className="font-bold mb-2 mt-4">Username</p>
-          <p>{user?.personal_details?.username}</p>
+          <p className="font-bold mb-2 mt-4 text-sm lg:text-base">Full Name</p>
+          <p className="text-xs lg:text-sm">{user?.personal_details?.fullName}</p>
+          <p className="font-bold mb-2 mt-4 text-sm lg:text-base">Username</p>
+          <p className="text-xs lg:text-sm">{user?.personal_details?.username}</p>
 
           <p className="font-bold mb-2 mt-4">Expertise in</p>
-          <p>{user?.personal_details?.expertise_in}</p>
+          <p className="text-xs lg:text-sm">{user?.personal_details?.expertise_in}</p>
         </div>
 
         <div className="w-1/2">
-          <p className="font-bold mb-2 mt-4">Phone</p>
-          <p>{user?.personal_details?.phone}</p>
-          <p className="font-bold mb-2 mt-4">City</p>
-          <p>{user?.personal_details?.city}</p>
+          <p className="font-bold mb-2 mt-4 text-sm lg:text-base">Phone</p>
+          <p className="text-xs lg:text-sm">{user?.personal_details?.phone}</p>
+          <p className="font-bold mb-2 mt-4 text-sm lg:text-base">City</p>
+          <p className="text-xs lg:text-sm">{user?.personal_details?.city}</p>
 
-          <p className="font-bold mb-2 mt-4">About</p>
-          <p>{user?.personal_details?.about}</p>
+          <p className="font-bold mb-2 mt-4 text-sm lg:text-base">About</p>
+          <p className="text-xs lg:text-sm">{user?.personal_details?.about}</p>
         </div>
       </div>
 

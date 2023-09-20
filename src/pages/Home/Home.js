@@ -1,22 +1,18 @@
 import React, { useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import Users from "../../services/Data";
-import { doc, setDoc } from "firebase/firestore";
-import { db } from "../../services/firebase";
+import { handleIsSideNavbarOpen } from "../../features/authSlice";
 
 function Home() {
-  const { user, authToken } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+  const { authToken } = useSelector((state) => state.auth);
 
-  const addDummyDataToFirebaseFirestore = () => {
-    Users.map(async (data) => {
-      // await setDoc(doc(db, "users", data.personal_details.email.split("@")[0]), data);
-      // console.log(data.personal_details.email)
-    });
+  const handleSideNav = () => {
+    dispatch(handleIsSideNavbarOpen());
   };
 
   useEffect(() => {
-    addDummyDataToFirebaseFirestore();
+    handleSideNav();
   }, []);
 
   console.log("user home", authToken);

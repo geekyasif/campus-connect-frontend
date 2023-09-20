@@ -5,7 +5,7 @@ import ForumContainer from "../../components/Forum/ForumContainer";
 function ForumCategory() {
   const { category } = useParams();
 
-  return <ForumContainer title={category} />;
+  return <ForumContainer title={category} type="category" />;
 }
 
 export default ForumCategory;

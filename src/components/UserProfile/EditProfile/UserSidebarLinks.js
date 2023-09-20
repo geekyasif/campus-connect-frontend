@@ -7,7 +7,7 @@ function UserSidebarLinks() {
 
   // md:mr-4 md:w-64 rounded mb-4 md:flex md:flex-col p-2 flex-wrap
   return (
-    <div className="bg-white shadow lg:w-[15%] w-full h-full p-2 flex flex-row lg:flex-col flex-wrap">
+    <div className="bg-white shadow lg:w-[15%] w-full h-full lg:p-2 pt-2 lg:pt-0 flex flex-row lg:flex-col flex-wrap">
       <UserSidebarLink
         url={`${user?.personal_details?.username}`}
         label="Personal Details"

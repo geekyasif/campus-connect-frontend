@@ -17,17 +17,14 @@ function UserMyProfile() {
 
   return (
     <div className="container mx-auto my-2">
-      <div className="flex md:flex-row flex-col">
-        {/* sidebar  */}
+      <div className="flex lg:flex-row flex-col p-2 gap-2">
         <UserMyProfileSidebar />
-        {/* container  */}
-
-        <div className="flex flex-col border p-2 rounded ml-2 w-full bg-white shadow">
-        <UserProfileTab
-          handleActiveTab={handleActiveTab}
-          activeTab={activeTab}
-        />
-        <UserTabContainer activeTab={activeTab} />
+        <div className="flex flex-col flex-wrap border p-2 rounded w-full bg-white shadow ">
+          <UserProfileTab
+            handleActiveTab={handleActiveTab}
+            activeTab={activeTab}
+          />
+          <UserTabContainer activeTab={activeTab} />
         </div>
       </div>
     </div>

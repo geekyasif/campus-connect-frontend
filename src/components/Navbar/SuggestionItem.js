@@ -8,7 +8,6 @@ function SuggestionItem({ data }) {
 
   return (
     <Link
-    key={data?.data?.personal_details.username}
       to={`/find-dev/${data?.data?.personal_details?.username}`}
       className="p-2 hover:bg-gray-100 hover:rounded my-2 text-xs cursor-pointer flex items-center w-full"
     >

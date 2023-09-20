@@ -2,17 +2,21 @@ import React, { useEffect, useState } from "react";
 import DevCard from "../../components/DevCard/DevCard";
 import DevCardShimmer from "../../components/Shimmer/DevCardShimmer";
 import useDev from "../../hooks/dev/useDev";
+import useSideNavbar from "../../hooks/navbar/useSideNavbar";
 
 function FindDev() {
   const { fetchDevs } = useDev();
   const [devs, setDevs] = useState([]);
+  const { handleIsSideNavbarOpen } = useSideNavbar()
+
 
   const fetchUsers = async () => {
     const res = await fetchDevs();
-    setDevs(res);
+    setDevs(res.reverse());
   };
 
   useEffect(() => {
+    handleIsSideNavbarOpen()
     fetchUsers();
   }, []);
 

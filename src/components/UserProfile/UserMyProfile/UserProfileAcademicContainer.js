@@ -7,7 +7,6 @@ function UserProfileAcademicContainer() {
 
   return (
     <div>
-      <p className="text-2xl font-bold mb-2">Academics</p>
       <UserAcademicsCard academics={user?.academics} />
     </div>
   );

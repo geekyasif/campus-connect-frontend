@@ -12,7 +12,7 @@ function UserMyProfileSidebar() {
         {user?.personal_details?.profile_url !== "" ? (
           <img
             src={user?.personal_details?.profile_url}
-            className="w-[150px] rounded-full mx-auto"
+            className=" w-[120px] lg:w-[150px] rounded-full mx-auto"
           />
         ) : (
           <Avatar
@@ -23,11 +23,8 @@ function UserMyProfileSidebar() {
         )}
       </div>
 
-      <p>{user?.personal_details?.fullName}</p>
-      <p>@{user?.personal_details?.username}</p>
-      {/* <button className="rounded bg-indigo-500 p-2 text-white text-xs mt-4">
-        <FontAwesomeIcon icon={faMessage} /> Request Chat
-      </button> */}
+      <p className="text-lg font-bold">{user?.personal_details?.fullName}</p>
+      <p className="text-xs lg:text-sm text-gray-500 font-semibold">@{user?.personal_details?.username}</p>
     </div>
   );
 }

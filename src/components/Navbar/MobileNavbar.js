@@ -4,25 +4,25 @@ import {
   faHome,
   faMultiply,
   faPeopleGroup,
-  faQuestion,
   faSignOut,
   faUser,
   faUsers,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useRef, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, NavLink } from "react-router-dom";
+import { handleIsSideNavbarOpen } from "../../features/authSlice";
+import Avatar from "react-avatar";
+import useLogout from "../../hooks/useLogout";
 
 function MobileNavbar() {
+  const Logout = useLogout();
+  const dispatch = useDispatch();
   const sideNavbarRef = useRef();
-  const { user, authToken } = useSelector((state) => state.auth);
-  const [isSideNavbarOpen, setIsSideNavbarOpen] = useState(false);
-
-  // opening the side navbar
-  function handleToggle() {
-    setIsSideNavbarOpen(!isSideNavbarOpen);
-  }
+  const { user, authToken, isSideNavbarOpen } = useSelector(
+    (state) => state.auth
+  );
 
   // closing the side navbar
   useEffect(() => {
@@ -31,7 +31,7 @@ function MobileNavbar() {
         sideNavbarRef.current &&
         !sideNavbarRef.current.contains(event.target)
       ) {
-        setIsSideNavbarOpen(!isSideNavbarOpen);
+        dispatch(handleIsSideNavbarOpen());
       }
     };
 
@@ -47,7 +47,7 @@ function MobileNavbar() {
       {/* open menu icon on mobile  */}
       <FontAwesomeIcon
         className="text-[18px]"
-        onClick={handleToggle}
+        onClick={() => dispatch(handleIsSideNavbarOpen())}
         icon={faBars}
       />
 
@@ -57,7 +57,7 @@ function MobileNavbar() {
           <div className="w-[260px] bg-white p-4 pb-[80px] shadow overflow-scroll flex flex-col relative">
             <FontAwesomeIcon
               className="absolute top-1 right-1 px-2 py-1 text-[25px]"
-              onClick={handleToggle}
+              onClick={() => dispatch(handleIsSideNavbarOpen())}
               icon={faMultiply}
             />
 
@@ -133,31 +133,38 @@ function MobileNavbar() {
                   Edit Profile
                 </NavLink>
 
-                <p className="text-gray-700 my-2  p-2">
+                <p
+                  onClick={Logout}
+                  className="text-gray-700 rounded transition-al py-2 text-sm"
+                >
                   <FontAwesomeIcon
-                    className="text-gray-700 mr-2 text-sm"
                     icon={faSignOut}
+                    className="ml-2 pr-2 text-black"
                   />
                   Logout
                 </p>
 
                 <div className="fixed bottom-0 left-0 flex flex-row items-center border-t-2 py-2 px-4 w-[260px] bg-white">
-                  <div className="rounded-full w-[50px] h-[50px]">
+                  <div className="rounded-full w-[40px] h-[40px]">
                     {user?.personal_details.profile_url !== "" ? (
                       <img
-                        src={user?.personal_details.profile_url}
+                        src={user?.personal_details?.profile_url}
                         className="rounded-full"
                       />
                     ) : (
-                      <FontAwesomeIcon icon={faUsers} />
+                      <Avatar
+                        name={user?.personal_details?.fullName}
+                        round={true}
+                        size={40}
+                      />
                     )}
                   </div>
                   <div className="ml-4">
-                    <p className="text-lg font-bold">
-                      {user?.personal_details.name}
+                    <p className="text-sm lg:text-lg font-bold">
+                      {user?.personal_details?.fullName}
                     </p>
-                    <p className="text-gray-500">
-                      @{user?.personal_details.username}
+                    <p className="text-xs lg:text-sm text-gray-500">
+                      @{user?.personal_details?.username}
                     </p>
                   </div>
                 </div>

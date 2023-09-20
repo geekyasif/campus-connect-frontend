@@ -7,6 +7,7 @@ const initialState = {
   loading: false,
   error: null,
   authToken: null,
+  isSideNavbarOpen: false,
 };
 
 export const authSlice = createSlice({
@@ -31,6 +32,9 @@ export const authSlice = createSlice({
     logout: (state) => {
       state.user = null;
     },
+    handleIsSideNavbarOpen: (state) => {
+      state.isSideNavbarOpen = !state.isSideNavbarOpen;
+    },
   },
 });
 
@@ -41,6 +45,7 @@ export const {
   clearError,
   logout,
   setAuthToken,
+  handleIsSideNavbarOpen,
 } = authSlice.actions;
 
 export const updateUserData = (username) => async (dispatch) => {

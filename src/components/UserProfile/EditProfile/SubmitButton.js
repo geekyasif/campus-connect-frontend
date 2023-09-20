@@ -6,7 +6,7 @@ function SubmitButton({ loading }) {
       <button
         className={` ${
           loading ? "bg-indigo-400" : "bg-indigo-500"
-        } border  px-6 py-2 rounded text-white hover:bg-indigo-600 transition-all`}
+        } border text-sm lg:text-base px-4 py-2  lg:px-6 lg:py-2 rounded text-white hover:bg-indigo-600 transition-all`}
         type="submit"
         disabled={loading}
       >

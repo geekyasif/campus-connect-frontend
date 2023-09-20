@@ -2,7 +2,7 @@ import React from "react";
 
 function UserCertificateCard({ certificate }) {
   return (
-    <div className="border p-2 my-2 flex flex-col lg:flex-row flex-wrap" key={certificate?.certificate_id}>
+    <div className="border p-2 lg:my-2 flex flex-col lg:flex-row flex-wrap" key={certificate?.certificate_id}>
       <img
         src={certificate?.certificate_image}
         className="lg:w-[250px] h-[150px] w-full"
