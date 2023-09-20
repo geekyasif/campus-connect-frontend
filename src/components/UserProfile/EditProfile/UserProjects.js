@@ -1,20 +1,23 @@
 import React, { useState } from "react";
-import TextInput from "../../components/UserProfile/TextInput";
-import TextArea from "../../components/UserProfile/TextArea";
-import InputRow from "../../components/UserProfile/InputRow";
+
 import { useDispatch, useSelector } from "react-redux";
-import Thumbnail from "../../components/Thumbnail/Thumbnail";
+import Thumbnail from "../../../components/Thumbnail/Thumbnail";
 import { Toaster, toast } from "react-hot-toast";
 import { arrayRemove, arrayUnion, doc, updateDoc } from "firebase/firestore";
-import { db, storage } from "../../services/firebase";
+import { db, storage } from "../../../services/firebase";
 import { getDownloadURL, uploadBytes, ref } from "firebase/storage";
 import { v4 as uuid4 } from "uuid";
-import { updateUserData } from "../../features/authSlice";
-import useLoading from "../../hooks/useLoading";
-import SubmitButton from "../../components/UserProfile/SubmitButton";
-import UserProjectCard from "../../components/UserProfile/UserMyProfile/UserProject/UserProjectCard";
+import { updateUserData } from "../../../features/authSlice";
+import useLoading from "../../../hooks/useLoading";
+import UserProjectCard from "../../../components/UserProfile/UserMyProfile/UserProject/UserProjectCard";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
+
+
+import TextInput from "./TextInput";
+import TextArea from "./TextArea";
+import InputRow from "./InputRow";
+import SubmitButton from "./SubmitButton";
 
 function UserProjects() {
   const [isUpdateOn, setIsUpdateOn] = useState(false);

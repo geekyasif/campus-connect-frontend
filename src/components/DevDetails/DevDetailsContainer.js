@@ -1,7 +1,7 @@
 import React from "react";
 import UserCertificateCard from "../UserProfile/UserMyProfile/UserCertificate/UserCertificateCard";
 import UserProjectCard from "../UserProfile/UserMyProfile/UserProject/UserProjectCard";
-import UserAcademicsCard from "../UserProfile/UserAcademicsCard";
+import UserAcademicsCard from "../UserProfile/UserMyProfile/UserAcademicsCard";
 
 function DevDetailsContainer({ user }) {
   const { personal_details, academics, certificates, projects } = user;

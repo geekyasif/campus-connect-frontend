@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import TextInput from "../../components/UserProfile/TextInput";
-import InputRow from "../../components/UserProfile/InputRow";
+import InputRow from "./InputRow";
 import { useDispatch, useSelector } from "react-redux";
 import { doc, setDoc } from "firebase/firestore";
-import { db } from "../../services/firebase";
+import { db } from "../../../services/firebase";
 import { Toaster, toast } from "react-hot-toast";
-import { updateUserData } from "../../features/authSlice";
-import useLoading from "../../hooks/useLoading";
-import SubmitButton from "../../components/UserProfile/SubmitButton";
+import { updateUserData } from "../../../features/authSlice";
+import useLoading from "../../../hooks/useLoading";
+import SubmitButton from "./SubmitButton";
+import TextInput from "./TextInput";
 
 function UserAcademics() {
   const dispatch = useDispatch();

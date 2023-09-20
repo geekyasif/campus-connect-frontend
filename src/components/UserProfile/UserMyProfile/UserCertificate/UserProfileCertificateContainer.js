@@ -7,7 +7,9 @@ function UserProfileCertificateContainer() {
   return (
     <div>
       {user?.certificates?.map((certificate) => (
-        <UserCertificateCard certificate={certificate}/>
+        <div key={certificate?.certificate_id}>
+          <UserCertificateCard certificate={certificate} />
+        </div>
       ))}
     </div>
   );

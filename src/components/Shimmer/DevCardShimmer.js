@@ -2,7 +2,7 @@ import React from "react";
 
 function DevCardShimmer() {
   return (
-    <div className="border shadow m-2 p-4 rounded bg-white lg:w-[48%] md:w-full lg:h-[300px] h-[330px]">
+    <div >
       <div className="bg-gray-200 h-[150px] animate-none"></div>
       <div className="bg-gray-200 h-[20px] rounded-sm my-2"></div>
       <div className="bg-gray-200 h-[20px] rounded-sm my-2"></div>

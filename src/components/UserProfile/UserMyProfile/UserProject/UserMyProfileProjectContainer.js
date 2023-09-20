@@ -6,11 +6,13 @@ function UserMyProfileProjectContainer() {
   const { user } = useSelector((state) => state.auth);
 
   return (
-    <div>
+    <>
       {user?.projects?.map((project) => (
-        <UserProjectCard project={project} />
+        <div key={project?.project_id}>
+          <UserProjectCard project={project} />
+        </div>
       ))}
-    </div>
+    </>
   );
 }
 

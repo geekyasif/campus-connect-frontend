@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import Avatar from "react-avatar";
 import { useSelector } from "react-redux";
-import UserProfileTab from "../../components/UserProfile/UserMyProfile/UserProfileTab";
-import UserTabContainer from "../../components/UserProfile/UserMyProfile/UserTabContainer";
-import UserMyProfileSidebar from "../../components/UserProfile/UserMyProfile/UserMyProfileSidebar";
+import UserProfileTab from "../../../components/UserProfile/UserMyProfile/UserProfileTab";
+import UserTabContainer from "../../../components/UserProfile/UserMyProfile/UserTabContainer";
+import UserMyProfileSidebar from "../../../components/UserProfile/UserMyProfile/UserMyProfileSidebar";
 
 function UserMyProfile() {
   const { user } = useSelector((state) => state.auth);

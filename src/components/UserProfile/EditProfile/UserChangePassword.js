@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import TextInput from "../../components/UserProfile/TextInput";
-import SubmitButton from "../../components/UserProfile/SubmitButton";
 import { updatePassword } from "firebase/auth";
-import { auth } from "../../services/firebase";
+import { auth } from "../../../services/firebase";
 import toast, { Toaster } from "react-hot-toast";
+import SubmitButton from "./SubmitButton";
+import TextInput from "./TextInput"
 
 function UserChangePassword() {
   const [password, setPassword] = useState("");

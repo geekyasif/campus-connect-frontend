@@ -4,17 +4,20 @@ import FindDev from "./pages/FindDev/FindDev";
 import Home from "./pages/Home/Home";
 import Login from "./pages/Authentication/Login";
 import Register from "./pages/Authentication/Register";
-import User from "./pages/User/User";
+import User from "./pages/User/EditProfile/User";
 import AuthRoute from "./routes/AuthRoute";
 import Footer from "./components/Footer/Footer";
 import DevDetails from "./pages/DevDetails.js/DevDetails";
-import UserPersonalDetails from "./pages/User/UserPersonalDetails";
-import UserAcademics from "./pages/User/UserAcademics";
-import UserSocialLinks from "./pages/User/UserSocialLinks";
-import UserCertificates from "./pages/User/UserCertificates";
-import UserProjects from "./pages/User/UserProjects";
-import UserChangePassword from "./pages/User/UserChangePassword";
-import UserMyProfile from "./pages/User/UserMyProfile";
+
+import UserAcademics from "./components/UserProfile/EditProfile/UserAcademics";
+import UserPersonalDetails from "./components/UserProfile/EditProfile/UserPersonalDetails";
+import UserSocialLinks from "./components/UserProfile/EditProfile/UserSocialLinks";
+import UserChangePassword from "./components/UserProfile/EditProfile/UserChangePassword";
+import UserCertificates from "./components/UserProfile/EditProfile/UserCertificates";
+
+import UserProjects from "./components/UserProfile/EditProfile/UserProjects";
+
+import UserMyProfile from "./pages/User/MyProfile/UserMyProfile";
 import Forum from "./pages/Forum/Forum";
 import ForgotPassword from "./pages/Authentication/ForgotPassword";
 import ForumContainer from "./components/Forum/ForumContainer";
@@ -31,7 +34,7 @@ function App() {
         <Route path="forum" element={<Forum />}>
           <Route index element={<ForumContainer title="Recent Queries" />} />
           <Route path=":category" element={<ForumCategory />} />
-          <Route path=":category/:slug" element={<QueryDetails />} />
+          <Route path=":category/:username/:id" element={<QueryDetails />} />
         </Route>
         <Route element={<AuthRoute />}>
           <Route path="find-dev/:username" element={<DevDetails />} />

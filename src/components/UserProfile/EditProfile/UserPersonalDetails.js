@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from "react";
-import TextInput from "../../components/UserProfile/TextInput";
-import TextArea from "../../components/UserProfile/TextArea";
-import InputRow from "../../components/UserProfile/InputRow";
 import Avatar from "react-avatar";
 import { useDispatch, useSelector } from "react-redux";
-import { db, storage } from "../../services/firebase";
+import { db, storage } from "../../../services/firebase";
 import { uploadBytes, ref, getDownloadURL } from "firebase/storage";
 import { doc, setDoc, updateDoc } from "firebase/firestore";
 import { Toaster, toast } from "react-hot-toast";
-import { updateUserData } from "../../features/authSlice";
-import useLoading from "../../hooks/useLoading";
-import SubmitButton from "../../components/UserProfile/SubmitButton";
+import { updateUserData } from "../../../features/authSlice";
+import useLoading from "../../../hooks/useLoading";
+
+import TextInput from "./TextInput";
+import TextArea from "./TextArea";
+import InputRow from "./InputRow";
+import SubmitButton from "./SubmitButton";
 
 function UserPersonalDetails() {
   const { loading, startLoading, stopLoading } = useLoading();

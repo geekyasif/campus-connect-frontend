@@ -14,7 +14,7 @@ import { Link } from "react-router-dom";
 
 function DevCard({ user }) {
   return (
-    <div className="border shadow m-2 px-4 pt-2 rounded bg-white lg:w-[48%] md:w-full">
+    <div className="" key={user?.personal_details?.username}>
       <div className="flex flex-row items-center">
         <div className=" md:w-[140px] md:h-[100px] w-[80px] h-[60px] flex justify-center items-center md:mr-8 mr-4 ">
           {user?.personal_details?.profile_url === "" ? (

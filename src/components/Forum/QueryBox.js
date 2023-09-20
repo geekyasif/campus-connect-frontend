@@ -1,35 +1,41 @@
 import { faMultiply } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { getAuth } from "firebase/auth";
-import { doc, getDoc } from "firebase/firestore";
-import { comment } from "postcss";
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+
+import uuid4 from "uuid4";
+import useCategories from "../../hooks/forum/useCategories";
+import { Link } from "react-router-dom";
+import { arrayUnion, doc, updateDoc } from "firebase/firestore";
+import { updateUserData } from "../../features/authSlice";
+import toast, { Toaster } from "react-hot-toast";
 import { db } from "../../services/firebase";
 
 const post = {
-  postId: 1,
-  // user: {
-  //   username: "",
-  //   profile_pic: "",
-  //   fullName: "",
-  // },
+  postId: "1",
   title: "thi sis title",
   tags: "React, hook, nextjs",
   description: "THi sis descripito",
-  category: "Frontend Development",
-  date: "",
+  category: "frontend-development",
+  datetime: "10-10-23:10:44",
   comments: [
     {
-      commentId: 1,
+      commentId: "102",
       comment: "this is comment",
-      user: {},
+      user: "jsmith",
       replies: [
         {
-          repId: "",
-          rep: "",
-          comment: "",
-          user: {},
+          replyId: "101",
+          reply: "Thank you",
+          user: "geekyasif",
+          replies: [
+            {
+              replyId: "104",
+              reply: "It's ok",
+              user: "jsmith",
+              replies: [],
+            },
+          ],
         },
       ],
     },
@@ -37,8 +43,9 @@ const post = {
 };
 
 const QueryBox = ({ handleIsModalOpen }) => {
-  const { user } = useSelector((state) => state.auth);
-  const { username, fullName, profile_url } = user?.personal_details;
+  const dispatch = useDispatch();
+  const { authToken, user } = useSelector((state) => state.auth);
+  const { categories } = useCategories();
 
   const [query, setQuery] = useState({
     title: "",
@@ -55,27 +62,55 @@ const QueryBox = ({ handleIsModalOpen }) => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    try {
+      if (query.category === "") {
+        alert("Plese select the category !");
+      } else {
+        const _query = {
+          id: uuid4(),
+          title: query.title,
+          description: query.description,
+          tags: query.tags,
+          category: query.category === "" ? "other" : query.category,
+          datetime: `${new Date()}`,
+          comments: [],
+        };
+        console.log(_query);
 
-    const _query = {
-      user: {
-        username,
-        fullName,
-        profile_url,
-      },
-      title: query.title,
-      description: query.description,
-      tags: query.tags,
-      category: query.category,
-      comments: [],
-    };
+        const userDocRef = doc(
+          db,
+          "users",
+          user?.personal_details.email.split("@")[0]
+        );
+        await updateDoc(
+          userDocRef,
+          {
+            queries: arrayUnion(_query),
+          },
+          { merge: true }
+        );
 
-    console.log(_query);
+        dispatch(updateUserData(user?.personal_details.email.split("@")[0]));
+        toast.success("Query added successfully!");
+
+        setQuery({
+          title: "",
+          description: "",
+          tags: "",
+          category: "",
+        });
+        handleIsModalOpen();
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
     <div className="mx-auto p-6 bg-white rounded shadow ">
+      <Toaster position="top-right" reverseOrder={false} />
       <div className="flex justify-between items-center">
         <h2 className="text-xl font-bold mb-4">Ask a Question</h2>
         <button onClick={handleIsModalOpen}>
@@ -162,19 +197,32 @@ const QueryBox = ({ handleIsModalOpen }) => {
             onChange={handleInputChange}
             required
           >
-            <option value="">Select a Category</option>
-            <option value="React">React</option>
-            <option value="JavaScript">JavaScript</option>
-            <option value="CSS">CSS</option>
+            <option value="others">-- select category --</option>
+            {categories?.map((cat) => (
+              <option key={cat.id} value={cat.slug}>
+                {cat.title}
+              </option>
+            ))}
           </select>
         </div>
 
-        <button
-          type="submit"
-          className="bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded text-xs"
-        >
-          Submit
-        </button>
+        <div className="text-center">
+          {authToken ? (
+            <button
+              type="submit"
+              className="bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded text-xs items-center"
+            >
+              Submit
+            </button>
+          ) : (
+            <Link
+              to="/login"
+              className="bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded text-xs "
+            >
+              Login
+            </Link>
+          )}
+        </div>
       </form>
     </div>
   );

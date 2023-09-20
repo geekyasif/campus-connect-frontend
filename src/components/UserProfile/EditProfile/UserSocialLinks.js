@@ -1,16 +1,18 @@
 import React, { useState } from "react";
-import TextInput from "../../components/UserProfile/TextInput";
-import InputRow from "../../components/UserProfile/InputRow";
 import { useDispatch, useSelector } from "react-redux";
+import { updateUserData } from "../../../features/authSlice";
+
 import { Toaster, toast } from "react-hot-toast";
 import { doc, setDoc } from "firebase/firestore";
-import { db } from "../../services/firebase";
-import { updateUserData } from "../../features/authSlice";
-import useLoading from "../../hooks/useLoading";
-import SubmitButton from "../../components/UserProfile/SubmitButton";
+import { db } from "../../../services/firebase";
+
+import TextInput from "./TextInput";
+import InputRow from "./InputRow";
+import SubmitButton from "./SubmitButton";
+import useLoading from "../../../hooks/useLoading";
 
 function UserSocialLinks() {
-  const {loading, startLoading, stopLoading} = useLoading();
+  const { loading, startLoading, stopLoading } = useLoading();
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
   const [socialLinksData, setSocialLinksData] = useState({
@@ -30,28 +32,31 @@ function UserSocialLinks() {
 
   const handleUserSocialLinksFormData = async (e) => {
     e.preventDefault();
-    try{
-      startLoading()
-      await setDoc(doc(db, "users", user?.personal_details.email.split("@")[0]), {
-        social_links: {
-          github: socialLinksData.github,
-          linkedin: socialLinksData.linkedin,
-          leetcode: socialLinksData.leetcode,
-          hackerrank: socialLinksData.hackerrank,
-          codechef: socialLinksData.codechef,
-          geeksforgeek: socialLinksData.geeksforgeek,
-          portfolio: socialLinksData.portfolio,
-        }
-      }, {merge: true});
-      
-      stopLoading()
-      dispatch(updateUserData(user?.personal_details.email.split("@")[0]))
-      toast.success("Profile upadated successfully!")
+    try {
+      startLoading();
+      await setDoc(
+        doc(db, "users", user?.personal_details.email.split("@")[0]),
+        {
+          social_links: {
+            github: socialLinksData.github,
+            linkedin: socialLinksData.linkedin,
+            leetcode: socialLinksData.leetcode,
+            hackerrank: socialLinksData.hackerrank,
+            codechef: socialLinksData.codechef,
+            geeksforgeek: socialLinksData.geeksforgeek,
+            portfolio: socialLinksData.portfolio,
+          },
+        },
+        { merge: true }
+      );
 
-    }catch(err){
-      stopLoading()
-      console.log(err)
-      toast.error("Something went wrong!")
+      stopLoading();
+      dispatch(updateUserData(user?.personal_details.email.split("@")[0]));
+      toast.success("Profile upadated successfully!");
+    } catch (err) {
+      stopLoading();
+      console.log(err);
+      toast.error("Something went wrong!");
     }
   };
 
@@ -127,7 +132,7 @@ function UserSocialLinks() {
           />
         </InputRow>
 
-       <SubmitButton loading={loading} />
+        <SubmitButton loading={loading} />
       </form>
     </div>
   );

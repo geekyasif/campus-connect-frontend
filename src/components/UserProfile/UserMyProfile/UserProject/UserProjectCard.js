@@ -2,7 +2,7 @@ import React from "react";
 
 function UserProjectCard({ project }) {
   return (
-    <div className="border my-2 flex flex-col lg:flex-row py-4 px-2">
+    <div className="border my-2 flex flex-col lg:flex-row py-4 px-2" key={project?.project_id}>
       <img
         src={project?.project_image}
         className="lg:w-[250px] h-[150px] w-full"

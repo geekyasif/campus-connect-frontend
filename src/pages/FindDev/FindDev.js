@@ -21,9 +21,18 @@ function FindDev() {
       {devs?.length === 0 &&
         Array(6)
           .fill(0)
-          .map(() => <DevCardShimmer />)}
+          .map((_, i) => (
+            <div className="border shadow m-2 p-4 rounded bg-white lg:w-[48%] md:w-full lg:h-[300px] h-[330px]" key={i}>
+              <DevCardShimmer />
+            </div>
+          ))}
       {devs?.map(({ data }) => (
-        <DevCard user={data} />
+        <div
+          className="border shadow m-2 px-4 pt-2 rounded bg-white lg:w-[48%] md:w-full"
+          key={data?.personal_details.username}
+        >
+          <DevCard user={data} />
+        </div>
       ))}
     </div>
   );

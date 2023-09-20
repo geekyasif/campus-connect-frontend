@@ -59,7 +59,7 @@ const Login = () => {
         <h2 className="text-center font-bold text-base lg:text-xl  text-indigo-600">
           Login
         </h2>
-        <form onSubmit={handleFormSubmit}>
+        <form onSubmit={handleFormSubmit} autoComplete="on">
           <div className="form-group">
             <AuthInput
               label="Email"
