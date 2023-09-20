@@ -37,8 +37,6 @@ function QueryDetails() {
       });
       setQuery(_data);
       setLoading(false);
-    } else {
-      console.log("Not found !");
     }
   };
 

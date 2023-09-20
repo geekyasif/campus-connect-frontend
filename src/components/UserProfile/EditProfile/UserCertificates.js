@@ -37,7 +37,6 @@ function UserCertificates() {
   // handling thumbnail / certificate image
   const handleCertificateImage = (e) => {
     const certificateFile = e.target.files[0];
-    console.log(certificateFile);
     const certificateImagePrev = URL.createObjectURL(certificateFile);
     if (
       certificateFile.type === "image/jpeg" ||

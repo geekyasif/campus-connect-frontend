@@ -4,9 +4,6 @@ import QueryCard from "../../Forum/QueryCard";
 
 function MyQueriesContainer() {
   const { user } = useSelector((state) => state.auth);
-
-  console.log("queryes");
-
   return (
     <div>
       {!user?.queries && (

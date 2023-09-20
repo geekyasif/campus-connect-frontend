@@ -77,8 +77,6 @@ const QueryBox = ({ handleIsModalOpen }) => {
           datetime: `${new Date()}`,
           comments: [],
         };
-        console.log(_query);
-
         const userDocRef = doc(
           db,
           "users",

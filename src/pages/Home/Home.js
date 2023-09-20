@@ -15,7 +15,6 @@ function Home() {
     handleSideNav();
   }, []);
 
-  console.log("user home", authToken);
   return (
     <div className=" w-full h-full container mx-auto mt-8 px-4">
       <div className="md:flex md:flex-row md:justify-between items-center">

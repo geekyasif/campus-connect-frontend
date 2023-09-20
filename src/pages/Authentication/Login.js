@@ -43,7 +43,6 @@ const Login = () => {
       userCredential.password
     );
     if (res) {
-      console.log(res);
       toast.error(res);
     }
     stopLoading();

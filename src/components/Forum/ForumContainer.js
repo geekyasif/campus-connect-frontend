@@ -98,8 +98,6 @@ function ForumContainer({ title, type }) {
   const handleSearchQueryText = async (args) => {
     try {
       if (args) {
-        console.log("searching....");
-
         const _queries = [];
         const querySnapshot = await getDocs(collection(db, "users"));
         querySnapshot.forEach((doc) => {

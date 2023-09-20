@@ -57,8 +57,6 @@ export const updateUserData = (username) => async (dispatch) => {
     querySnapshot.forEach((doc) => {
       dispatch(setUser(doc.data()));
     });
-
-    console.log("updated");
   } catch (error) {
     console.log(error);
   }

@@ -6,8 +6,6 @@ function useSideNavbar() {
   // opening the side navbar
   function handleIsSideNavbarOpen() {
     setIsSideNavbarOpen(!isSideNavbarOpen);
-    console.log("callng.....")
-    console.log(isSideNavbarOpen)
   }
 
   return { handleIsSideNavbarOpen, isSideNavbarOpen };
