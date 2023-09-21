@@ -1,11 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import UserSidebarLinks from "../../../components/UserProfile/EditProfile/UserSidebarLinks";
+import { handleIsSideNavbarOpen } from "../../../features/authSlice";
 
 
 function User() {
   const { user } = useSelector((state) => state.auth);
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(handleIsSideNavbarOpen());
+  },[])
 
   return (
     <div className="container mx-auto flex flex-col md:flex md:flex-row my-4 md:p-0 p-2">

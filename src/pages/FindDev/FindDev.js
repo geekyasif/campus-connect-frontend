@@ -3,12 +3,13 @@ import DevCard from "../../components/DevCard/DevCard";
 import DevCardShimmer from "../../components/Shimmer/DevCardShimmer";
 import useDev from "../../hooks/dev/useDev";
 import useSideNavbar from "../../hooks/navbar/useSideNavbar";
+import { useDispatch } from "react-redux";
+import { handleIsSideNavbarOpen } from "../../features/authSlice";
 
 function FindDev() {
   const { fetchDevs } = useDev();
+  const dispatch = useDispatch();
   const [devs, setDevs] = useState([]);
-  const { handleIsSideNavbarOpen } = useSideNavbar()
-
 
   const fetchUsers = async () => {
     const res = await fetchDevs();
@@ -16,7 +17,7 @@ function FindDev() {
   };
 
   useEffect(() => {
-    handleIsSideNavbarOpen()
+    dispatch(handleIsSideNavbarOpen());
     fetchUsers();
   }, []);
 
@@ -26,7 +27,10 @@ function FindDev() {
         Array(6)
           .fill(0)
           .map((_, i) => (
-            <div className="border shadow m-2 p-4 rounded bg-white lg:w-[48%] md:w-full lg:h-[300px] h-[330px]" key={i}>
+            <div
+              className="border shadow m-2 p-4 rounded bg-white lg:w-[48%] md:w-full lg:h-[300px] h-[330px]"
+              key={i}
+            >
               <DevCardShimmer />
             </div>
           ))}
