@@ -13,7 +13,6 @@ import UserProjectCard from "../../../components/UserProfile/UserMyProfile/UserP
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
 
-
 import TextInput from "./TextInput";
 import TextArea from "./TextArea";
 import InputRow from "./InputRow";
@@ -124,39 +123,66 @@ function UserProjects() {
 
   const handleUpdateProjectFormData = async (e) => {
     e.preventDefault();
-    toast.success("Project Updated successfully!");
-    setProjectData({
-      project_title: "",
-      project_image: "",
-      project_source_code_link: "",
-      project_deployment_link: "",
-      project_demo_link: "",
-      project_tech_stack: "",
-      project_date: "",
-      project_description: "",
-    });
-    setProjectImage({
-      uploadImage: "",
-      prevImage: "",
-      downloadUrl: "",
-    });
-    setIsUpdateOn(false);
+
+    try {
+      const oldProjects = user?.projects.filter(
+        (p) => p.project_id !== projectData.project_id
+      );
+      const updatedProjects = [...oldProjects, projectData];
+
+      const userDocRef = doc(
+        db,
+        "users",
+        user?.personal_details.email.split("@")[0]
+      );
+
+      await updateDoc(userDocRef, {
+        projects: updatedProjects,
+      });
+
+      dispatch(updateUserData(user?.personal_details.email.split("@")[0]));
+
+      toast.success("Project Updated successfully!");
+      setProjectData({
+        project_title: "",
+        project_image: "",
+        project_source_code_link: "",
+        project_deployment_link: "",
+        project_demo_link: "",
+        project_tech_stack: "",
+        project_date: "",
+        project_description: "",
+      });
+      setProjectImage({
+        uploadImage: "",
+        prevImage: "",
+        downloadUrl: "",
+      });
+      setIsUpdateOn(false);
+    } catch (error) {
+      toast.error("Something went wrong!");
+    }
   };
 
   const handleDeleteProject = async (id) => {
-    const filteredProject = user?.projects.filter((p) => p.project_id != id);
+    try {
+      const filteredProject = user?.projects.filter((p) => p.project_id !== id);
 
-    const userDocRef = doc(
-      db,
-      "users",
-      user?.personal_details.email.split("@")[0]
-    );
+      const userDocRef = doc(
+        db,
+        "users",
+        user?.personal_details.email.split("@")[0]
+      );
 
-    await updateDoc(userDocRef, {
-      projects: filteredProject,
-    });
+      await updateDoc(userDocRef, {
+        projects: filteredProject,
+      });
 
-    dispatch(updateUserData(user?.personal_details.email.split("@")[0]));
+      dispatch(updateUserData(user?.personal_details.email.split("@")[0]));
+      toast.success("Project Deleted Successfully");
+    } catch (error) {
+      toast.error("Something went wrong!");
+    }
   };
 
   const handleEditProject = async (project) => {

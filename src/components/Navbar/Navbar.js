@@ -26,6 +26,8 @@ function Navbar() {
           .includes(args.toLowerCase())
       );
       setFilterResults(_results);
+    } else {
+      setFilterResults([]);
     }
   };
 

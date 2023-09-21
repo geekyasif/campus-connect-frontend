@@ -5,6 +5,7 @@ import UserAcademicsCard from "../UserProfile/UserMyProfile/UserAcademicsCard";
 
 function DevDetailsContainer({ user }) {
   const { personal_details, academics, certificates, projects } = user;
+
   return (
     <div className="bg-white p-4 border flex-grow lg:w-[70%] w-full">
       <p className="text-base lg:text-2xl font-bold mb-2 border-b-2">

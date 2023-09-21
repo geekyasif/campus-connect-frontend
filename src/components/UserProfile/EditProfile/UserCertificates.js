@@ -135,20 +135,42 @@ function UserCertificates() {
 
   const handleUpdateCertficateFormData = async (e) => {
     e.preventDefault();
-    toast.success("Project Updated successfully!");
-    setCertificateData({
-      certificate_title: "",
-      certificate_url: "",
-      certificate_issue_date: "",
-      certificate_expire_date: "",
-      credential_verification_link: "",
-    });
-    setCertificateImage({
-      uploadImage: "",
-      prevImage: "",
-      downloadUrl: "",
-    });
-    setIsUpdateOn(false);
+
+    try {
+      const oldCertificated = user?.certificates.filter(
+        (c) => c.certificate_id !== certificateData.certificate_id
+      );
+      const updatedCertificates = [...oldCertificated, certificateData];
+
+      const userDocRef = doc(
+        db,
+        "users",
+        user?.personal_details.email.split("@")[0]
+      );
+
+      await updateDoc(userDocRef, {
+        certificates: updatedCertificates,
+      });
+
+      dispatch(updateUserData(user?.personal_details.email.split("@")[0]));
+
+      toast.success("Certificate Updated successfully!");
+      setCertificateData({
+        certificate_title: "",
+        certificate_url: "",
+        certificate_issue_date: "",
+        certificate_expire_date: "",
+        credential_verification_link: "",
+      });
+      setCertificateImage({
+        uploadImage: "",
+        prevImage: "",
+        downloadUrl: "",
+      });
+      setIsUpdateOn(false);
+    } catch (error) {
+      toast.error("Something went wrong!");
+    }
   };
 
   // deleting certicifate
@@ -169,7 +191,9 @@ function UserCertificates() {
       });
 
       dispatch(updateUserData(user?.personal_details.email.split("@")[0]));
+      toast.success("Certificate deleted Successfully.");
     } catch (error) {
+      toast.error("Something went wrong! Try again");
       console.log(error);
     }
   };
