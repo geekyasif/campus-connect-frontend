@@ -1,6 +1,6 @@
 import { faMultiply } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import uuid4 from "uuid4";
@@ -10,37 +10,6 @@ import { arrayUnion, doc, updateDoc } from "firebase/firestore";
 import { updateUserData } from "../../features/authSlice";
 import toast, { Toaster } from "react-hot-toast";
 import { db } from "../../services/firebase";
-
-const post = {
-  postId: "1",
-  title: "thi sis title",
-  tags: "React, hook, nextjs",
-  description: "THi sis descripito",
-  category: "frontend-development",
-  datetime: "10-10-23:10:44",
-  comments: [
-    {
-      commentId: "102",
-      comment: "this is comment",
-      user: "jsmith",
-      replies: [
-        {
-          replyId: "101",
-          reply: "Thank you",
-          user: "geekyasif",
-          replies: [
-            {
-              replyId: "104",
-              reply: "It's ok",
-              user: "jsmith",
-              replies: [],
-            },
-          ],
-        },
-      ],
-    },
-  ],
-};
 
 const QueryBox = ({ handleIsModalOpen }) => {
   const dispatch = useDispatch();
@@ -66,7 +35,7 @@ const QueryBox = ({ handleIsModalOpen }) => {
     e.preventDefault();
     try {
       if (query.category === "") {
-        alert("Plese select the category !");
+        toast.error("Category field is required!");
       } else {
         const _query = {
           id: uuid4(),
@@ -102,7 +71,7 @@ const QueryBox = ({ handleIsModalOpen }) => {
         handleIsModalOpen();
       }
     } catch (error) {
-      console.log(error);
+      toast.error("Something went wrong. Try again!");
     }
   };
 

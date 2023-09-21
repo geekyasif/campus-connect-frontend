@@ -1,11 +1,9 @@
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function SuggestionItem({ data }) {
-  const navigate = useNavigate();
-
   return (
     <Link
       to={`/find-dev/${data?.data?.personal_details?.username}`}

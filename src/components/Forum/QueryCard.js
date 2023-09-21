@@ -47,6 +47,16 @@ function QueryCard({ query, user }) {
     }
   };
 
+
+  const handleEditQuery = async ()  => {
+    try{
+      toast.error("Try again later we are working on it!")
+    }catch(error){
+      console.log(error)
+      toast.error("Something went wrong!")
+    }
+  } 
+
   return (
     <div className="border-b-2 my-2 lg:px-4 py-2">
       <Toaster position="top-right" reverseOrder={false} />
@@ -70,6 +80,7 @@ function QueryCard({ query, user }) {
               className="mx-2 text-red-600 cursor-pointer"
             />
             <FontAwesomeIcon
+              onClick={handleEditQuery}
               icon={faPen}
               width={10}
               className="mx-2 text-indigo-500 cursor-pointer"

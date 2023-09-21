@@ -9,6 +9,7 @@ import { useLocation } from "react-router-dom";
 import SearchInput from "./SearchInput";
 import SuggestionContainer from "./SuggestionContainer";
 import useDev from "../../hooks/dev/useDev";
+import toast, { Toaster } from "react-hot-toast";
 
 function Navbar() {
   const { pathname } = useLocation();
@@ -19,15 +20,19 @@ function Navbar() {
   const [filterResults, setFilterResults] = useState([]);
 
   const handleSearchDevs = (args) => {
-    if (args) {
-      const _results = devs?.filter((d) =>
-        d.data.personal_details.fullName
-          .toLowerCase()
-          .includes(args.toLowerCase())
-      );
-      setFilterResults(_results);
-    } else {
-      setFilterResults([]);
+    try {
+      if (args) {
+        const _results = devs?.filter((d) =>
+          d.data.personal_details.fullName
+            .toLowerCase()
+            .includes(args.toLowerCase())
+        );
+        setFilterResults(_results);
+      } else {
+        setFilterResults([]);
+      }
+    } catch (error) {
+      toast.error("Something went wrong. try again!");
     }
   };
 
@@ -42,6 +47,7 @@ function Navbar() {
 
   return (
     <div className="bg-white p-4 border-b-2 sticky top-0 z-10">
+      <Toaster position="top-right" reverseOrder={false} />
       <div className="container mx-auto flex flex-row justify-between items-center relative flex-wrap">
         <LeftNavbar />
         {pathname.split("/")[1] === "find-dev" && (

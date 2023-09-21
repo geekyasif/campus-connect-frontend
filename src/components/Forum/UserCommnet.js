@@ -36,7 +36,7 @@ const UserComment = ({ user, comment, replies }) => {
           className="h-4 w-4 rounded-full"
         />
 
-        <p className="text-xs my-2 mx-2">{user.userName}</p>
+        <p className="text-xs my-2 mx-2">{user?.username}</p>
         <FontAwesomeIcon icon={faClock} className="w-3 text-gray-600" />
         <p className="text-xs my-2 mx-2">1233</p>
       </div>

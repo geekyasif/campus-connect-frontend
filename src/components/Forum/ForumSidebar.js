@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import ForumSidebarTag from "./ForumSidebarTag";
 import { collection, doc, getDocs } from "firebase/firestore";
 import { db } from "../../services/firebase";
+import toast, { Toaster } from "react-hot-toast";
 
 function ForumSidebar() {
   const [loading, setLoading] = useState(true);
@@ -24,7 +25,7 @@ function ForumSidebar() {
         setLoading(false);
       });
     } catch (error) {
-      console.log(error);
+      toast.error("Something went wrong. Try again!");
     }
   };
 
@@ -34,6 +35,7 @@ function ForumSidebar() {
 
   return (
     <div className="bg-white border rounded p-2 ">
+      <Toaster position="top-right" reverseOrder={false} />
       <p className="font-semibold border-b-2  mb-4 pb-2 ">Tags</p>
       {/* <div className="mb-4">
         <input

@@ -5,12 +5,13 @@ import { useSelector } from "react-redux";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../services/firebase";
 import QueryCardShimmer from "./QueryCardShimmer";
+import toast, { Toaster } from "react-hot-toast";
 
 function ForumContainer({ title, type }) {
   const { user } = useSelector((state) => state.auth);
   const [loading, setLoading] = useState(true);
   const [queries, setQueries] = useState([]);
-  const [filteredQueries, setFilteredQueries] = useState([])
+  const [filteredQueries, setFilteredQueries] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [searchQueryText, setSearchQueryText] = useState("");
 
@@ -19,6 +20,7 @@ function ForumContainer({ title, type }) {
       setIsModalOpen(!isModalOpen);
     } catch (error) {
       console.log(error);
+      toast.error("Something went wrong!");
     }
   }
 
@@ -40,7 +42,7 @@ function ForumContainer({ title, type }) {
         });
 
         setQueries(_queries);
-        setFilteredQueries(_queries)
+        setFilteredQueries(_queries);
       } else if (type === "category") {
         const _queries = [];
         const querySnapshot = await getDocs(collection(db, "users"));
@@ -65,7 +67,7 @@ function ForumContainer({ title, type }) {
         });
 
         setQueries(_queries);
-        setFilteredQueries(_queries)
+        setFilteredQueries(_queries);
       } else {
         const _queries = [];
         const querySnapshot = await getDocs(collection(db, "users"));
@@ -86,12 +88,12 @@ function ForumContainer({ title, type }) {
         });
 
         setQueries(_queries);
-        setFilteredQueries(_queries)
+        setFilteredQueries(_queries);
       }
     } catch (error) {
-      console.log(error);
-    }finally{
-      setLoading(false)
+      toast.error("Something went wrong. Try again!");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -115,12 +117,12 @@ function ForumContainer({ title, type }) {
             }
           }
         });
-        setFilteredQueries(_queries)
-      }else{
-        setFilteredQueries(queries)
+        setFilteredQueries(_queries);
+      } else {
+        setFilteredQueries(queries);
       }
     } catch (error) {
-      console.log(error);
+      toast.error("Something went wrong. Try again!");
     } finally {
       setLoading(false);
     }
@@ -141,6 +143,7 @@ function ForumContainer({ title, type }) {
 
   return (
     <div className="w-full lg:w-[78%] bg-white rounded">
+      <Toaster position="top-right" reverseOrder={false} />
       <div className="bg-gray-100  flex justify-between border items-center p-2 flex-wrap lg:flex-nowrap">
         <p className="px-1 lg:px-2 font-bold lg:mb-0 mb-2 w-full">{title}</p>
         <div className="flex justify-between w-full lg:justify-end">

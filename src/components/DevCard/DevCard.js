@@ -11,11 +11,18 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Avatar from "react-avatar";
 import React from "react";
 import { Link } from "react-router-dom";
+import toast, { Toaster } from "react-hot-toast";
 
 function DevCard({ user }) {
+  const handleRequestChat = () => {
+    console.log("Wroking");
+    toast.success("Request chat will coming soon...");
+  };
+
   return (
     <div>
       <div className="flex flex-row items-center">
+        <Toaster position="top-right" reverseOrder={false} />
         <div className=" md:w-[140px] md:h-[100px] w-[80px] h-[60px] flex justify-center items-center md:mr-8 mr-4 ">
           {user?.personal_details?.profile_url === "" ? (
             <Avatar
@@ -123,10 +130,13 @@ function DevCard({ user }) {
             <FontAwesomeIcon icon={faUser} className="mr-2" />
             View Details
           </Link>
-          <Link className="border rounded p-2 text-xs  bg-indigo-500 text-center text-white w-full lg:w-1/5">
+          <button
+            className="border rounded p-2 text-xs  bg-indigo-500 text-center text-white w-full lg:w-1/5"
+            onClick={handleRequestChat}
+          >
             <FontAwesomeIcon icon={faMessage} className="mr-2" />
             Request Chat
-          </Link>
+          </button>
         </div>
       </div>
     </div>

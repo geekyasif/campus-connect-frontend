@@ -27,7 +27,7 @@ function Home() {
           </p>
           <Link
             className="bg-indigo-500 p-2 rounded text-white text-xs md:text-sm"
-            to="/"
+            to={authToken ? "/find-dev" : "/login"}
           >
             Connects with Devs
           </Link>

@@ -2,13 +2,18 @@ import { faMessage } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import Avatar from "react-avatar";
-import { Link } from "react-router-dom";
+import toast, { Toaster } from "react-hot-toast";
 
 function DevDetailsSidebar({ user }) {
   const { personal_details, social_links } = user;
 
+  const handleRequestChat = () => {
+    toast.success("Request chat will coming soon...");
+  };
+
   return (
     <div className="border bg-white rounded p-4 h-full lg:w-[25%] w-full ">
+      <Toaster position="top-right" reverseOrder={false} />
       <div className="flex justify-center">
         {personal_details?.profile_url !== "" ? (
           <img
@@ -56,7 +61,7 @@ function DevDetailsSidebar({ user }) {
       </p>
       <p className="my-2 font-bold mt-4 border-b-2">Skills</p>
       <div className="flex flex-row flex-wrap">
-        {personal_details?.skills.split(",").map((skill, id) => (
+        {personal_details?.skills?.split(",").map((skill, id) => (
           <p className="border p-1 my-1 mr-1 text-xs rounded" key={id}>
             {skill}
           </p>
@@ -104,10 +109,13 @@ function DevDetailsSidebar({ user }) {
         </div>
       </div>
       <div className="my-4 text-center">
-        <Link className="border rounded p-2 text-xs md:text-sm bg-indigo-500 text-center text-white">
+        <button
+          className="border rounded p-2 text-xs md:text-sm bg-indigo-500 text-center text-white"
+          onClick={handleRequestChat}
+        >
           <FontAwesomeIcon icon={faMessage} className="mr-2" />
           Request Chat
-        </Link>
+        </button>
       </div>
     </div>
   );
