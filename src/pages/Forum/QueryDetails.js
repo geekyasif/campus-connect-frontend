@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import CommentBox from "../../components/Forum/CommentBox";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faArrowAltCircleLeft,
@@ -11,12 +11,15 @@ import {
   faTrash,
 } from "@fortawesome/free-solid-svg-icons";
 import CommentContainer from "../../components/Forum/CommentContainer";
-import { doc, getDoc } from "firebase/firestore";
+import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { db } from "../../services/firebase";
 import Avatar from "react-avatar";
+import { updateUserData } from "../../features/authSlice";
+import toast from "react-hot-toast";
 
 function QueryDetails() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [loading, setLoading] = useState(true);
   const { user, authToken } = useSelector((state) => state.auth);
   const { category, username, id } = useParams();
@@ -39,6 +42,30 @@ function QueryDetails() {
       setLoading(false);
     }
   };
+
+  const handleDeleteQuery = async () => {
+    try {
+      const filteredQueries = user?.queries.filter((q) => q.id !== id);
+
+      const userDocRef = doc(
+        db,
+        "users",
+        user?.personal_details.email.split("@")[0]
+      );
+
+      await updateDoc(userDocRef, {
+        queries: filteredQueries,
+      });
+
+      dispatch(updateUserData(user?.personal_details.email.split("@")[0]));
+      toast.success("Query Deleted Successfully");
+      navigate(-1);
+    } catch (error) {
+      console.log(error);
+      toast.error("Something went wrong!");
+    }
+  };
+
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -81,17 +108,22 @@ function QueryDetails() {
             </button>
 
             {query?.user?.username === user?.personal_details?.username && (
-              <div className="flex justify-end">
+              <div className="flex justify-end items-center">
                 <FontAwesomeIcon
+                  onClick={handleDeleteQuery}
                   icon={faTrash}
                   width={12}
                   className="mx-2 text-red-600 cursor-pointer"
                 />
-                <FontAwesomeIcon
-                  icon={faPen}
-                  width={12}
-                  className="mx-2 text-indigo-500 cursor-pointer"
-                />
+                <Link
+                  to={`/forum/edit/${query?.user?.username}/${query?.query?.id}`}
+                >
+                  <FontAwesomeIcon
+                    icon={faPen}
+                    width={12}
+                    className="mx-2 text-indigo-500 cursor-pointer"
+                  />
+                </Link>
               </div>
             )}
           </div>

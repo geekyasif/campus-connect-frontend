@@ -24,6 +24,7 @@ import ForumContainer from "./components/Forum/ForumContainer";
 import QueryDetails from "./pages/Forum/QueryDetails";
 import ForumCategory from "./pages/Forum/ForumCategory";
 import ForumTag from "./pages/Forum/ForumTag";
+import EditQuery from "./pages/Forum/EditQuery";
 
 function App() {
   return (
@@ -33,10 +34,14 @@ function App() {
       <Routes>
         <Route path="find-dev" element={<FindDev />} />
         <Route path="forum" element={<Forum />}>
-          <Route index element={<ForumContainer title="Recent Queries" type="default" />} />
+          <Route
+            index
+            element={<ForumContainer title="Recent Queries" type="default" />}
+          />
           <Route path="category/:category" element={<ForumCategory />} />
           <Route path="tag/:tag" element={<ForumTag />} />
           <Route path=":category/:username/:id" element={<QueryDetails />} />
+          <Route path="edit/:username/:id" element={<EditQuery />} />
         </Route>
         <Route element={<AuthRoute />}>
           <Route path="find-dev/:username" element={<DevDetails />} />
