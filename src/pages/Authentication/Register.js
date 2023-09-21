@@ -1,7 +1,11 @@
-import React, { useReducer, useState } from "react";
+import React, { useEffect, useReducer, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { setUser, signup } from "../../features/authSlice";
+import {
+  handleIsSideNavbarOpen,
+  setUser,
+  signup,
+} from "../../features/authSlice";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth, db } from "../../services/firebase";
 import { Toaster, toast } from "react-hot-toast";
@@ -118,6 +122,10 @@ const Register = () => {
       toast.error(error.code);
     }
   };
+
+  useEffect(() => {
+    dispatch(handleIsSideNavbarOpen());
+  }, []);
 
   if (authToken) {
     return navigate("/");
