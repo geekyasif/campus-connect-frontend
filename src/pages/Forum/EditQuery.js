@@ -1,16 +1,18 @@
 import { faArrowAltCircleLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { doc, getDoc } from "firebase/firestore";
+import { doc, getDoc, updateDoc } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { db } from "../../services/firebase";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import useCategories from "../../hooks/forum/useCategories";
 import toast from "react-hot-toast";
+import { updateUserData } from "../../features/authSlice";
 
 function EditQuery() {
   const navigate = useNavigate();
-  const { authToken } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+  const { authToken, user } = useSelector((state) => state.auth);
   const [loading, setLoading] = useState(true);
   const { username, id } = useParams();
   const { categories } = useCategories();
@@ -59,10 +61,29 @@ function EditQuery() {
     fetchQueryDetails();
   }, [username, id]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    toast.success("Query updated successfully!");
-    navigate(-1);
+    try {
+      const oldQueries = user?.queries?.filter((q) => q.id !== id);
+      const newUpdatedQueries = [...oldQueries, updatedQuery];
+
+      const userDocRef = doc(
+        db,
+        "users",
+        user?.personal_details.email.split("@")[0]
+      );
+
+      await updateDoc(userDocRef, {
+        queries: newUpdatedQueries,
+      });
+
+      dispatch(updateUserData(user?.personal_details.email.split("@")[0]));
+
+      toast.success("Query updated successfully!");
+      navigate(-1);
+    } catch (error) {
+      toast.error("Something went wrong!");
+    }
   };
 
   return (
