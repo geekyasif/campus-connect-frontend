@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { Toaster, toast } from "react-hot-toast";
 
@@ -11,10 +11,11 @@ import AuthButton from "../../components/AuthenticationForm/AuthButton";
 import useFirebaseLogin from "../../hooks/useFirebaseLogin";
 import useLoading from "../../hooks/useLoading";
 import useSideNavbar from "../../hooks/navbar/useSideNavbar";
+import { handleIsSideNavbarOpen } from "../../features/authSlice";
 
 const Login = () => {
   const navigate = useNavigate();
-  const { handleIsSideNavbarOpen } = useSideNavbar();
+  const dispatch = useDispatch();
   const { authToken } = useSelector((state) => state.auth);
   const [userCredential, setUserCredential] = useState({
     email: "",
@@ -49,7 +50,7 @@ const Login = () => {
   };
 
   useEffect(() => {
-    handleIsSideNavbarOpen();
+    dispatch(handleIsSideNavbarOpen());
   }, []);
 
   // Redirect to login page if token is null
