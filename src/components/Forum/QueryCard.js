@@ -6,15 +6,50 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { getAuth } from "firebase/auth";
-import React from "react";
+import { doc, updateDoc } from "firebase/firestore";
+import React, { useEffect } from "react";
 import Avatar from "react-avatar";
 import { Link } from "react-router-dom";
+import { db } from "../../services/firebase";
+import { useDispatch, useSelector } from "react-redux";
+import toast, { Toaster } from "react-hot-toast";
+import { updateUserData } from "../../features/authSlice";
 
 function QueryCard({ query, user }) {
+  const { user: userQueries } = useSelector((state) => state.auth);
   const { currentUser } = getAuth();
+  const dispatch = useDispatch();
+
+  const handleDeleteQuery = async () => {
+    console.log(query.id);
+    try {
+      const filteredQueries = userQueries?.queries.filter(
+        (q) => q.id !== query.id
+      );
+
+      const userDocRef = doc(
+        db,
+        "users",
+        userQueries?.personal_details.email.split("@")[0]
+      );
+
+      await updateDoc(userDocRef, {
+        queries: filteredQueries,
+      });
+
+      dispatch(
+        updateUserData(userQueries?.personal_details.email.split("@")[0])
+      );
+      toast.success("Query Deleted Successfully");
+    } catch (error) {
+      console.log(error);
+      toast.error("Something went wrong!");
+    }
+  };
 
   return (
     <div className="border-b-2 my-2 lg:px-4 py-2">
+      <Toaster position="top-right" reverseOrder={false} />
       <div className="flex justify-between">
         <Link
           to={`/forum/${query.category.split(" ").join("-").toLowerCase()}/${
@@ -29,6 +64,7 @@ function QueryCard({ query, user }) {
         {user?.email === currentUser?.email && (
           <div className="flex justify-end">
             <FontAwesomeIcon
+              onClick={handleDeleteQuery}
               icon={faTrash}
               width={10}
               className="mx-2 text-red-600 cursor-pointer"
@@ -43,7 +79,11 @@ function QueryCard({ query, user }) {
       </div>
       <div className="flex">
         {query?.tags?.split(",").map((tag) => (
-          <Link to={`/forum/tag/${tag}`} className="px-2 text-xs border mr-2 rounded my-2" key={tag}>
+          <Link
+            to={`/forum/tag/${tag}`}
+            className="px-2 text-xs border mr-2 rounded my-2"
+            key={tag}
+          >
             {tag}
           </Link>
         ))}
