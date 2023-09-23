@@ -17,6 +17,7 @@ function DevDetailsSidebar({ user }) {
       <div className="flex justify-center">
         {personal_details?.profile_url !== "" ? (
           <img
+alt="profile"
             src={personal_details?.profile_url}
             className="rounded-full w-40 h-40"
           />
@@ -74,35 +75,35 @@ function DevDetailsSidebar({ user }) {
           <a
             className="mr-2 text-xs text-indigo-600 border p-1 rounded"
             target="_blank"
-            href={social_links?.github}
+            href={social_links?.github} rel="noreferrer"
           >
             Github
           </a>
           <a
             className="mr-2 text-xs text-indigo-600 border p-1 rounded"
             target="_blank"
-            href={social_links?.leetcode}
+            href={social_links?.leetcode} rel="noreferrer"
           >
             Leetcode
           </a>
           <a
             className="mr-2 text-xs text-indigo-600 border p-1 rounded"
             target="_blank"
-            href={social_links?.linkedin}
+            href={social_links?.linkedin} rel="noreferrer"
           >
             Linkedin
           </a>
           <a
             className="mr-2 text-xs text-indigo-600 border p-1 rounded"
             target="_blank"
-            href={social_links?.geeksforgeek}
+            href={social_links?.geeksforgeek} rel="noreferrer"
           >
             GeeksforGeeks
           </a>
           <a
             className="mr-2 text-xs text-indigo-600 border p-1 rounded"
             target="_blank"
-            href={social_links?.codechef}
+            href={social_links?.codechef} rel="noreferrer"
           >
             Codechef
           </a>

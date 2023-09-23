@@ -9,7 +9,7 @@ import {
   faUsers,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, NavLink } from "react-router-dom";
 import { handleIsSideNavbarOpen } from "../../features/authSlice";
@@ -148,6 +148,7 @@ function MobileNavbar() {
                   <div className="rounded-full w-[40px] h-[40px]">
                     {user?.personal_details.profile_url !== "" ? (
                       <img
+                        alt="profile"
                         src={user?.personal_details?.profile_url}
                         className="rounded-full"
                       />

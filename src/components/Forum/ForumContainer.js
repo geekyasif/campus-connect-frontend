@@ -9,7 +9,7 @@ import toast, { Toaster } from "react-hot-toast";
 
 function ForumContainer({ title, type }) {
   const { user } = useSelector((state) => state.auth);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [queries, setQueries] = useState([]);
   const [filteredQueries, setFilteredQueries] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -19,13 +19,13 @@ function ForumContainer({ title, type }) {
     try {
       setIsModalOpen(!isModalOpen);
     } catch (error) {
-      console.log(error);
-      toast.error("Something went wrong!");
+      throw error;
     }
   }
 
-  const fetchQueries = async () => {
+  const handleFetchQueries = async () => {
     try {
+      setLoading(true);
       if (type === "default") {
         const _queries = [];
         const querySnapshot = await getDocs(collection(db, "users"));
@@ -130,7 +130,7 @@ function ForumContainer({ title, type }) {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    fetchQueries();
+    handleFetchQueries();
   }, [title, user]);
 
   useEffect(() => {

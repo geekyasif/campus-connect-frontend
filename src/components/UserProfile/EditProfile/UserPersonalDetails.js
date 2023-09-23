@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Avatar from "react-avatar";
 import { useDispatch, useSelector } from "react-redux";
 import { db, storage } from "../../../services/firebase";
@@ -51,7 +51,7 @@ function UserPersonalDetails() {
         `profiles/${user?.personal_details.email.split("@")[0]}/${file.name}`
       );
 
-      const snapshot = await uploadBytes(storageRef, file);
+      await uploadBytes(storageRef, file);
       const url = await getDownloadURL(storageRef);
 
       setProfileImage((profileImage) => ({
@@ -122,9 +122,9 @@ function UserPersonalDetails() {
 
           {profileImage.prevImage ? (
             <img
+              alt="profile"
               src={profileImage.prevImage}
               className="w-[120px] h-[120px] rounded-full"
-              alt="as"
             />
           ) : (
             <Avatar

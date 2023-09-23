@@ -11,6 +11,7 @@ function SuggestionItem({ data }) {
     >
       {data.data.personal_details.profile_url ? (
         <img
+alt="profile"
           src={data?.data?.personal_details?.profile_url}
           className="w-[25px] rounded-full mr-2"
         />

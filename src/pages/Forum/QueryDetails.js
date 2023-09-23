@@ -156,6 +156,7 @@ function QueryDetails() {
                 >
                   {query?.user?.profile_url ? (
                     <img
+alt="profile"
                       src={query?.user?.profile_url}
                       className="w-[20px] h-[20px] rounded-full"
                     />

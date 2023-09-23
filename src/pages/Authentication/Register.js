@@ -1,18 +1,12 @@
-import React, { useEffect, useReducer, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import {
-  handleIsSideNavbarOpen,
-  setUser,
-  signup,
-} from "../../features/authSlice";
+import { closeSideNavbar, setUser } from "../../features/authSlice";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth, db } from "../../services/firebase";
 import { Toaster, toast } from "react-hot-toast";
-import Loader from "react-js-loader";
 import { doc, setDoc } from "firebase/firestore";
 import { setAuthToken } from "../../features/authSlice";
-import { v4 as uuid4 } from "uuid";
 import AuthInput from "../../components/AuthenticationForm/AuthInput";
 import AuthButton from "../../components/AuthenticationForm/AuthButton";
 
@@ -124,7 +118,7 @@ const Register = () => {
   };
 
   useEffect(() => {
-    dispatch(handleIsSideNavbarOpen());
+    dispatch(closeSideNavbar(false));
   }, []);
 
   if (authToken) {

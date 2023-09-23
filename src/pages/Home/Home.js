@@ -1,18 +1,14 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { handleIsSideNavbarOpen } from "../../features/authSlice";
+import { closeSideNavbar } from "../../features/authSlice";
 
 function Home() {
   const dispatch = useDispatch();
   const { authToken } = useSelector((state) => state.auth);
 
-  const handleSideNav = () => {
-    dispatch(handleIsSideNavbarOpen());
-  };
-
   useEffect(() => {
-    handleSideNav();
+    dispatch(closeSideNavbar(false));
   }, []);
 
   return (
@@ -33,13 +29,13 @@ function Home() {
           </Link>
         </div>
         <div className="">
-          <img src="/startup-210.svg" alt="logo" />
+          <img alt="profile" src="/startup-210.svg" />
         </div>
       </div>
 
       <div className="md:flex md:flex-row md:justify-between items-center flex flex-col-reverse">
         <div className="">
-          <img src="/collab.svg" alt="logo" />
+          <img alt="profile" src="/collab.svg" />
         </div>
 
         <div className=" md:w-1/2">

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import ForumSidebarTag from "./ForumSidebarTag";
-import { collection, doc, getDocs } from "firebase/firestore";
+import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../services/firebase";
 import toast, { Toaster } from "react-hot-toast";
 

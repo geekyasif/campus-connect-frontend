@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
 import LeftNavbar from "./LeftNavbar";
 import MidNavbar from "./MidNavbar";
 import RightNavbar from "./RightNavbar";
 import MobileNavbar from "./MobileNavbar";
-import NewMobileNavbar from "./NewMobileNavbar";
 import { useLocation } from "react-router-dom";
 import SearchInput from "./SearchInput";
 import SuggestionContainer from "./SuggestionContainer";
@@ -13,16 +11,14 @@ import toast, { Toaster } from "react-hot-toast";
 
 function Navbar() {
   const { pathname } = useLocation();
-  const { user, authToken } = useSelector((state) => state.auth);
   const [isSuggestionBoxOpen, setIsSuggestionBoxOpen] = useState(false);
-  const { fetchDevs } = useDev();
-  const [devs, setDevs] = useState([]);
+  const { fetchDevs, devsData } = useDev();
   const [filterResults, setFilterResults] = useState([]);
 
   const handleSearchDevs = (args) => {
     try {
       if (args) {
-        const _results = devs?.filter((d) =>
+        const _results = devsData?.filter((d) =>
           d.data.personal_details.fullName
             .toLowerCase()
             .includes(args.toLowerCase())
@@ -36,13 +32,9 @@ function Navbar() {
     }
   };
 
-  const handleFetchDevs = async () => {
-    const res = await fetchDevs();
-    setDevs(res);
-  };
-
   useEffect(() => {
-    handleFetchDevs();
+    const unsubscribe = fetchDevs();
+    return () => unsubscribe;
   }, []);
 
   return (
@@ -69,7 +61,6 @@ function Navbar() {
           <MidNavbar />
           <RightNavbar />
         </div>
-        {/* <NewMobileNavbar /> */}
         <MobileNavbar />
       </div>
     </div>

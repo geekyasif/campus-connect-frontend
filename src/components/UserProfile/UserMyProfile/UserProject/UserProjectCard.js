@@ -7,6 +7,7 @@ function UserProjectCard({ project }) {
       key={project?.project_id}
     >
       <img
+alt="profile"
         src={project?.project_image}
         className="lg:w-[250px] h-[150px] w-full"
       />

@@ -1,4 +1,3 @@
-import React from "react";
 import { useNavigate } from "react-router-dom";
 import { auth } from "../services/firebase";
 import { signOut } from "firebase/auth";

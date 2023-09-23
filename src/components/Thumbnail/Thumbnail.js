@@ -12,6 +12,7 @@ function Thumbnail({thumbnail, onChange}) {
         {!thumbnail && "choose image*"}
         {thumbnail && (
           <img
+alt="profile"
             src={thumbnail}
             className="w-[350px] h-[200px] object-contain"
           />

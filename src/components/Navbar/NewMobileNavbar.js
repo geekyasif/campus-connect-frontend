@@ -8,12 +8,11 @@ import {
   faUsers,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useEffect, useRef, useState } from "react";
+import React, {  useState } from "react";
 import { useSelector } from "react-redux";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function NewMobileNavbar() {
-  const location = useLocation();
   const { user, authToken } = useSelector((state) => state.auth);
   const [toggle, setToggle] = useState(false);
 
@@ -25,7 +24,7 @@ function NewMobileNavbar() {
     <div className="md:hidden lg:hidden">
       <button onClick={handleToggle}>
         {!toggle ? (
-          <FontAwesomeIcon icon={faBars} className="text-xl"/>
+          <FontAwesomeIcon icon={faBars} className="text-xl" />
         ) : (
           <FontAwesomeIcon icon={faMultiply} />
         )}
@@ -60,80 +59,13 @@ function NewMobileNavbar() {
                 <FontAwesomeIcon className="text-gray-700 mr-2" icon={faUser} />
                 My Profile
               </Link>
-              <Link to={`/edit-profile/${user?.personal_details.username}`} className="text-gray-700 my-2">
+              <Link
+                to={`/edit-profile/${user?.personal_details.username}`}
+                className="text-gray-700 my-2"
+              >
                 <FontAwesomeIcon className="text-gray-700 mr-2" icon={faEdit} />
                 Edit Profile
               </Link>
-
-              {/* <Link
-            className={
-              location.pathname === `/edit-profile/${user?.personal_details.username}`
-                ? "bg-indigo-500 text-sm text-white cursor-pointer p-2 rounded my-2"
-                : "cursor-pointer p-2 rounded my-2 text-sm"
-            }
-            to={`/edit-profile/${user?.personal_details.username}`}
-          >
-            Personal Details
-          </Link>
-          <Link
-            className={
-              location.pathname ===
-              `/edit-profile/${user?.personal_details.username}/academics`
-                ? "bg-indigo-500 text-sm text-white cursor-pointer p-2 rounded my-2"
-                : "cursor-pointer p-2 rounded my-2 text-sm"
-            }
-            to={`/edit-profile/${user?.personal_details.username}/academics`}
-          >
-            Academics
-          </Link>
-
-          <Link
-            className={
-              location.pathname ===
-              `/edit-profile/${user?.personal_details.username}/social-links`
-                ? "bg-indigo-500 text-sm text-white cursor-pointer p-2 rounded my-2"
-                : "cursor-pointer p-2 rounded my-2 text-sm"
-            }
-            to={`/edit-profile/${user?.personal_details.username}/social-links`}
-          >
-            Social Links
-          </Link>
-
-          <Link
-            className={
-              location.pathname ===
-              `/edit-profile/${user?.personal_details.username}/certificates`
-                ? "bg-indigo-500 text-sm text-white cursor-pointer p-2 rounded my-2"
-                : "cursor-pointer p-2 rounded my-2 text-sm"
-            }
-            to={`/edit-profile/${user?.personal_details.username}/certificates`}
-          >
-            Certificates
-          </Link>
-
-          <Link
-            className={
-              location.pathname ===
-              `/edit-profile/${user?.personal_details.username}/projects`
-                ? "bg-indigo-500 text-sm text-white cursor-pointer p-2 rounded my-2"
-                : "cursor-pointer p-2 rounded my-2 text-sm"
-            }
-            to={`/edit-profile/${user?.personal_details.username}/projects`}
-          >
-            Projects
-          </Link>
-
-          <Link
-            className={
-              location.pathname ===
-              `/edit-profile/${user?.personal_details.username}/change-password`
-                ? "bg-indigo-500 text-sm text-white cursor-pointer p-2 rounded my-2"
-                : "cursor-pointer p-2 rounded my-2 text-sm"
-            }
-            to={`/edit-profile/${user?.personal_details.username}/change-password`}
-          >
-            Change Password
-          </Link> */}
 
               <p className="text-gray-700 my-2">
                 <FontAwesomeIcon
@@ -149,6 +81,8 @@ function NewMobileNavbar() {
             <div className="rounded-full w-[50px] h-[50px]">
               {user?.personal_details.profile_url !== "" ? (
                 <img
+alt="profile"
+        
                   src={user?.personal_details.profile_url}
                   className="rounded-full"
                 />

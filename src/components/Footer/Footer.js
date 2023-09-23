@@ -10,7 +10,7 @@ function Footer() {
         <a
           className="text-indigo-500"
           href="https://wwww.geekyasif.github.io/"
-          target="_blank"
+          target="_blank" rel="noreferrer"
         >
           Mohammad Asif
         </a>

@@ -1,4 +1,4 @@
-import { faClock, faReply, faUser } from "@fortawesome/free-solid-svg-icons";
+import { faClock, faReply } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
@@ -22,7 +22,6 @@ const UserComment = ({ user, comment, replies }) => {
   };
 
   const handlePostReply = () => {
-    // Add logic to post reply (e.g., save to database)
     setReplying(false);
     setReplyText("");
   };
@@ -31,8 +30,8 @@ const UserComment = ({ user, comment, replies }) => {
     <div className="bg-white px-4 pt-2 rounded border-t-2">
       <div className="flex items-center ">
         <img
+          alt="profile"
           src="https://assets.leetcode.com/users/sithis/avatar_1566406146.png"
-          alt="User Avatar"
           className="h-4 w-4 rounded-full"
         />
 
@@ -74,7 +73,6 @@ const UserComment = ({ user, comment, replies }) => {
               <FontAwesomeIcon icon={faReply} />
             </button>
           ) : (
-            // <p className="text-center my-4 text-xs">Login to reply</p>
             <></>
           )}
         </div>

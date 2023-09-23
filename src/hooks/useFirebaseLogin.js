@@ -1,14 +1,11 @@
 import { signInWithEmailAndPassword } from "firebase/auth";
-import React from "react";
 import { auth, db } from "../services/firebase";
 import { collection, getDocs, query, where } from "firebase/firestore";
-import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import useLoading from "./useLoading";
 import { setAuthToken, setUser } from "../features/authSlice";
 
 function useFirebaseLogin() {
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   const firebaseLogin = async (email, password) => {
     try {
@@ -27,11 +24,11 @@ function useFirebaseLogin() {
 
       dispatch(setAuthToken(user?.accessToken));
     } catch (error) {
-      return error.code
+      return error.code;
     }
   };
 
-  return {firebaseLogin};
+  return { firebaseLogin };
 }
 
 export default useFirebaseLogin;

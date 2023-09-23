@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { auth, db } from "../services/firebase";
+import { db } from "../services/firebase";
 import { collection, getDocs, query, where } from "firebase/firestore";
 
 const initialState = {
@@ -32,6 +32,9 @@ export const authSlice = createSlice({
     logout: (state) => {
       state.user = null;
     },
+    closeSideNavbar: (state, action) => {
+      state.isSideNavbarOpen = action.payload;
+    },
     handleIsSideNavbarOpen: (state) => {
       state.isSideNavbarOpen = !state.isSideNavbarOpen;
     },
@@ -46,6 +49,7 @@ export const {
   logout,
   setAuthToken,
   handleIsSideNavbarOpen,
+  closeSideNavbar,
 } = authSlice.actions;
 
 export const updateUserData = (username) => async (dispatch) => {

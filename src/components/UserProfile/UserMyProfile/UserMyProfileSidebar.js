@@ -11,6 +11,7 @@ function UserMyProfileSidebar() {
       <div className="my-4">
         {user?.personal_details?.profile_url !== "" ? (
           <img
+alt="profile"
             src={user?.personal_details?.profile_url}
             className=" w-[120px] lg:w-[150px] rounded-full mx-auto"
           />

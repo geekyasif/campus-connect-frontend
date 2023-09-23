@@ -2,7 +2,7 @@ import { faArrowAltCircleLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { db } from "../../services/firebase";
 import { useDispatch, useSelector } from "react-redux";
 import useCategories from "../../hooks/forum/useCategories";
@@ -12,11 +12,10 @@ import { updateUserData } from "../../features/authSlice";
 function EditQuery() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { authToken, user } = useSelector((state) => state.auth);
-  const [loading, setLoading] = useState(true);
+  const { user } = useSelector((state) => state.auth);
+  const [setLoading] = useState(true);
   const { username, id } = useParams();
   const { categories } = useCategories();
-  const [query, setQuery] = useState({});
   const [updatedQuery, setUpdatedQuery] = useState({
     title: "",
     description: "",

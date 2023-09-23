@@ -2,28 +2,33 @@ import React, { useEffect, useState } from "react";
 import DevCard from "../../components/DevCard/DevCard";
 import DevCardShimmer from "../../components/Shimmer/DevCardShimmer";
 import useDev from "../../hooks/dev/useDev";
-import useSideNavbar from "../../hooks/navbar/useSideNavbar";
 import { useDispatch } from "react-redux";
-import { handleIsSideNavbarOpen } from "../../features/authSlice";
+import { closeSideNavbar } from "../../features/authSlice";
 
 function FindDev() {
-  const { fetchDevs } = useDev();
+  const { fetchDevs, devsData } = useDev();
   const dispatch = useDispatch();
-  const [devs, setDevs] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const fetchUsers = async () => {
-    const res = await fetchDevs();
-    setDevs(res.reverse());
+    try {
+      return fetchDevs();
+    } catch (error) {
+      throw error;
+    } finally {
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
-    dispatch(handleIsSideNavbarOpen());
-    fetchUsers();
+    dispatch(closeSideNavbar(false));
+    const unsubscribe = fetchUsers();
+    return () => unsubscribe;
   }, []);
 
   return (
     <div className="container mx-auto md:flex md:flex-row md:flex-wrap">
-      {devs?.length === 0 &&
+      {loading &&
         Array(6)
           .fill(0)
           .map((_, i) => (
@@ -34,7 +39,13 @@ function FindDev() {
               <DevCardShimmer />
             </div>
           ))}
-      {devs?.map(({ data }) => (
+
+      {devsData?.length === 0 && (
+        <div className="w-screen h-screen flex items-center justify-center">
+          <p>No data found!</p>
+        </div>
+      )}
+      {devsData?.map(({ data }) => (
         <div
           className="border shadow m-2 px-4 pt-2 rounded bg-white lg:w-[48%] md:w-full"
           key={data?.personal_details.username}

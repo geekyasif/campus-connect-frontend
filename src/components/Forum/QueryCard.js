@@ -1,13 +1,8 @@
-import {
-  faClock,
-  faPen,
-  faTrash,
-  faUser,
-} from "@fortawesome/free-solid-svg-icons";
+import { faClock, faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { getAuth } from "firebase/auth";
 import { doc, updateDoc } from "firebase/firestore";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Avatar from "react-avatar";
 import { Link } from "react-router-dom";
 import { db } from "../../services/firebase";
@@ -46,7 +41,6 @@ function QueryCard({ query, user }) {
       toast.error("Something went wrong!");
     }
   };
-
 
   return (
     <div className="border-b-2 my-2 lg:px-4 py-2">
@@ -110,6 +104,7 @@ function QueryCard({ query, user }) {
           >
             {user?.profile_url ? (
               <img
+                alt="profile"
                 src={user?.profile_url}
                 className="w-[20px] h-[20px] rounded-full"
               />

@@ -1,10 +1,4 @@
-import {
-  faEdit,
-  faEye,
-  faSignOut,
-  faUser,
-  faUsers,
-} from "@fortawesome/free-solid-svg-icons";
+import { faEdit, faEye, faSignOut } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
@@ -72,6 +66,7 @@ function RightNavbar() {
             >
               {user?.personal_details?.profile_url !== "" ? (
                 <img
+                  alt="profile"
                   src={user?.personal_details?.profile_url}
                   className="rounded-full"
                 />
@@ -89,6 +84,7 @@ function RightNavbar() {
                   <div className="rounded-full w-[40px] h-[40px]">
                     {user?.personal_details?.profile_url !== "" ? (
                       <img
+                        alt="profile"
                         src={user?.personal_details?.profile_url}
                         className="rounded-full"
                       />

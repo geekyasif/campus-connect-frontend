@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Thumbnail from "../../../components/Thumbnail/Thumbnail";
 import { Toaster, toast } from "react-hot-toast";
-import { arrayRemove, arrayUnion, doc, updateDoc } from "firebase/firestore";
+import { arrayUnion, doc, updateDoc } from "firebase/firestore";
 import { db, storage } from "../../../services/firebase";
 import { getDownloadURL, uploadBytes, ref } from "firebase/storage";
 import { v4 as uuid4 } from "uuid";

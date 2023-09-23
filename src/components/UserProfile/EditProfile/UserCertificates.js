@@ -67,10 +67,7 @@ function UserCertificates() {
           certificateImage.uploadImage.name
         }`
       );
-      const snapshot = await uploadBytes(
-        storageRef,
-        certificateImage.uploadImage
-      );
+      await uploadBytes(storageRef, certificateImage.uploadImage);
       const url = await getDownloadURL(storageRef);
       setCertificateImage((certificateImage) => ({
         ...certificateImage,
@@ -177,7 +174,7 @@ function UserCertificates() {
   const handleDeleteCertificate = async (id) => {
     try {
       const filteredCertificates = user?.certificates.filter(
-        (c) => c.certificate_id != id
+        (c) => c.certificate_id !== id
       );
 
       const userDocRef = doc(

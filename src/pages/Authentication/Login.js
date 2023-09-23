@@ -10,8 +10,9 @@ import AuthButton from "../../components/AuthenticationForm/AuthButton";
 // custom hook import
 import useFirebaseLogin from "../../hooks/useFirebaseLogin";
 import useLoading from "../../hooks/useLoading";
-import useSideNavbar from "../../hooks/navbar/useSideNavbar";
-import { handleIsSideNavbarOpen } from "../../features/authSlice";
+import {
+  closeSideNavbar,
+} from "../../features/authSlice";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -50,7 +51,7 @@ const Login = () => {
   };
 
   useEffect(() => {
-    dispatch(handleIsSideNavbarOpen());
+    dispatch(closeSideNavbar(false));
   }, []);
 
   // Redirect to login page if token is null

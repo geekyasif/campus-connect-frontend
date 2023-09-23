@@ -32,6 +32,7 @@ function DevCard({ user }) {
             />
           ) : (
             <img
+              alt="profile"
               src={user?.personal_details?.profile_url}
               className="rounded-full"
             />
@@ -48,6 +49,7 @@ function DevCard({ user }) {
                   className="mr-2 md:mr-4 text-xs text-indigo-600"
                   href={user?.social_links?.github}
                   target="_blank"
+                  rel="noreferrer"
                 >
                   Github
                 </a>
@@ -57,6 +59,7 @@ function DevCard({ user }) {
                   href={user?.social_links?.linkedin}
                   target="_blank"
                   className="text-xs text-indigo-600"
+                  rel="noreferrer"
                 >
                   Linkedin
                 </a>
