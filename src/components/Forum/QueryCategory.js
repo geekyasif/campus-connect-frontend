@@ -3,7 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 
 function QueryCategory({ cat }) {
   const {pathname} = useLocation()
-  const currentPath = pathname.split("/")[2]
+  const currentPath = pathname.split("/")[3]
 
   return (
     <Link

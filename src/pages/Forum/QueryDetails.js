@@ -66,7 +66,6 @@ function QueryDetails() {
     }
   };
 
-
   useEffect(() => {
     window.scrollTo(0, 0);
     fetchQueryDetails(category, username, id);
@@ -156,7 +155,7 @@ function QueryDetails() {
                 >
                   {query?.user?.profile_url ? (
                     <img
-alt="profile"
+                      alt="profile"
                       src={query?.user?.profile_url}
                       className="w-[20px] h-[20px] rounded-full"
                     />
@@ -185,7 +184,7 @@ alt="profile"
               </p>
             </div>
             {authToken ? (
-              <CommentBox />
+              <CommentBox query={query} />
             ) : (
               <div className="text-center p-4">
                 <Link

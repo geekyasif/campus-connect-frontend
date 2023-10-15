@@ -173,12 +173,12 @@ function ForumContainer({ title, type }) {
               </div>
             ))}
 
-        {filteredQueries?.length === 0 && loading === false ? (
+        {queries?.length === 0 && loading === false ? (
           <div className="text-center my-2">
             <p>No Query Found !</p>
           </div>
         ) : (
-          filteredQueries?.map((data) =>
+          queries?.map((data) =>
             data?.queries.map((query) => (
               <div key={query.id}>
                 <QueryCard query={query} user={data.user} />
