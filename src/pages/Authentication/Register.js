@@ -81,9 +81,9 @@ const Register = () => {
             },
             certificates: [],
             projects: [],
+            is_online: false,
           };
 
-          console.log(data);
 
           await setDoc(doc(db, "users", user?.email.split("@")[0]), data);
 

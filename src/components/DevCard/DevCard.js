@@ -9,14 +9,41 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Avatar from "react-avatar";
-import React from "react";
-import { Link } from "react-router-dom";
-import toast, { Toaster } from "react-hot-toast";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { Toaster } from "react-hot-toast";
+import Chat from "../chat/Chat";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  setCloseChatBox,
+  setOpenChatBox,
+  setUserChat,
+} from "../../features/authSlice";
+import ChatShimmer from "../chat/ChatShimmer";
 
 function DevCard({ user }) {
-  const handleRequestChat = () => {
-    console.log("Wroking");
-    toast.success("Request chat will coming soon...");
+  const { authToken, isChatOpen } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+  const naviagte = useNavigate();
+
+  const [isChatLoading, setIsChatLoading] = useState(false);
+
+  const handleChatBox = async () => {
+    if (authToken) {
+      try {
+        setIsChatLoading(true);
+        dispatch(setCloseChatBox());
+        await new Promise((resolve) => setTimeout(resolve, 200));
+        dispatch(setUserChat(user));
+        dispatch(setOpenChatBox());
+      } catch (error) {
+        console.error("Error:", error);
+      } finally {
+        setIsChatLoading(false);
+      }
+    } else {
+      naviagte("/login");
+    }
   };
 
   return (
@@ -128,6 +155,9 @@ function DevCard({ user }) {
         <div className="flex flex-row lg:justify-end justify-between items-center">
           <Link
             to={`/find-dev/${user?.personal_details?.username}`}
+            state={{
+              user,
+            }}
             className="border rounded p-2 md:mr-2 text-xs  bg-indigo-500 mr-0  md:mt-0 text-center text-white w-full lg:w-1/5"
           >
             <FontAwesomeIcon icon={faUser} className="mr-2" />
@@ -135,13 +165,15 @@ function DevCard({ user }) {
           </Link>
           <button
             className="border rounded p-2 text-xs  bg-indigo-500 text-center text-white w-full lg:w-1/5"
-            onClick={handleRequestChat}
+            onClick={handleChatBox}
           >
             <FontAwesomeIcon icon={faMessage} className="mr-2" />
-            Request Chat
+            Chat
           </button>
         </div>
       </div>
+      {isChatLoading && <ChatShimmer />}
+      {isChatOpen && <Chat />}
     </div>
   );
 }

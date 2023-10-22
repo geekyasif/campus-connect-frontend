@@ -3,13 +3,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import Avatar from "react-avatar";
 import toast, { Toaster } from "react-hot-toast";
+import { useDispatch } from "react-redux";
+import { setOpenChatBox, setUserChat } from "../../features/authSlice";
 
 function DevDetailsSidebar({ user }) {
   const { personal_details, social_links } = user;
+  const dispatch = useDispatch();
 
-  const handleRequestChat = () => {
-    toast.success("Request chat will coming soon...");
-  };
 
   return (
     <div className="border bg-white rounded p-4 h-full lg:w-[25%] w-full ">
@@ -17,7 +17,7 @@ function DevDetailsSidebar({ user }) {
       <div className="flex justify-center">
         {personal_details?.profile_url !== "" ? (
           <img
-alt="profile"
+            alt="profile"
             src={personal_details?.profile_url}
             className="rounded-full w-40 h-40"
           />
@@ -75,35 +75,40 @@ alt="profile"
           <a
             className="mr-2 text-xs text-indigo-600 border p-1 rounded"
             target="_blank"
-            href={social_links?.github} rel="noreferrer"
+            href={social_links?.github}
+            rel="noreferrer"
           >
             Github
           </a>
           <a
             className="mr-2 text-xs text-indigo-600 border p-1 rounded"
             target="_blank"
-            href={social_links?.leetcode} rel="noreferrer"
+            href={social_links?.leetcode}
+            rel="noreferrer"
           >
             Leetcode
           </a>
           <a
             className="mr-2 text-xs text-indigo-600 border p-1 rounded"
             target="_blank"
-            href={social_links?.linkedin} rel="noreferrer"
+            href={social_links?.linkedin}
+            rel="noreferrer"
           >
             Linkedin
           </a>
           <a
             className="mr-2 text-xs text-indigo-600 border p-1 rounded"
             target="_blank"
-            href={social_links?.geeksforgeek} rel="noreferrer"
+            href={social_links?.geeksforgeek}
+            rel="noreferrer"
           >
             GeeksforGeeks
           </a>
           <a
             className="mr-2 text-xs text-indigo-600 border p-1 rounded"
             target="_blank"
-            href={social_links?.codechef} rel="noreferrer"
+            href={social_links?.codechef}
+            rel="noreferrer"
           >
             Codechef
           </a>
@@ -112,10 +117,13 @@ alt="profile"
       <div className="my-4 text-center">
         <button
           className="border rounded p-2 text-xs md:text-sm bg-indigo-500 text-center text-white"
-          onClick={handleRequestChat}
+          onClick={() => {
+            dispatch(setUserChat(user))
+            dispatch(setOpenChatBox())
+          }}
         >
           <FontAwesomeIcon icon={faMessage} className="mr-2" />
-          Request Chat
+          Chat
         </button>
       </div>
     </div>

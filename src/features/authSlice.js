@@ -8,6 +8,8 @@ const initialState = {
   error: null,
   authToken: null,
   isSideNavbarOpen: false,
+  isChatOpen: false,
+  userChat: null,
 };
 
 export const authSlice = createSlice({
@@ -38,6 +40,15 @@ export const authSlice = createSlice({
     handleIsSideNavbarOpen: (state) => {
       state.isSideNavbarOpen = !state.isSideNavbarOpen;
     },
+    setOpenChatBox: (state) => {
+      state.isChatOpen = true;
+    },
+    setCloseChatBox: (state) => {
+      state.isChatOpen = false;
+    },
+    setUserChat: (state, action) => {
+      state.userChat = action.payload;
+    },
   },
 });
 
@@ -50,6 +61,9 @@ export const {
   setAuthToken,
   handleIsSideNavbarOpen,
   closeSideNavbar,
+  setOpenChatBox,
+  setCloseChatBox,
+  setUserChat
 } = authSlice.actions;
 
 export const updateUserData = (username) => async (dispatch) => {

@@ -1,13 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import DevDetailsSidebar from "../../components/DevDetails/DevDetailsSidebar";
 import DevDetailsContainer from "../../components/DevDetails/DevDetailsContainer";
 import { doc, onSnapshot } from "firebase/firestore";
 import { db } from "../../services/firebase";
 import DevDetailShimmer from "../../components/Shimmer/DevDetailShimmer";
+import Chat from "../../components/chat/Chat";
+import { useSelector } from "react-redux";
 
 function DevDetails() {
+  const {isChatOpen} = useSelector((state) => state.auth)
   const { username } = useParams();
+  const location = useLocation();
+  const user = location.state.user
   const [devData, setDevData] = useState({});
   const [loading, setLoading] = useState(false);
 
@@ -46,6 +51,7 @@ function DevDetails() {
           <DevDetailsContainer user={devData} />
         </div>
       )}
+       {isChatOpen && <Chat user={user} />}
     </div>
   );
 }

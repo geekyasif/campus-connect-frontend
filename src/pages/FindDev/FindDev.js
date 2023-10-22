@@ -3,7 +3,7 @@ import DevCard from "../../components/DevCard/DevCard";
 import DevCardShimmer from "../../components/Shimmer/DevCardShimmer";
 import useDev from "../../hooks/dev/useDev";
 import { useDispatch } from "react-redux";
-import { closeSideNavbar } from "../../features/authSlice";
+import { closeSideNavbar, setCloseChatBox } from "../../features/authSlice";
 
 function FindDev() {
   const { fetchDevs, devsData } = useDev();
@@ -23,11 +23,14 @@ function FindDev() {
   useEffect(() => {
     dispatch(closeSideNavbar(false));
     const unsubscribe = fetchUsers();
-    return () => unsubscribe;
+    return () => {
+      dispatch(setCloseChatBox());
+      return unsubscribe;
+    };
   }, []);
 
   return (
-    <div className="container mx-auto md:flex md:flex-row md:flex-wrap">
+    <div className="container mx-auto md:flex md:flex-row md:flex-wrap relative">
       {loading &&
         Array(6)
           .fill(0)

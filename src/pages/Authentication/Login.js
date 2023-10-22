@@ -10,14 +10,14 @@ import AuthButton from "../../components/AuthenticationForm/AuthButton";
 // custom hook import
 import useFirebaseLogin from "../../hooks/useFirebaseLogin";
 import useLoading from "../../hooks/useLoading";
-import {
-  closeSideNavbar,
-} from "../../features/authSlice";
+import { closeSideNavbar } from "../../features/authSlice";
+import { doc, updateDoc } from "firebase/firestore";
+import { db } from "../../services/firebase";
 
 const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { authToken } = useSelector((state) => state.auth);
+  const { authToken, user } = useSelector((state) => state.auth);
   const [userCredential, setUserCredential] = useState({
     email: "",
     password: "",
@@ -54,8 +54,17 @@ const Login = () => {
     dispatch(closeSideNavbar(false));
   }, []);
 
+  async function handleUpdateUserOnlineStatus() {
+    const username = user?.personal_details?.username;
+    const docRef = doc(db, "users", username);
+    await updateDoc(docRef, {
+      is_online: true,
+    });
+  }
+
   // Redirect to login page if token is null
   if (authToken) {
+    handleUpdateUserOnlineStatus();
     return navigate("/find-dev");
   }
 
