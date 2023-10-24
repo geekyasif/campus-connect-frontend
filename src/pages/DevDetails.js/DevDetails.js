@@ -2,33 +2,47 @@ import React, { useEffect, useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
 import DevDetailsSidebar from "../../components/DevDetails/DevDetailsSidebar";
 import DevDetailsContainer from "../../components/DevDetails/DevDetailsContainer";
-import { doc, onSnapshot } from "firebase/firestore";
+import {
+  collection,
+  doc,
+  getDocs,
+  onSnapshot,
+  query,
+  where,
+} from "firebase/firestore";
 import { db } from "../../services/firebase";
 import DevDetailShimmer from "../../components/Shimmer/DevDetailShimmer";
 import Chat from "../../components/chat/Chat";
 import { useSelector } from "react-redux";
 
 function DevDetails() {
-  const {isChatOpen} = useSelector((state) => state.auth)
-  const { username } = useParams();
+  const { isChatOpen } = useSelector((state) => state.auth);
   const location = useLocation();
-  const user = location.state.user
+  const user = location?.state?.user;
   const [devData, setDevData] = useState({});
   const [loading, setLoading] = useState(false);
 
   const fetchUserData = async () => {
     try {
       setLoading(true);
-      const unsubscribe = onSnapshot(doc(db, "users", username), (doc) => {
-        if (doc.exists()) {
+
+      // Assuming 'users' is the name of your collection
+      const userRef = collection(db, "users");
+      const q = query(
+        userRef,
+        where("personal_details.username", "==", user.personal_details.username)
+      );
+      const querySnapshot = await getDocs(q);
+
+      if (!querySnapshot.empty) {
+        querySnapshot.forEach((doc) => {
           setDevData(doc.data());
-        } else {
-          setDevData({});
-        }
-      });
-      return unsubscribe;
+        });
+      } else {
+        setDevData({});
+      }
     } catch (error) {
-      throw error;
+      throw new Error(error);
     } finally {
       setLoading(false);
     }
@@ -36,9 +50,8 @@ function DevDetails() {
 
   useEffect(() => {
     const unsubscribe = fetchUserData();
-
     return () => unsubscribe;
-  }, [username]);
+  }, [user]);
 
   return (
     <div className="container mx-auto my-4">
@@ -51,7 +64,7 @@ function DevDetails() {
           <DevDetailsContainer user={devData} />
         </div>
       )}
-       {isChatOpen && <Chat user={user} />}
+      {isChatOpen && <Chat user={user} />}
     </div>
   );
 }

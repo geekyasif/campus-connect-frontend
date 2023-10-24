@@ -41,7 +41,7 @@ function Chat() {
         setMessage("");
       }
     } catch (error) {
-      console.log(error);
+      throw new Error("Something went wrong!")
     }
   }
 

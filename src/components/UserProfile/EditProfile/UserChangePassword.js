@@ -24,7 +24,6 @@ function UserChangePassword() {
         toast.error("Password field is required!");
       }
     } catch (error) {
-      console.log(error);
       toast.error("Password field is required!", error.message.toString());
     }
   };

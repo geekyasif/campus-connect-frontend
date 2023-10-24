@@ -15,15 +15,13 @@ function ForgotPassword() {
   const handleSendEmail = async () => {
     try {
       if (email) {
-        const res = await sendPasswordResetEmail(auth, email);
-        console.log(res);
+        await sendPasswordResetEmail(auth, email);
         toast.success("Password reset link is sent to your email!");
         setEmail("");
       } else {
         toast.error("Email is required!");
       }
     } catch (err) {
-      console.log(err);
       toast.error("Something went wrong!");
     }
   };

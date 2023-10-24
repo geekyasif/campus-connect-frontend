@@ -61,7 +61,6 @@ function QueryDetails() {
       toast.success("Query Deleted Successfully");
       navigate(-1);
     } catch (error) {
-      console.log(error);
       toast.error("Something went wrong!");
     }
   };

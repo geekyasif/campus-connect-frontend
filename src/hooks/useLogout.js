@@ -16,7 +16,6 @@ function useLogout() {
     await updateDoc(docRef, {
       is_online: false,
     });
-    console.log("update is done")
   }
 
   const Logout = async () => {
@@ -27,7 +26,7 @@ function useLogout() {
       dispatch(setUser(null));
       navigate("/login");
     } catch (error) {
-      console.log(error);
+      throw new Error("Something went wrong!")
     }
   };
 

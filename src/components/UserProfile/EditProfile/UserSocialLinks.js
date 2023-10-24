@@ -55,7 +55,6 @@ function UserSocialLinks() {
       toast.success("Profile upadated successfully!");
     } catch (err) {
       stopLoading();
-      console.log(err);
       toast.error("Something went wrong!");
     }
   };

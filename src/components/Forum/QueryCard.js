@@ -16,7 +16,6 @@ function QueryCard({ query, user }) {
   const dispatch = useDispatch();
 
   const handleDeleteQuery = async () => {
-    console.log(query.id);
     try {
       const filteredQueries = userQueries?.queries.filter(
         (q) => q.id !== query.id
@@ -37,7 +36,6 @@ function QueryCard({ query, user }) {
       );
       toast.success("Query Deleted Successfully");
     } catch (error) {
-      console.log(error);
       toast.error("Something went wrong!");
     }
   };

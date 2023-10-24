@@ -50,7 +50,6 @@ function EditQuery() {
         setLoading(false);
       }
     } catch (error) {
-      console.log(error);
       toast.error("Someting went wrong!");
     }
   };

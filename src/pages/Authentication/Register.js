@@ -111,8 +111,6 @@ const Register = () => {
       }
     } catch (error) {
       setLoading(false);
-      console.log(error.code);
-      console.log(error.message);
       toast.error(error.code);
     }
   };

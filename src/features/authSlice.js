@@ -76,7 +76,7 @@ export const updateUserData = (username) => async (dispatch) => {
       dispatch(setUser(doc.data()));
     });
   } catch (error) {
-    console.log(error);
+    throw new Error("Something went wrong!")
   }
 };
 export default authSlice.reducer;

@@ -1,8 +1,7 @@
-import { arrayUnion, doc, getDoc, updateDoc, where } from "firebase/firestore";
+import {doc, getDoc} from "firebase/firestore";
 import React, { useState } from "react";
-import toast, { Toaster } from "react-hot-toast";
+import  { Toaster } from "react-hot-toast";
 import { db } from "../../services/firebase";
-import uuid4 from "uuid4";
 
 function CommentBox({ query }) {
   const [comment, setComment] = useState("");
@@ -14,19 +13,11 @@ function CommentBox({ query }) {
       docSnap.data().queries.forEach(async (q) => {
         if (q.id === query?.query?.id) {
           const queryRef = doc(userDoc, "queries", q.id);
-          const d = await getDoc(queryRef);
-          console.log(d.id)
-          // await updateDoc(queryRef, {
-          //   comments: arrayUnion({
-          //     comment: comment,
-          //   },{ merge: true }),
-          // });
+          await getDoc(queryRef);
         }
       });
 
-      console.log(comment);
     } catch (error) {
-      console.log(error);
       throw new Error("Something went wrong!");
     }
   };

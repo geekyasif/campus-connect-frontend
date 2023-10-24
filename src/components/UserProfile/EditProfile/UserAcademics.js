@@ -54,7 +54,6 @@ function UserAcademics() {
       dispatch(updateUserData(user?.personal_details.email.split("@")[0]));
       toast.success("Academics data upadated successfully!");
     } catch (err) {
-      console.log(err);
       toast.error("Something went wrong!");
     }
   };

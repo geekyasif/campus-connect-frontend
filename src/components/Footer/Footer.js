@@ -9,7 +9,7 @@ function Footer() {
         <Link className="text-indigo-500 font-semibold">Campus Connect</Link> by{" "}
         <a
           className="text-indigo-500"
-          href="https://wwww.geekyasif.github.io/"
+          href="https://geekyasif.github.io/"
           target="_blank" rel="noreferrer"
         >
           Mohammad Asif

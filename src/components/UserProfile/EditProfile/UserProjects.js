@@ -115,7 +115,6 @@ function UserProjects() {
       }
       stopLoading();
     } catch (error) {
-      console.log(error);
       toast.error("Something went wrong!");
       stopLoading();
     }

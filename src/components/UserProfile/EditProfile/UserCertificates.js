@@ -124,7 +124,6 @@ function UserCertificates() {
         toast.error("Before uploading");
       }
     } catch (error) {
-      console.log(error);
       toast.error("Something went wrong!");
       stopLoading();
     }
@@ -191,7 +190,6 @@ function UserCertificates() {
       toast.success("Certificate deleted Successfully.");
     } catch (error) {
       toast.error("Something went wrong! Try again");
-      console.log(error);
     }
   };
 
