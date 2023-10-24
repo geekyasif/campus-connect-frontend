@@ -17,10 +17,10 @@ import { useSelector } from "react-redux";
 
 function DevDetails() {
   const { isChatOpen } = useSelector((state) => state.auth);
-  const location = useLocation();
-  const user = location?.state?.user;
   const [devData, setDevData] = useState({});
   const [loading, setLoading] = useState(false);
+  const location = useLocation();
+  const username = location?.pathname?.split("/")[2];
 
   const fetchUserData = async () => {
     try {
@@ -30,13 +30,13 @@ function DevDetails() {
       const userRef = collection(db, "users");
       const q = query(
         userRef,
-        where("personal_details.username", "==", user.personal_details.username)
+        where("personal_details.username", "==", username)
       );
       const querySnapshot = await getDocs(q);
 
       if (!querySnapshot.empty) {
         querySnapshot.forEach((doc) => {
-          setDevData(doc.data());
+          setDevData({ id: doc.id, user: doc.data() });
         });
       } else {
         setDevData({});
@@ -51,7 +51,8 @@ function DevDetails() {
   useEffect(() => {
     const unsubscribe = fetchUserData();
     return () => unsubscribe;
-  }, [user]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [username]);
 
   return (
     <div className="container mx-auto my-4">
@@ -64,7 +65,7 @@ function DevDetails() {
           <DevDetailsContainer user={devData} />
         </div>
       )}
-      {isChatOpen && <Chat user={user} />}
+      {isChatOpen && <Chat user={devData} />}
     </div>
   );
 }

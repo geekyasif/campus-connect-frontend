@@ -14,14 +14,14 @@ function UserAcademics() {
   const { loading, startLoading, stopLoading } = useLoading();
   const { user } = useSelector((state) => state.auth);
   const [academicsData, setAcademicsData] = useState({
-    university_name: user?.academics?.university_name,
-    location: user?.academics?.location,
-    university_email: user?.academics?.university_email,
-    enrol_in_branch_name: user?.academics?.enrol_in_branch_name,
-    enrolment_number: user?.academics?.enrolment_number,
-    current_semester: user?.academics?.current_semester,
-    current_year: user?.academics?.current_year,
-    year_of_passing: user?.academics?.year_of_passing,
+    university_name: user?.user?.academics?.university_name,
+    location: user?.user?.academics?.location,
+    university_email: user?.user?.academics?.university_email,
+    enrol_in_branch_name: user?.user?.academics?.enrol_in_branch_name,
+    enrolment_number: user?.user?.academics?.enrolment_number,
+    current_semester: user?.user?.academics?.current_semester,
+    current_year: user?.user?.academics?.current_year,
+    year_of_passing: user?.user?.academics?.year_of_passing,
   });
 
   const handleAcademicsDataInputChange = (e) => {
@@ -34,7 +34,7 @@ function UserAcademics() {
     try {
       startLoading();
       await setDoc(
-        doc(db, "users", user?.personal_details.email.split("@")[0]),
+        doc(db, "users", user?.user?.personal_details.email.split("@")[0]),
         {
           academics: {
             university_name: academicsData.university_name,
@@ -51,7 +51,7 @@ function UserAcademics() {
       );
 
       stopLoading();
-      dispatch(updateUserData(user?.personal_details.email.split("@")[0]));
+      dispatch(updateUserData(user?.user?.personal_details.email.split("@")[0]));
       toast.success("Academics data upadated successfully!");
     } catch (err) {
       toast.error("Something went wrong!");

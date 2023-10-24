@@ -69,7 +69,7 @@ function UserProjects() {
       startLoading();
       const storageRef = ref(
         storage,
-        `projects/${user?.personal_details.email.split("@")[0]}/${
+        `projects/${user?.user?.personal_details.email.split("@")[0]}/${
           projectImage.uploadImage.name
         }`
       );
@@ -80,7 +80,7 @@ function UserProjects() {
         const userDocRef = doc(
           db,
           "users",
-          user?.personal_details.email.split("@")[0]
+          user?.user?.personal_details.email.split("@")[0]
         );
         await updateDoc(
           userDocRef,
@@ -100,7 +100,7 @@ function UserProjects() {
           { merge: true }
         );
 
-        dispatch(updateUserData(user?.personal_details.email.split("@")[0]));
+        dispatch(updateUserData(user?.user?.personal_details.email.split("@")[0]));
         toast.success("Project added successfully!");
         setProjectData({
           project_title: "",
@@ -124,7 +124,7 @@ function UserProjects() {
     e.preventDefault();
 
     try {
-      const oldProjects = user?.projects.filter(
+      const oldProjects = user?.user?.projects.filter(
         (p) => p.project_id !== projectData.project_id
       );
       const updatedProjects = [...oldProjects, projectData];
@@ -132,14 +132,14 @@ function UserProjects() {
       const userDocRef = doc(
         db,
         "users",
-        user?.personal_details.email.split("@")[0]
+        user?.user?.personal_details.email.split("@")[0]
       );
 
       await updateDoc(userDocRef, {
         projects: updatedProjects,
       });
 
-      dispatch(updateUserData(user?.personal_details.email.split("@")[0]));
+      dispatch(updateUserData(user?.user?.personal_details.email.split("@")[0]));
 
       toast.success("Project Updated successfully!");
       setProjectData({
@@ -165,19 +165,19 @@ function UserProjects() {
 
   const handleDeleteProject = async (id) => {
     try {
-      const filteredProject = user?.projects.filter((p) => p.project_id !== id);
+      const filteredProject = user?.user?.projects.filter((p) => p.project_id !== id);
 
       const userDocRef = doc(
         db,
         "users",
-        user?.personal_details.email.split("@")[0]
+        user?.user?.personal_details.email.split("@")[0]
       );
 
       await updateDoc(userDocRef, {
         projects: filteredProject,
       });
 
-      dispatch(updateUserData(user?.personal_details.email.split("@")[0]));
+      dispatch(updateUserData(user?.user?.personal_details.email.split("@")[0]));
       toast.success("Project Deleted Successfully");
     } catch (error) {
       toast.error("Something went wrong!");
@@ -320,10 +320,10 @@ function UserProjects() {
       </div>
 
       <div className="my-4 bg-white border p-4">
-        {user?.projects.length === 0 && (
+        {user?.user?.projects.length === 0 && (
           <p className="text-center">No Project found!</p>
         )}
-        {user?.projects?.map((project) => (
+        {user?.user?.projects?.map((project) => (
           <div className=" mb-4" key={project.project_id}>
             <div className="flex justify-end">
               <FontAwesomeIcon

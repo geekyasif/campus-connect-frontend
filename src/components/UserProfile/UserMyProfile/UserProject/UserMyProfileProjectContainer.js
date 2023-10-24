@@ -7,10 +7,10 @@ function UserMyProfileProjectContainer() {
 
   return (
     <>
-       {user?.projects.length === 0 && (
+       {user?.user?.projects.length === 0 && (
           <p className="text-center">No Project found!</p>
         )}
-      {user?.projects?.map((project) => (
+      {user?.user?.projects?.map((project) => (
         <div key={project?.project_id}>
           <UserProjectCard project={project} />
         </div>

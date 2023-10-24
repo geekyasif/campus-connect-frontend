@@ -5,7 +5,7 @@ import UserAcademicsCard from "../UserProfile/UserMyProfile/UserAcademicsCard";
 import QueryCard from "../Forum/QueryCard";
 
 function DevDetailsContainer({ user }) {
-  const { personal_details, academics, certificates, projects, queries } = user;
+  const { personal_details, academics, certificates, projects, queries } = user?.user;
 
   return (
     <div className="bg-white p-4 border flex-grow lg:w-[70%] w-full">
@@ -58,7 +58,7 @@ function DevDetailsContainer({ user }) {
         )}
         {queries?.map((data) => (
           <div key={data.id}>
-            <QueryCard query={data} user={user.personal_details} />
+            <QueryCard query={data} user={personal_details} />
           </div>
         ))}
       </div>

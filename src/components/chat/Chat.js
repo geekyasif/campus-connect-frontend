@@ -14,16 +14,20 @@ import { setCloseChatBox, setUserChat } from "../../features/authSlice";
 function Chat() {
   const dispatch = useDispatch();
   const { user: me, userChat } = useSelector((state) => state.auth);
-  const [username2, setUsername2] = useState(
-    userChat?.personal_details?.username
-  );
-  const [myUsername, setMyUsername] = useState(me?.personal_details?.username);
+  const [username2, setUsername2] = useState(userChat?.id);
+  const [myUsername, setMyUsername] = useState(me?.id);
   const [room, setRoom] = useState(
     [myUsername, username2]
       .filter(Boolean)
       .sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase()))
       .join("")
   );
+
+
+  console.log("me", me)
+  console.log("useChat", userChat)
+
+  console.log("room", room)
 
   const [message, setMessage] = useState("");
   const [chats, setChats] = useState([]);
@@ -41,7 +45,7 @@ function Chat() {
         setMessage("");
       }
     } catch (error) {
-      throw new Error("Something went wrong!")
+      throw new Error("Something went wrong!");
     }
   }
 
@@ -78,8 +82,8 @@ function Chat() {
     <div className="fixed w-[400px] h-[400px] bottom-0 right-0 lg:right-60 bg-white border shadow-sm">
       <div className="flex justify-between items-center border-b-2 p-1 relative bg-gray-50">
         <div className="">
-          {userChat?.personal_details?.fullName}{" "}
-          {userChat?.is_online === true ? (
+          {userChat?.user?.personal_details?.fullName}{" "}
+          {userChat?.user?.is_online === true ? (
             <p className="p-1 rounded-full bg-green-500 inline-block"></p>
           ) : (
             <p className="p-1 rounded-full bg-red-500 inline-block"></p>

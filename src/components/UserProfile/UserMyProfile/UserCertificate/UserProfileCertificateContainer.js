@@ -6,10 +6,10 @@ function UserProfileCertificateContainer() {
   const { user } = useSelector((state) => state.auth);
   return (
     <div>
-      {user?.certificates?.length === 0 && (
+      {user?.user?.certificates?.length === 0 && (
         <p className="text-center">No certificates found!</p>
       )}
-      {user?.certificates?.map((certificate) => (
+      {user?.user?.certificates?.map((certificate) => (
         <div key={certificate?.certificate_id}>
           <UserCertificateCard certificate={certificate} />
         </div>

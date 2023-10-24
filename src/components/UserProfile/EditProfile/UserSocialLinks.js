@@ -16,13 +16,13 @@ function UserSocialLinks() {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
   const [socialLinksData, setSocialLinksData] = useState({
-    github: user?.social_links?.github,
-    linkedin: user?.social_links?.linkedin,
-    leetcode: user?.social_links?.leetcode,
-    hackerrank: user?.social_links?.hackerrank,
-    codechef: user?.social_links?.codechef,
-    geeksforgeek: user?.social_links?.geeksforgeek,
-    portfolio: user?.social_links?.portfolio,
+    github: user?.user?.social_links?.github,
+    linkedin: user?.user?.social_links?.linkedin,
+    leetcode: user?.user?.social_links?.leetcode,
+    hackerrank: user?.user?.social_links?.hackerrank,
+    codechef: user?.user?.social_links?.codechef,
+    geeksforgeek: user?.user?.social_links?.geeksforgeek,
+    portfolio: user?.user?.social_links?.portfolio,
   });
 
   const handleUserSocialLinksInputChange = (e) => {
@@ -35,7 +35,7 @@ function UserSocialLinks() {
     try {
       startLoading();
       await setDoc(
-        doc(db, "users", user?.personal_details.email.split("@")[0]),
+        doc(db, "users", user?.user?.personal_details.email.split("@")[0]),
         {
           social_links: {
             github: socialLinksData.github,
@@ -51,7 +51,7 @@ function UserSocialLinks() {
       );
 
       stopLoading();
-      dispatch(updateUserData(user?.personal_details.email.split("@")[0]));
+      dispatch(updateUserData(user?.user?.personal_details.email.split("@")[0]));
       toast.success("Profile upadated successfully!");
     } catch (err) {
       stopLoading();

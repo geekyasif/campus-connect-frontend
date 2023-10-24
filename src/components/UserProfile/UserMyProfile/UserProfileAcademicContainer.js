@@ -7,7 +7,7 @@ function UserProfileAcademicContainer() {
 
   return (
     <div>
-      <UserAcademicsCard academics={user?.academics} />
+      <UserAcademicsCard academics={user?.user?.academics} />
     </div>
   );
 }

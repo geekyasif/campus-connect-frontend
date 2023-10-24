@@ -84,11 +84,10 @@ const Register = () => {
             is_online: false,
           };
 
-
           await setDoc(doc(db, "users", user?.email.split("@")[0]), data);
 
           dispatch(setAuthToken(user?.accessToken));
-          dispatch(setUser(data));
+          dispatch(setUser({ id: user?.email.split("@")[0], user: data }));
 
           setUserRegistration({
             fullName: "",

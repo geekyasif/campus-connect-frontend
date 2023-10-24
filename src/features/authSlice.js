@@ -63,7 +63,7 @@ export const {
   closeSideNavbar,
   setOpenChatBox,
   setCloseChatBox,
-  setUserChat
+  setUserChat,
 } = authSlice.actions;
 
 export const updateUserData = (username) => async (dispatch) => {
@@ -73,10 +73,10 @@ export const updateUserData = (username) => async (dispatch) => {
     const querySnapshot = await getDocs(q);
 
     querySnapshot.forEach((doc) => {
-      dispatch(setUser(doc.data()));
+      dispatch(setUser({ id: doc.id, user: doc.data() }));
     });
   } catch (error) {
-    throw new Error("Something went wrong!")
+    throw new Error("Something went wrong!");
   }
 };
 export default authSlice.reducer;

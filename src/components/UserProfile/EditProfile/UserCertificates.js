@@ -63,7 +63,7 @@ function UserCertificates() {
     if (certificateImage.prevImage !== "") {
       const storageRef = ref(
         storage,
-        `certificates/${user?.personal_details.email.split("@")[0]}/${
+        `certificates/${user?.user?.personal_details.email.split("@")[0]}/${
           certificateImage.uploadImage.name
         }`
       );
@@ -90,7 +90,7 @@ function UserCertificates() {
         const userDocRef = doc(
           db,
           "users",
-          user?.personal_details.email.split("@")[0]
+          user?.user?.personal_details.email.split("@")[0]
         );
         await updateDoc(
           userDocRef,
@@ -109,7 +109,7 @@ function UserCertificates() {
           { merge: true }
         );
 
-        dispatch(updateUserData(user?.personal_details.email.split("@")[0]));
+        dispatch(updateUserData(user?.user?.personal_details.email.split("@")[0]));
         toast.success("Academics data upadated successfully!");
         setCertificateData({
           certificate_title: "",
@@ -133,7 +133,7 @@ function UserCertificates() {
     e.preventDefault();
 
     try {
-      const oldCertificated = user?.certificates.filter(
+      const oldCertificated = user?.user?.certificates.filter(
         (c) => c.certificate_id !== certificateData.certificate_id
       );
       const updatedCertificates = [...oldCertificated, certificateData];
@@ -141,14 +141,14 @@ function UserCertificates() {
       const userDocRef = doc(
         db,
         "users",
-        user?.personal_details.email.split("@")[0]
+        user?.user?.personal_details.email.split("@")[0]
       );
 
       await updateDoc(userDocRef, {
         certificates: updatedCertificates,
       });
 
-      dispatch(updateUserData(user?.personal_details.email.split("@")[0]));
+      dispatch(updateUserData(user?.user?.personal_details.email.split("@")[0]));
 
       toast.success("Certificate Updated successfully!");
       setCertificateData({
@@ -172,21 +172,21 @@ function UserCertificates() {
   // deleting certicifate
   const handleDeleteCertificate = async (id) => {
     try {
-      const filteredCertificates = user?.certificates.filter(
+      const filteredCertificates = user?.user?.certificates.filter(
         (c) => c.certificate_id !== id
       );
 
       const userDocRef = doc(
         db,
         "users",
-        user?.personal_details.email.split("@")[0]
+        user?.user?.personal_details.email.split("@")[0]
       );
 
       await updateDoc(userDocRef, {
         certificates: filteredCertificates,
       });
 
-      dispatch(updateUserData(user?.personal_details.email.split("@")[0]));
+      dispatch(updateUserData(user?.user?.personal_details.email.split("@")[0]));
       toast.success("Certificate deleted Successfully.");
     } catch (error) {
       toast.error("Something went wrong! Try again");
@@ -310,10 +310,10 @@ function UserCertificates() {
         </form>
       </div>
       <div className="my-2 bg-white border p-4">
-        {user?.certificates?.length === 0 && (
+        {user?.user?.certificates?.length === 0 && (
           <p className="text-center">No certificates found!</p>
         )}
-        {user?.certificates?.map((certificate) => (
+        {user?.user?.certificates?.map((certificate) => (
           <div className=" mb-4" key={certificate.certificate_id}>
             <div className="flex justify-end">
               <FontAwesomeIcon

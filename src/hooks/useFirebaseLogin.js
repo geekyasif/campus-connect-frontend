@@ -19,7 +19,7 @@ function useFirebaseLogin() {
       const querySnapshot = await getDocs(q);
 
       querySnapshot.forEach((doc) => {
-        dispatch(setUser(doc.data()));
+        dispatch(setUser({ id: doc.id, user: doc.data() }));
       });
 
       dispatch(setAuthToken(user?.accessToken));

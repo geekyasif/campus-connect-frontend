@@ -21,7 +21,7 @@ import {
 } from "../../features/authSlice";
 import ChatShimmer from "../chat/ChatShimmer";
 
-function DevCard({ user }) {
+function DevCard({ user, id }) {
   const { authToken, isChatOpen } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const naviagte = useNavigate();
@@ -34,7 +34,7 @@ function DevCard({ user }) {
         setIsChatLoading(true);
         dispatch(setCloseChatBox());
         await new Promise((resolve) => setTimeout(resolve, 200));
-        dispatch(setUserChat(user));
+        dispatch(setUserChat({ user, id }));
         dispatch(setOpenChatBox());
       } catch (error) {
         console.error("Error:", error);

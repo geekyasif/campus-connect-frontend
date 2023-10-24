@@ -7,9 +7,8 @@ import { useDispatch } from "react-redux";
 import { setOpenChatBox, setUserChat } from "../../features/authSlice";
 
 function DevDetailsSidebar({ user }) {
-  const { personal_details, social_links } = user;
+  const { personal_details, social_links } = user?.user;
   const dispatch = useDispatch();
-
 
   return (
     <div className="border bg-white rounded p-4 h-full lg:w-[25%] w-full ">
@@ -118,8 +117,8 @@ function DevDetailsSidebar({ user }) {
         <button
           className="border rounded p-2 text-xs md:text-sm bg-indigo-500 text-center text-white"
           onClick={() => {
-            dispatch(setUserChat(user))
-            dispatch(setOpenChatBox())
+            dispatch(setUserChat(user));
+            dispatch(setOpenChatBox());
           }}
         >
           <FontAwesomeIcon icon={faMessage} className="mr-2" />

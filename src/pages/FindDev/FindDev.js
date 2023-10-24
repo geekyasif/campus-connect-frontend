@@ -48,12 +48,12 @@ function FindDev() {
           <p>No data found!</p>
         </div>
       )}
-      {devsData?.map(({ data }) => (
+      {devsData?.map(({ data, id }) => (
         <div
           className="border shadow m-2 px-4 pt-2 rounded bg-white lg:w-[48%] md:w-full"
-          key={data?.personal_details.username}
+          key={id}
         >
-          <DevCard user={data} />
+          <DevCard user={data} id={id}/>
         </div>
       ))}
     </div>

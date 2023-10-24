@@ -8,31 +8,31 @@ function UserSidebarLinks() {
   return (
     <div className="bg-white shadow lg:w-[15%] w-full h-full lg:p-2 pt-2 lg:pt-0 flex flex-row lg:flex-col flex-wrap">
       <UserSidebarLink
-        url={`${user?.personal_details?.username}`}
+        url={`${user?.user?.personal_details?.username}`}
         label="Personal Details"
       />
 
       <UserSidebarLink
-        url={`${user?.personal_details?.username}/academics`}
+        url={`${user?.user?.personal_details?.username}/academics`}
         label="Academics"
       />
 
       <UserSidebarLink
-        url={`${user?.personal_details?.username}/social-links`}
+        url={`${user?.user?.personal_details?.username}/social-links`}
         label="Social Links"
       />
 
       <UserSidebarLink
-        url={`${user?.personal_details?.username}/certificates`}
+        url={`${user?.user?.personal_details?.username}/certificates`}
         label="Certificates"
       />
       <UserSidebarLink
-        url={`${user?.personal_details?.username}/projects`}
+        url={`${user?.user?.personal_details?.username}/projects`}
         label="Projects"
       />
 
       <UserSidebarLink
-        url={`${user?.personal_details?.username}/change-password`}
+        url={`${user?.user?.personal_details?.username}/change-password`}
         label="Change Password"
       />
     </div>

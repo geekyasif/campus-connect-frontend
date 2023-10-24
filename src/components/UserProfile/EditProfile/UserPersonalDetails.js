@@ -18,20 +18,20 @@ function UserPersonalDetails() {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
   const [profileImage, setProfileImage] = useState({
-    uploadImg: user?.personal_details?.profile_url,
-    prevImage: user?.personal_details?.profile_url,
+    uploadImg: user?.user?.personal_details?.profile_url,
+    prevImage: user?.user?.personal_details?.profile_url,
     downloadUrl: "",
   });
 
   const [personalData, setPersonalData] = useState({
-    fullName: user?.personal_details?.fullName,
-    username: user?.personal_details?.username,
-    email: user?.personal_details?.email,
-    phone: user?.personal_details?.phone,
-    city: user?.personal_details?.city,
-    expertise_in: user?.personal_details?.expertise_in,
-    skills: user?.personal_details?.skills.toString(),
-    about: user?.personal_details?.about,
+    fullName: user?.user?.personal_details?.fullName,
+    username: user?.user?.personal_details?.username,
+    email: user?.user?.personal_details?.email,
+    phone: user?.user?.personal_details?.phone,
+    city: user?.user?.personal_details?.city,
+    expertise_in: user?.user?.personal_details?.expertise_in,
+    skills: user?.user?.personal_details?.skills.toString(),
+    about: user?.user?.personal_details?.about,
   });
 
   // handling personalData
@@ -48,7 +48,7 @@ function UserPersonalDetails() {
 
       const storageRef = ref(
         storage,
-        `profiles/${user?.personal_details.email.split("@")[0]}/${file.name}`
+        `profiles/${user?.user?.personal_details.email.split("@")[0]}/${file.name}`
       );
 
       await uploadBytes(storageRef, file);
@@ -64,12 +64,12 @@ function UserPersonalDetails() {
       const docRef = doc(
         db,
         "users",
-        user?.personal_details?.email.split("@")[0]
+        user?.user?.personal_details?.email.split("@")[0]
       );
       await updateDoc(docRef, {
         "personal_details.profile_url": url,
       });
-      dispatch(updateUserData(user?.personal_details.email.split("@")[0]));
+      dispatch(updateUserData(user?.user?.personal_details.email.split("@")[0]));
       toast.success("Profile picture uploaded successfully!");
     } catch (error) {
       toast.error("Something went wrong! Try again");
@@ -81,12 +81,12 @@ function UserPersonalDetails() {
     try {
       startLoading();
       await setDoc(
-        doc(db, "users", user?.personal_details?.email.split("@")[0]),
+        doc(db, "users", user?.user?.personal_details?.email.split("@")[0]),
         {
           personal_details: {
             fullName: personalData.fullName,
             username: personalData.username,
-            profile_url: user?.personal_details?.profile_url,
+            profile_url: user?.user?.personal_details?.profile_url,
             email: personalData.email,
             phone: personalData.phone,
             city: personalData.city,
@@ -99,7 +99,7 @@ function UserPersonalDetails() {
       );
 
       stopLoading();
-      dispatch(updateUserData(user?.personal_details?.email.split("@")[0]));
+      dispatch(updateUserData(user?.user?.personal_details?.email.split("@")[0]));
       toast.success("Profile upadated successfully!");
     } catch (err) {
       stopLoading();
@@ -127,7 +127,7 @@ function UserPersonalDetails() {
             />
           ) : (
             <Avatar
-              name={user?.personal_details?.fullName}
+              name={user?.user?.personal_details?.fullName}
               round={true}
               size={120}
             />
