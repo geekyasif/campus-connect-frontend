@@ -3,10 +3,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import uuid4 from "uuid4";
 import useCategories from "../../hooks/forum/useCategories";
 import { Link } from "react-router-dom";
-import { arrayUnion, doc, updateDoc } from "firebase/firestore";
+import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { updateUserData } from "../../features/authSlice";
 import toast, { Toaster } from "react-hot-toast";
 import { db } from "../../services/firebase";
@@ -38,28 +37,17 @@ const QueryBox = ({ handleIsModalOpen }) => {
         toast.error("Category field is required!");
       } else {
         const _query = {
-          id: uuid4(),
           title: query.title,
           description: query.description,
           tags: query.tags,
           category: query.category === "" ? "other" : query.category,
-          datetime: `${new Date()}`,
-          comments: [],
+          datetime: serverTimestamp(),
         };
-        const userDocRef = doc(
-          db,
-          "users",
-          user?.personal_details.email.split("@")[0]
-        );
-        await updateDoc(
-          userDocRef,
-          {
-            queries: arrayUnion(_query),
-          },
-          { merge: true }
-        );
 
-        dispatch(updateUserData(user?.personal_details.email.split("@")[0]));
+        const queryRef = collection(db, "users", user?.id, "queries");
+        await addDoc(queryRef, _query);
+
+        dispatch(updateUserData(user?.id));
         toast.success("Query added successfully!");
 
         setQuery({

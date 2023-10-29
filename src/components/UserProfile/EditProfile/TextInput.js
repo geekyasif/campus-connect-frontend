@@ -23,6 +23,7 @@ function TextInput({
         value={value}
         name={name}
         onChange={onChange}
+        disabled={name === "email" && true}
       />
     </div>
   );

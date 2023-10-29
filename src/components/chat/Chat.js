@@ -23,12 +23,6 @@ function Chat() {
       .join("")
   );
 
-
-  console.log("me", me)
-  console.log("useChat", userChat)
-
-  console.log("room", room)
-
   const [message, setMessage] = useState("");
   const [chats, setChats] = useState([]);
   const chatContainerRef = useRef(null);

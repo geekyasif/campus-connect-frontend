@@ -105,7 +105,7 @@ function MobileNavbar() {
             {authToken && (
               <>
                 <NavLink
-                  to={`/my-profile/${user?.personal_details?.username}`}
+                  to={`/my-profile/${user?.user?.personal_details?.username}`}
                   className={({ isActive }) =>
                     isActive
                       ? "bg-indigo-500 text-white my-2 rounded p-2 text-sm"
@@ -119,7 +119,7 @@ function MobileNavbar() {
                   My Profile
                 </NavLink>
                 <NavLink
-                  to={`/edit-profile/${user?.personal_details?.username}`}
+                  to={`/edit-profile/${user?.user?.personal_details?.username}`}
                   className={({ isActive }) =>
                     isActive
                       ? "bg-indigo-500 text-white my-2 rounded p-2 text-sm"
@@ -146,15 +146,15 @@ function MobileNavbar() {
 
                 <div className="fixed bottom-0 left-0 flex flex-row items-center border-t-2 py-2 px-4 w-[260px] bg-white">
                   <div className="rounded-full w-[40px] h-[40px]">
-                    {user?.personal_details.profile_url !== "" ? (
+                    {user?.user?.personal_details.profile_url !== "" ? (
                       <img
                         alt="profile"
-                        src={user?.personal_details?.profile_url}
+                        src={user?.user?.personal_details?.profile_url}
                         className="rounded-full"
                       />
                     ) : (
                       <Avatar
-                        name={user?.personal_details?.fullName}
+                        name={user?.user?.personal_details?.fullName}
                         round={true}
                         size={40}
                       />
@@ -162,10 +162,10 @@ function MobileNavbar() {
                   </div>
                   <div className="ml-4">
                     <p className="text-sm lg:text-lg font-bold">
-                      {user?.personal_details?.fullName}
+                      {user?.user?.personal_details?.fullName}
                     </p>
                     <p className="text-xs lg:text-sm text-gray-500">
-                      @{user?.personal_details?.username}
+                      @{user?.user?.personal_details?.username}
                     </p>
                   </div>
                 </div>

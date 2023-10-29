@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import toast, { Toaster } from "react-hot-toast";
 import { updateUserData } from "../../features/authSlice";
 
-function QueryCard({ query, user }) {
+function QueryCard({ query, user, id }) {
   const { user: userQueries } = useSelector((state) => state.auth);
   const { currentUser } = getAuth();
   const dispatch = useDispatch();
@@ -45,13 +45,13 @@ function QueryCard({ query, user }) {
       <Toaster position="top-right" reverseOrder={false} />
       <div className="flex justify-between">
         <Link
-          to={`/forum/${query.category.split(" ").join("-").toLowerCase()}/${
+          to={`/forum/${query?.category.split(" ").join("-").toLowerCase()}/${
             user.username
-          }/${query.id}`}
+          }/${query?.id}`}
           className="font-semibold text-sm lg:text-base"
         >
           {query.title} |{" "}
-          <span>{query.category.split("-").join(" ").toUpperCase()}</span>{" "}
+          <span>{query?.category.split("-").join(" ").toUpperCase()}</span>{" "}
         </Link>
 
         {user?.email === currentUser?.email && (
@@ -112,7 +112,7 @@ function QueryCard({ query, user }) {
             <p className="text-xs my-2 mx-2"> {user?.username} </p>
           </Link>
           <FontAwesomeIcon icon={faClock} className="w-3 text-gray-600" />
-          <p className="text-xs my-2 mx-2">{query?.datetime.slice(0, 24)}</p>
+          {/* <p className="text-xs my-2 mx-2">{query?.datetime.slice(0, 24)}</p> */}
         </div>
         <div></div>
       </div>

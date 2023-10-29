@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import QueryCard from "./QueryCard";
 import AddQueryModal from "./AddQueryModal";
 import { useSelector } from "react-redux";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, query } from "firebase/firestore";
 import { db } from "../../services/firebase";
 import QueryCardShimmer from "./QueryCardShimmer";
 import toast, { Toaster } from "react-hot-toast";
@@ -28,16 +28,29 @@ function ForumContainer({ title, type }) {
       setLoading(true);
       if (type === "default") {
         const _queries = [];
+
         const querySnapshot = await getDocs(collection(db, "users"));
-        querySnapshot.forEach((doc) => {
-          const _data = doc?.data();
-          if (_data.queries) {
-            if (_data) {
-              _queries.unshift({
-                user: _data?.personal_details,
-                queries: _data?.queries,
-              });
-            }
+
+        // user loop
+        querySnapshot.forEach(async (doc) => {
+          const _querySnapshot = await getDocs(
+            collection(db, "users", doc.id, "queries")
+          );
+
+          const singleUserQueries = {};
+          const __queries = [];
+
+          // query loop
+          _querySnapshot.forEach((_doc) => {
+            __queries.push({ id: _doc.id, ..._doc.data() });
+          });
+
+          singleUserQueries["id"] = doc.id;
+          singleUserQueries["user"] = doc.data();
+          singleUserQueries["queries"] = __queries;
+
+          if (singleUserQueries["queries"].length > 0) {
+            _queries.push(singleUserQueries);
           }
         });
 
@@ -131,6 +144,7 @@ function ForumContainer({ title, type }) {
   useEffect(() => {
     window.scrollTo(0, 0);
     handleFetchQueries();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [title, user]);
 
   useEffect(() => {
@@ -139,6 +153,7 @@ function ForumContainer({ title, type }) {
     }, 300);
 
     return () => clearTimeout(timer);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchQueryText]);
 
   return (
@@ -178,10 +193,10 @@ function ForumContainer({ title, type }) {
             <p>No Query Found !</p>
           </div>
         ) : (
-          queries?.map((data) =>
-            data?.queries.map((query) => (
+          queries?.map((q) =>
+            q?.queries.map((query) => (
               <div key={query.id}>
-                <QueryCard query={query} user={data.user} />
+                <QueryCard query={query} user={q.user} id={q.id} />
               </div>
             ))
           )

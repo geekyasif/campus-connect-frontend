@@ -87,7 +87,7 @@ function UserPersonalDetails() {
             fullName: personalData.fullName,
             username: personalData.username,
             profile_url: user?.user?.personal_details?.profile_url,
-            email: personalData.email,
+            email: user?.user?.personal_details.email,
             phone: personalData.phone,
             city: personalData.city,
             expertise_in: personalData.expertise_in,

@@ -53,14 +53,14 @@ function NewMobileNavbar() {
           {authToken && (
             <>
               <Link
-                to={`/my-profile/${user?.personal_details.username}`}
+                to={`/my-profile/${user?.user?.personal_details.username}`}
                 className="text-gray-700 my-2"
               >
                 <FontAwesomeIcon className="text-gray-700 mr-2" icon={faUser} />
                 My Profile
               </Link>
               <Link
-                to={`/edit-profile/${user?.personal_details.username}`}
+                to={`/edit-profile/${user?.user?.personal_details.username}`}
                 className="text-gray-700 my-2"
               >
                 <FontAwesomeIcon className="text-gray-700 mr-2" icon={faEdit} />
@@ -79,11 +79,11 @@ function NewMobileNavbar() {
 
           <div className="fixed bottom-0 left-0 flex flex-row items-center border-t-2 py-2 px-4 bg-white w-[73%] transition ease-in delay-300">
             <div className="rounded-full w-[50px] h-[50px]">
-              {user?.personal_details.profile_url !== "" ? (
+              {user?.user?.personal_details.profile_url !== "" ? (
                 <img
 alt="profile"
         
-                  src={user?.personal_details.profile_url}
+                  src={user?.user?.personal_details.profile_url}
                   className="rounded-full"
                 />
               ) : (
@@ -91,9 +91,9 @@ alt="profile"
               )}
             </div>
             <div className="ml-4">
-              <p className="text-lg font-bold">{user?.personal_details.name}</p>
+              <p className="text-lg font-bold">{user?.user?.personal_details.name}</p>
               <p className="text-gray-500">
-                @{user?.personal_details.username}
+                @{user?.user?.personal_details.username}
               </p>
             </div>
           </div>
