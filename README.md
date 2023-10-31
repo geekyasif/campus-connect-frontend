@@ -41,3 +41,14 @@ Certificates
         confirm new password
 
 
+
+
+Extra Features
+    Cover image
+    Resume link
+    work history
+    Gender
+    account privacy settings (to show or not)
+        email 
+        phone
+        looking for collaboration

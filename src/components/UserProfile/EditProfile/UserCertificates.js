@@ -309,32 +309,7 @@ function UserCertificates() {
           )}
         </form>
       </div>
-      <div className="my-2 bg-white border p-4">
-        {user?.user?.certificates?.length === 0 && (
-          <p className="text-center">No certificates found!</p>
-        )}
-        {user?.user?.certificates?.map((certificate) => (
-          <div className=" mb-4" key={certificate.certificate_id}>
-            <div className="flex justify-end">
-              <FontAwesomeIcon
-                onClick={() =>
-                  handleDeleteCertificate(certificate.certificate_id)
-                }
-                icon={faTrash}
-                width={12}
-                className="mx-2 text-red-600 cursor-pointer"
-              />
-              <FontAwesomeIcon
-                icon={faPen}
-                width={12}
-                className="mx-2 text-indigo-500 cursor-pointer"
-                onClick={() => handleEditCertificate(certificate)}
-              />
-            </div>
-            <UserCertificateCard certificate={certificate} />
-          </div>
-        ))}
-      </div>
+     
     </div>
   );
 }

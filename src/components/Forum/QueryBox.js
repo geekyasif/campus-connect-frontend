@@ -66,12 +66,6 @@ const QueryBox = ({ handleIsModalOpen }) => {
   return (
     <div className="mx-auto p-6 bg-white rounded shadow ">
       <Toaster position="top-right" reverseOrder={false} />
-      <div className="flex justify-between items-center">
-        <h2 className="text-xl font-bold mb-4">Ask a Question</h2>
-        <button onClick={handleIsModalOpen}>
-          <FontAwesomeIcon icon={faMultiply} />
-        </button>
-      </div>
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
           <label

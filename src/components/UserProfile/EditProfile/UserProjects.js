@@ -318,31 +318,6 @@ function UserProjects() {
           )}
         </form>
       </div>
-
-      <div className="my-4 bg-white border p-4">
-        {user?.user?.projects.length === 0 && (
-          <p className="text-center">No Project found!</p>
-        )}
-        {user?.user?.projects?.map((project) => (
-          <div className=" mb-4" key={project.project_id}>
-            <div className="flex justify-end">
-              <FontAwesomeIcon
-                icon={faTrash}
-                width={12}
-                onClick={() => handleDeleteProject(project.project_id)}
-                className="mx-2 text-red-600 cursor-pointer"
-              />
-              <FontAwesomeIcon
-                icon={faPen}
-                width={12}
-                onClick={() => handleEditProject(project)}
-                className="mx-2 text-indigo-500 cursor-pointer"
-              />
-            </div>
-            <UserProjectCard project={project} />
-          </div>
-        ))}
-      </div>
     </div>
   );
 }
