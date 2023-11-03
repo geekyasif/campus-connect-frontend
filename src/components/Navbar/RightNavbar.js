@@ -103,7 +103,7 @@ function RightNavbar() {
                 </div>
 
                 <Link
-                  to={`/my-profile/${user?.user?.personal_details?.username}`}
+                  to={`/profile/${user?.user?.personal_details?.username}`}
                   className="mt-2 hover:bg-gray-100 rounded transition-al py-2"
                 >
                   <FontAwesomeIcon icon={faEye} className="w-8" />

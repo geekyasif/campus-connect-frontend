@@ -105,7 +105,7 @@ function MobileNavbar() {
             {authToken && (
               <>
                 <NavLink
-                  to={`/my-profile/${user?.user?.personal_details?.username}`}
+                  to={`/profile/${user?.user?.personal_details?.username}`}
                   className={({ isActive }) =>
                     isActive
                       ? "bg-indigo-500 text-white my-2 rounded p-2 text-sm"

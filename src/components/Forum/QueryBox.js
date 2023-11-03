@@ -64,7 +64,7 @@ const QueryBox = ({ handleIsModalOpen }) => {
   };
 
   return (
-    <div className="mx-auto p-6 bg-white rounded shadow ">
+    <div>
       <Toaster position="top-right" reverseOrder={false} />
       <form onSubmit={handleSubmit}>
         <div className="mb-4">

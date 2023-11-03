@@ -8,7 +8,7 @@ import {
   faUsers,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, {  useState } from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
@@ -53,7 +53,7 @@ function NewMobileNavbar() {
           {authToken && (
             <>
               <Link
-                to={`/my-profile/${user?.user?.personal_details.username}`}
+                to={`/profile/${user?.user?.personal_details.username}`}
                 className="text-gray-700 my-2"
               >
                 <FontAwesomeIcon className="text-gray-700 mr-2" icon={faUser} />
@@ -81,8 +81,7 @@ function NewMobileNavbar() {
             <div className="rounded-full w-[50px] h-[50px]">
               {user?.user?.personal_details.profile_url !== "" ? (
                 <img
-alt="profile"
-        
+                  alt="profile"
                   src={user?.user?.personal_details.profile_url}
                   className="rounded-full"
                 />
@@ -91,7 +90,9 @@ alt="profile"
               )}
             </div>
             <div className="ml-4">
-              <p className="text-lg font-bold">{user?.user?.personal_details.name}</p>
+              <p className="text-lg font-bold">
+                {user?.user?.personal_details.name}
+              </p>
               <p className="text-gray-500">
                 @{user?.user?.personal_details.username}
               </p>

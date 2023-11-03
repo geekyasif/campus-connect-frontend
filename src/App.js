@@ -10,14 +10,11 @@ import Footer from "./components/Footer/Footer";
 import DevDetails from "./pages/DevDetails.js/DevDetails";
 
 import UserAcademics from "./components/UserProfile/EditProfile/UserAcademics";
-import UserPersonalDetails from "./components/UserProfile/EditProfile/UserPersonalDetails";
 import UserSocialLinks from "./components/UserProfile/EditProfile/UserSocialLinks";
 import UserChangePassword from "./components/UserProfile/EditProfile/UserChangePassword";
 import UserCertificates from "./components/UserProfile/EditProfile/UserCertificates";
-
 import UserProjects from "./components/UserProfile/EditProfile/UserProjects";
-
-import UserMyProfile from "./pages/User/MyProfile/UserMyProfile";
+import MyProfile from "./pages/User/MyProfile/MyProfile";
 import Forum from "./pages/Forum/Forum";
 import ForgotPassword from "./pages/Authentication/ForgotPassword";
 import ForumContainer from "./components/Forum/ForumContainer";
@@ -25,12 +22,12 @@ import QueryDetails from "./pages/Forum/QueryDetails";
 import ForumCategory from "./pages/Forum/ForumCategory";
 import ForumTag from "./pages/Forum/ForumTag";
 import EditQuery from "./pages/Forum/EditQuery";
+import UserPersonalDetails from "./components/UserProfile/UserPersonalDetails/EditUserPersonalDetails";
 
 function App() {
   return (
     <div>
       <Navbar />
-
       <Routes>
         <Route path="find-dev" element={<FindDev />} />
         <Route path="forum" element={<Forum />}>
@@ -45,7 +42,7 @@ function App() {
         </Route>
         <Route element={<AuthRoute />}>
           <Route path="find-dev/:username" element={<DevDetails />} />
-          <Route path="my-profile/:username" element={<UserMyProfile />} />
+          <Route path="profile/:username" element={<MyProfile />} />
           <Route path="edit-profile/:username" element={<User />}>
             <Route index element={<UserPersonalDetails />} />
             <Route path="academics" element={<UserAcademics />} />

@@ -1,11 +1,12 @@
 import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { closeSideNavbar } from "../../features/authSlice";
+import useUser from "../../hooks/user/useUser";
 
 function Home() {
   const dispatch = useDispatch();
-  const { authToken } = useSelector((state) => state.auth);
+  const { authToken } = useUser();
 
   useEffect(() => {
     dispatch(closeSideNavbar(false));

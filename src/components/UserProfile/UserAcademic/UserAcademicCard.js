@@ -1,6 +1,6 @@
 import React from "react";
 
-function UserAcademicsCard({ academics }) {
+function UserAcademicCard({ academics }) {
   return (
     <div className="flex flex-row">
       <div className="w-1/2">
@@ -35,4 +35,4 @@ function UserAcademicsCard({ academics }) {
   );
 }
 
-export default UserAcademicsCard;
+export default UserAcademicCard;

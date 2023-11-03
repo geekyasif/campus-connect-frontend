@@ -1,15 +1,11 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import UserAcademicsCard from "./UserAcademicsCard";
+import UserAcademicCard from "./UserAcademicCard";
 
 function UserProfileAcademicContainer() {
   const { user } = useSelector((state) => state.auth);
 
-  return (
-    <div>
-      <UserAcademicsCard academics={user?.user?.academics} />
-    </div>
-  );
+  return <UserAcademicCard academics={user?.user?.academics} />;
 }
 
 export default UserProfileAcademicContainer;

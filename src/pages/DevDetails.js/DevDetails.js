@@ -1,15 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import DevDetailsSidebar from "../../components/DevDetails/DevDetailsSidebar";
 import DevDetailsContainer from "../../components/DevDetails/DevDetailsContainer";
-import {
-  collection,
-  doc,
-  getDocs,
-  onSnapshot,
-  query,
-  where,
-} from "firebase/firestore";
+import { collection, getDocs, query, where } from "firebase/firestore";
 import { db } from "../../services/firebase";
 import DevDetailShimmer from "../../components/Shimmer/DevDetailShimmer";
 import Chat from "../../components/chat/Chat";

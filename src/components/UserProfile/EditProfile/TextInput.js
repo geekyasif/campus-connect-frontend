@@ -23,7 +23,7 @@ function TextInput({
         value={value}
         name={name}
         onChange={onChange}
-        disabled={name === "email" && true}
+        disabled={name === "email" || (name === "username" && true)}
       />
     </div>
   );

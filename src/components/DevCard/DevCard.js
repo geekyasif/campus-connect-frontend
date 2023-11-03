@@ -19,7 +19,7 @@ import {
   setOpenChatBox,
   setUserChat,
 } from "../../features/authSlice";
-import ChatShimmer from "../chat/ChatShimmer";
+import ChatShimmer from "../Shimmer/ChatShimmer";
 
 function DevCard({ user, id }) {
   const { authToken, isChatOpen } = useSelector((state) => state.auth);
@@ -154,7 +154,7 @@ function DevCard({ user, id }) {
 
         <div className="flex flex-row lg:justify-end justify-between items-center">
           <Link
-            to={`/find-dev/${user?.personal_details?.username}`}
+            to={`/profile/${user?.personal_details?.username}`}
             state={{
               user,
             }}

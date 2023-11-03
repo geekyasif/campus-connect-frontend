@@ -1,7 +1,7 @@
 import React from "react";
 
-function InputRow(props) {
-  return <div className="flex flex-row gap-1">{props.children}</div>;
+function InputRow({ children }) {
+  return <div className="flex flex-row gap-1 my-4">{children}</div>;
 }
 
 export default InputRow;

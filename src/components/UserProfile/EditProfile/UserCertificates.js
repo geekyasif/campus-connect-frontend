@@ -11,7 +11,7 @@ import "firebase/firestore";
 import { updateUserData } from "../../../features/authSlice";
 import useLoading from "../../../hooks/useLoading";
 import SubmitButton from "./SubmitButton";
-import UserCertificateCard from "../../../components/UserProfile/UserMyProfile/UserCertificate/UserCertificateCard";
+import UserCertificateCard from "../UserCertificate/UserCertificateCard";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
 import uuid4 from "uuid4";
@@ -109,7 +109,9 @@ function UserCertificates() {
           { merge: true }
         );
 
-        dispatch(updateUserData(user?.user?.personal_details.email.split("@")[0]));
+        dispatch(
+          updateUserData(user?.user?.personal_details.email.split("@")[0])
+        );
         toast.success("Academics data upadated successfully!");
         setCertificateData({
           certificate_title: "",
@@ -148,7 +150,9 @@ function UserCertificates() {
         certificates: updatedCertificates,
       });
 
-      dispatch(updateUserData(user?.user?.personal_details.email.split("@")[0]));
+      dispatch(
+        updateUserData(user?.user?.personal_details.email.split("@")[0])
+      );
 
       toast.success("Certificate Updated successfully!");
       setCertificateData({
@@ -186,7 +190,9 @@ function UserCertificates() {
         certificates: filteredCertificates,
       });
 
-      dispatch(updateUserData(user?.user?.personal_details.email.split("@")[0]));
+      dispatch(
+        updateUserData(user?.user?.personal_details.email.split("@")[0])
+      );
       toast.success("Certificate deleted Successfully.");
     } catch (error) {
       toast.error("Something went wrong! Try again");
@@ -220,96 +226,91 @@ function UserCertificates() {
   };
 
   return (
-    <div>
-      <div className="bg-white p-4 shadow">
-        <Toaster position="top-right" reverseOrder={false} />
-        <form
-          onSubmit={
-            isUpdateOn
-              ? handleUpdateCertficateFormData
-              : handleCertficateFormData
-          }
-        >
-          <Thumbnail
-            thumbnail={certificateImage.prevImage}
-            onChange={handleCertificateImage}
-          />
-          <p className="text-center text-[12px] mb-2 text-orange-600">
-            Accept only jpeg, jpg files.
-          </p>
-          <InputRow>
-            <TextInput
-              labelText="Title"
-              typeText="text"
-              placeholderText="title"
-              name="certificate_title"
-              value={certificateData.certificate_title}
-              onChange={handleCertificateDataInputChange}
-            />
-
-            <TextInput
-              labelText="Certificate Url"
-              typeText="text"
-              placeholderText="certificate url"
-              name="certificate_url"
-              value={certificateData.certificate_url}
-              onChange={handleCertificateDataInputChange}
-            />
-          </InputRow>
-          <InputRow>
-            <TextInput
-              labelText="Issue Date"
-              typeText="date"
-              placeholderText="issue date"
-              name="certificate_issue_date"
-              value={certificateData.certificate_issue_date}
-              onChange={handleCertificateDataInputChange}
-            />
-
-            <TextInput
-              labelText="Expire Date"
-              typeText="date"
-              placeholderText="expire date"
-              name="certificate_expire_date"
-              value={certificateData.certificate_expire_date}
-              onChange={handleCertificateDataInputChange}
-            />
-          </InputRow>
-
+    <div className="">
+      <Toaster position="top-right" reverseOrder={false} />
+      <form
+        onSubmit={
+          isUpdateOn ? handleUpdateCertficateFormData : handleCertficateFormData
+        }
+      >
+        <Thumbnail
+          thumbnail={certificateImage.prevImage}
+          onChange={handleCertificateImage}
+        />
+        <p className="text-center text-[12px] mb-2 text-orange-600">
+          Accept only jpeg, jpg files.
+        </p>
+        <InputRow>
           <TextInput
-            labelText="Credential Verification Link"
+            labelText="Title"
             typeText="text"
-            placeholderText="credential verification link"
-            name="credential_verification_link"
-            value={certificateData.credential_verification_link}
+            placeholderText="title"
+            name="certificate_title"
+            value={certificateData.certificate_title}
             onChange={handleCertificateDataInputChange}
           />
 
-          {isUpdateOn ? (
-            <div className="flex justify-center">
-              <button
-                className={` ${
-                  loading ? "bg-indigo-400" : "bg-indigo-500"
-                } border  px-6 py-2 rounded text-white hover:bg-indigo-600 transition-all`}
-                type="submit"
-              >
-                Update
-              </button>
-              <button
-                onClick={handleClearForm}
-                className={` ${
-                  loading ? "bg-indigo-400" : "bg-indigo-500"
-                } border  px-6 py-2 rounded text-white hover:bg-indigo-600 transition-all`}
-              >
-                Cancel
-              </button>
-            </div>
-          ) : (
-            <SubmitButton loading={loading} />
-          )}
-        </form>
-      </div>
-     
+          <TextInput
+            labelText="Certificate Url"
+            typeText="text"
+            placeholderText="certificate url"
+            name="certificate_url"
+            value={certificateData.certificate_url}
+            onChange={handleCertificateDataInputChange}
+          />
+        </InputRow>
+        <InputRow>
+          <TextInput
+            labelText="Issue Date"
+            typeText="date"
+            placeholderText="issue date"
+            name="certificate_issue_date"
+            value={certificateData.certificate_issue_date}
+            onChange={handleCertificateDataInputChange}
+          />
+
+          <TextInput
+            labelText="Expire Date"
+            typeText="date"
+            placeholderText="expire date"
+            name="certificate_expire_date"
+            value={certificateData.certificate_expire_date}
+            onChange={handleCertificateDataInputChange}
+          />
+        </InputRow>
+
+        <TextInput
+          labelText="Credential Verification Link"
+          typeText="text"
+          placeholderText="credential verification link"
+          name="credential_verification_link"
+          value={certificateData.credential_verification_link}
+          onChange={handleCertificateDataInputChange}
+        />
+
+        {isUpdateOn ? (
+          <div className="flex justify-center">
+            <button
+              className={` ${
+                loading ? "bg-indigo-400" : "bg-indigo-500"
+              } border  px-6 py-2 rounded text-white hover:bg-indigo-600 transition-all`}
+              type="submit"
+            >
+              Update
+            </button>
+            <button
+              onClick={handleClearForm}
+              className={` ${
+                loading ? "bg-indigo-400" : "bg-indigo-500"
+              } border  px-6 py-2 rounded text-white hover:bg-indigo-600 transition-all`}
+            >
+              Cancel
+            </button>
+          </div>
+        ) : (
+          <SubmitButton loading={loading} />
+        )}
+      </form>
     </div>
   );
 }

@@ -13,6 +13,7 @@ function UserAcademics() {
   const dispatch = useDispatch();
   const { loading, startLoading, stopLoading } = useLoading();
   const { user } = useSelector((state) => state.auth);
+
   const [academicsData, setAcademicsData] = useState({
     university_name: user?.user?.academics?.university_name,
     location: user?.user?.academics?.location,
@@ -31,6 +32,9 @@ function UserAcademics() {
 
   const handleUserAcademicsFormData = async (e) => {
     e.preventDefault();
+
+    console.log(user);
+    return;
     try {
       startLoading();
       await setDoc(
@@ -51,7 +55,9 @@ function UserAcademics() {
       );
 
       stopLoading();
-      dispatch(updateUserData(user?.user?.personal_details.email.split("@")[0]));
+      dispatch(
+        updateUserData(user?.user?.personal_details.email.split("@")[0])
+      );
       toast.success("Academics data upadated successfully!");
     } catch (err) {
       toast.error("Something went wrong!");
