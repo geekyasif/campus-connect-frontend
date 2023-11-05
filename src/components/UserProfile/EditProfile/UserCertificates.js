@@ -4,7 +4,13 @@ import InputRow from "../../../components/UserProfile/EditProfile/InputRow";
 import { useDispatch, useSelector } from "react-redux";
 import Thumbnail from "../../../components/Thumbnail/Thumbnail";
 import { Toaster, toast } from "react-hot-toast";
-import { arrayUnion, doc, updateDoc } from "firebase/firestore";
+import {
+  addDoc,
+  arrayUnion,
+  collection,
+  doc,
+  updateDoc,
+} from "firebase/firestore";
 import { db, storage } from "../../../services/firebase";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import "firebase/firestore";
@@ -87,32 +93,30 @@ function UserCertificates() {
       const url = await uploadCertificateToFirebaseStorage();
 
       if (url) {
-        const userDocRef = doc(
-          db,
-          "users",
-          user?.user?.personal_details.email.split("@")[0]
-        );
-        await updateDoc(
-          userDocRef,
+        await addDoc(
+          collection(
+            db,
+            "users",
+            `${user?.user?.personal_details.email.split("@")[0]}`,
+            "certificates"
+          ),
           {
-            certificates: arrayUnion({
-              certificate_title: certificateData.certificate_title,
-              certificate_url: certificateData.certificate_url,
-              certificate_image: url,
-              certificate_issue_date: certificateData.certificate_issue_date,
-              certificate_expire_date: certificateData.certificate_expire_date,
-              credential_verification_link:
-                certificateData.credential_verification_link,
-              certificate_id: uuid4(),
-            }),
-          },
-          { merge: true }
+            certificate_title: certificateData.certificate_title,
+            certificate_url: certificateData.certificate_url,
+            certificate_image: url,
+            certificate_issue_date: certificateData.certificate_issue_date,
+            certificate_expire_date: certificateData.certificate_expire_date,
+            credential_verification_link:
+              certificateData.credential_verification_link,
+          }
         );
 
         dispatch(
           updateUserData(user?.user?.personal_details.email.split("@")[0])
         );
-        toast.success("Academics data upadated successfully!");
+
+        toast.success("Certificates added successfully");
+
         setCertificateData({
           certificate_title: "",
           certificate_url: "",
@@ -120,13 +124,10 @@ function UserCertificates() {
           certificate_expire_date: "",
           credential_verification_link: "",
         });
-        stopLoading();
-      } else {
-        stopLoading();
-        toast.error("Before uploading");
       }
     } catch (error) {
       toast.error("Something went wrong!");
+    } finally {
       stopLoading();
     }
   };

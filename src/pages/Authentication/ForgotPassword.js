@@ -27,7 +27,7 @@ function ForgotPassword() {
   };
 
   return (
-    <div className="container mx-auto p-8 m-8">
+    <div className="container mx-auto p-8 m-8 flex items-center justify-center lg:h-screen">
       <Toaster position="top-right" reverseOrder={false} />
       <div className="bg-gray-100 flex flex-col justify-center md:w-1/3 mx-auto p-4 rounded">
         <AuthInput

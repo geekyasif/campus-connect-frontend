@@ -2,18 +2,23 @@ import { faClock, faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { getAuth } from "firebase/auth";
 import { doc, updateDoc } from "firebase/firestore";
-import React from "react";
+import React, { useState } from "react";
 import Avatar from "react-avatar";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { db } from "../../services/firebase";
 import { useDispatch, useSelector } from "react-redux";
 import toast, { Toaster } from "react-hot-toast";
 import { updateUserData } from "../../features/authSlice";
+import useUser from "../../hooks/user/useUser";
+import { BiDotsVerticalRounded } from "react-icons/bi";
 
 function QueryCard({ query, user, id }) {
   const { user: userQueries } = useSelector((state) => state.auth);
-  const { currentUser } = getAuth();
   const dispatch = useDispatch();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { pathname } = useLocation();
+  const user_id = pathname?.split("/")[2];
+  const { user_id: current_user_id } = useUser();
 
   const handleDeleteQuery = async () => {
     try {
@@ -41,9 +46,29 @@ function QueryCard({ query, user, id }) {
   };
 
   return (
-    <div className="border-b-2 my-2 lg:px-4 py-2">
-      <Toaster position="top-right" reverseOrder={false} />
-      <div className="flex justify-between">
+    <div className="border rounded p-2">
+      {current_user_id === user_id && (
+        <div className="flex justify-end relative mb-2">
+          <BiDotsVerticalRounded
+            size={20}
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className="cursor-pointer"
+          />
+          {isMenuOpen && (
+            <div className="flex flex-col justify-end bg-white border transition-all ease-in absolute top-5 right-2 rounded">
+              <p className="mb-2 border-b-2 px-4 py-2 flex gap-2 items-center text-xs">
+                <FontAwesomeIcon icon={faPen} />
+                Edit
+              </p>
+              <p className="px-4 py-2 flex gap-2 items-center text-xs">
+                <FontAwesomeIcon icon={faTrash} /> Delete
+              </p>
+            </div>
+          )}
+        </div>
+      )}
+
+      <div className="flex justify-between p-2">
         <Link
           to={`/forum/${query?.category.split(" ").join("-").toLowerCase()}/${
             user.username
@@ -53,26 +78,8 @@ function QueryCard({ query, user, id }) {
           {query.title} |{" "}
           <span>{query?.category.split("-").join(" ").toUpperCase()}</span>{" "}
         </Link>
-
-        {user?.email === currentUser?.email && (
-          <div className="flex justify-end items-center">
-            <FontAwesomeIcon
-              onClick={handleDeleteQuery}
-              icon={faTrash}
-              width={10}
-              className="mx-2 text-red-600 cursor-pointer"
-            />
-            <Link to={`/forum/edit/${user?.username}/${query?.id}`}>
-              <FontAwesomeIcon
-                icon={faPen}
-                width={10}
-                className="mx-2 text-indigo-500 cursor-pointer"
-              />
-            </Link>
-          </div>
-        )}
       </div>
-      <div className="flex">
+      <div className="flex px-2">
         {query?.tags?.split(",").map((tag) => (
           <Link
             to={`/forum/tag/${tag}`}
@@ -84,7 +91,7 @@ function QueryCard({ query, user, id }) {
         ))}
       </div>
       <p
-        className="text-xs lg:text-sm text-gray-500 mb-2"
+        className="text-xs lg:text-sm text-gray-500 mb-2 px-2"
         style={{
           display: "-webkit-box",
           WebkitBoxOrient: "vertical",
@@ -94,12 +101,9 @@ function QueryCard({ query, user, id }) {
       >
         {query.description}
       </p>
-      <div className="flex justify-between items-center">
+      <div className="flex justify-between items-center px-2">
         <div className="flex items-center">
-          <Link
-            to={`/find-dev/${user?.username}`}
-            className="flex items-center"
-          >
+          <Link to={`/profile/${user?.username}`} className="flex items-center">
             {user?.profile_url ? (
               <img
                 alt="profile"

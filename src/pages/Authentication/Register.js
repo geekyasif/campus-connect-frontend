@@ -123,7 +123,7 @@ const Register = () => {
   }
 
   return (
-    <div className=" container mx-auto p-8 m-8 h-full lg:h-screen">
+    <div className=" container mx-auto p-8 m-8 h-full flex justify-center items-center lg:h-screen">
       <Toaster position="top-right" reverseOrder={false} />
       <div className="bg-gray-100 flex flex-col justify-center md:w-1/3 mx-auto p-4 rounded">
         <h2 className="text-center text-base lg:text-xl  text-indigo-600 font-bold">

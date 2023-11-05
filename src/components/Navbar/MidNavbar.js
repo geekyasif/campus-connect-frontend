@@ -30,6 +30,14 @@ function MidNavbar() {
       >
         Forum
       </NavLink>
+      <NavLink
+        className={({ isActive }) =>
+          isActive ? " text-[#6366F1] ml-8" : "ml-8"
+        }
+        to="/chats"
+      >
+        Chat
+      </NavLink>
     </div>
   );
 }

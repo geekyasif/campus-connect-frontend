@@ -13,21 +13,15 @@ function Home() {
   }, []);
 
   return (
-    <div className=" w-full h-full container mx-auto mt-8 px-4">
+    <div className="h-screen container mx-auto mt-8 px-4">
       <div className="md:flex md:flex-row md:justify-between items-center">
         <div className="md:text-center">
           <h1 className="text-2xl font-bold md:text-xl lg:text-3xl ">
             Welcome To Campus Connect
           </h1>
-          <p className="mb-2 text-xs md:my-2">
+          <p className="mb-2 text-sm md:my-2">
             Platform for connect, collab, build and learn new skills
           </p>
-          <Link
-            className="bg-indigo-500 p-2 rounded text-white text-xs md:text-sm"
-            to={authToken ? "/find-dev" : "/login"}
-          >
-            Connects with Devs
-          </Link>
         </div>
         <div className="">
           <img alt="profile" src="/startup-210.svg" />
@@ -40,10 +34,10 @@ function Home() {
         </div>
 
         <div className=" md:w-1/2">
-          <h1 className="my-4 text-2xl font-bold">
+          <h1 className="my-4 text-3xl font-bold">
             Platform for connect, collab, build and learn new skills
           </h1>
-          <p className="text-xs">
+          <p className="text-sm">
             A platform for university students can connect them with peers,
             mentors, and potential collaborators to enhance their educational
             experience. It offers resources for learning new skills,

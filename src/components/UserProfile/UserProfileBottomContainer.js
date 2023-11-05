@@ -16,6 +16,8 @@ import UserProjectCard from "./UserProject/UserProjectCard";
 import UserProjects from "./EditProfile/UserProjects";
 import Modal from "../Modal/Modal";
 import UserQueriesContainer from "./UserQuery/UserQueriesContainer";
+import UserMyProfileProjectContainer from "./UserProject/UserMyProfileProjectContainer";
+import UserProfileCertificateContainer from "./UserCertificate/UserProfileCertificateContainer";
 
 function UserProfileBottomContainer({ user }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -45,7 +47,7 @@ function UserProfileBottomContainer({ user }) {
         title="Queries"
         user={user}
         icon={<ImQuestion className="text-red-800" />}
-        element={<UserQueriesContainer />}
+        element={<UserQueriesContainer user={user} />}
         button={
           <AddButton
             callback={showModal}
@@ -58,7 +60,7 @@ function UserProfileBottomContainer({ user }) {
         title="Academics"
         user={user}
         icon={<ImBooks className="text-white bg-blue-500" />}
-        element={<UserProfileAcademicContainer />}
+        element={<UserProfileAcademicContainer user={user} />}
         button={
           <AddButton
             callback={showModal}
@@ -71,19 +73,7 @@ function UserProfileBottomContainer({ user }) {
         title="Certificates"
         user={user}
         icon={<ImProfile className="text-yellow-500" />}
-        element={
-          <div className="">
-            {user?.user?.certificates?.length === 0 && (
-              <p className="text-center">No certificates found!</p>
-            )}
-            {user?.user?.certificates?.map((certificate) => (
-              <UserCertificateCard
-                certificate={certificate}
-                key={certificate.certificate_id}
-              />
-            ))}
-          </div>
-        }
+        element={<UserProfileCertificateContainer user={user} />}
         button={
           <AddButton
             callback={showModal}
@@ -96,16 +86,7 @@ function UserProfileBottomContainer({ user }) {
         title="Projects"
         user={user}
         icon={<ImRocket className="text-red-600" />}
-        element={
-          <div className="flex flex-row gap-2">
-            {user?.user?.projects.length === 0 && (
-              <p className="text-center">No Project found!</p>
-            )}
-            {user?.user?.projects?.map((project) => (
-              <UserProjectCard project={project} key={project.project_id} />
-            ))}
-          </div>
-        }
+        element={<UserMyProfileProjectContainer user={user} />}
         button={
           <AddButton
             callback={showModal}

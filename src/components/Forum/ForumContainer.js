@@ -144,7 +144,7 @@ function ForumContainer({ title, type }) {
   useEffect(() => {
     window.scrollTo(0, 0);
     handleFetchQueries();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [title, user]);
 
   useEffect(() => {
@@ -153,11 +153,11 @@ function ForumContainer({ title, type }) {
     }, 300);
 
     return () => clearTimeout(timer);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchQueryText]);
 
   return (
-    <div className="w-full lg:w-[78%] bg-white rounded">
+    <div className="w-full lg:w-[78%] bg-white rounded mb-4">
       <Toaster position="top-right" reverseOrder={false} />
       <div className="bg-gray-100  flex justify-between border items-center p-2 flex-wrap lg:flex-nowrap">
         <p className="px-1 lg:px-2 font-bold lg:mb-0 mb-2 w-full">{title}</p>
@@ -178,7 +178,7 @@ function ForumContainer({ title, type }) {
         </div>
       </div>
 
-      <div className="bg-white rounded ">
+      <div className="bg-white rounded flex flex-col gap-2 p-2">
         {loading &&
           Array(10)
             .fill(0)

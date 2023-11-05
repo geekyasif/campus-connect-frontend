@@ -3,7 +3,14 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Thumbnail from "../../../components/Thumbnail/Thumbnail";
 import { Toaster, toast } from "react-hot-toast";
-import { arrayUnion, doc, updateDoc } from "firebase/firestore";
+import {
+  addDoc,
+  arrayUnion,
+  collection,
+  doc,
+  query,
+  updateDoc,
+} from "firebase/firestore";
 import { db, storage } from "../../../services/firebase";
 import { getDownloadURL, uploadBytes, ref } from "firebase/storage";
 import { v4 as uuid4 } from "uuid";
@@ -67,6 +74,7 @@ function UserProjects() {
 
     try {
       startLoading();
+
       const storageRef = ref(
         storage,
         `projects/${user?.user?.personal_details.email.split("@")[0]}/${
@@ -77,29 +85,24 @@ function UserProjects() {
       await uploadBytes(storageRef, projectImage.uploadImage);
       const url = await getDownloadURL(storageRef);
       if (url) {
-        const userDocRef = doc(
-          db,
-          "users",
-          user?.user?.personal_details.email.split("@")[0]
-        );
-        await updateDoc(
-          userDocRef,
+        await addDoc(
+          collection(
+            db,
+            "users",
+            `${user?.user?.personal_details.email.split("@")[0]}`,
+            "projects"
+          ),
           {
-            projects: arrayUnion({
-              project_title: projectData.project_title,
-              project_image: url,
-              project_source_code_link: projectData.project_source_code_link,
-              project_deployment_link: projectData.project_deployment_link,
-              project_demo_link: projectData.project_demo_link,
-              project_tech_stack: projectData.project_tech_stack,
-              project_date: projectData.project_date,
-              project_description: projectData.project_description,
-              project_id: uuid4(),
-            }),
-          },
-          { merge: true }
+            project_title: projectData.project_title,
+            project_image: url,
+            project_source_code_link: projectData.project_source_code_link,
+            project_deployment_link: projectData.project_deployment_link,
+            project_demo_link: projectData.project_demo_link,
+            project_tech_stack: projectData.project_tech_stack,
+            project_date: projectData.project_date,
+            project_description: projectData.project_description,
+          }
         );
-
         dispatch(
           updateUserData(user?.user?.personal_details.email.split("@")[0])
         );

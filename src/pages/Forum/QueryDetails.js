@@ -149,7 +149,7 @@ function QueryDetails() {
             <div className="flex justify-between items-center">
               <div className="flex items-center ">
                 <Link
-                  to={`/find-dev/${query?.user?.username}`}
+                  to={`/profile/${query?.user?.username}`}
                   className="flex items-center"
                 >
                   {query?.user?.profile_url ? (

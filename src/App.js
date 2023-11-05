@@ -23,12 +23,17 @@ import ForumCategory from "./pages/Forum/ForumCategory";
 import ForumTag from "./pages/Forum/ForumTag";
 import EditQuery from "./pages/Forum/EditQuery";
 import UserPersonalDetails from "./components/UserProfile/UserPersonalDetails/EditUserPersonalDetails";
+import Chat from "./pages/Chat/Chat";
+import Chatting from "./pages/Chat/Chatting";
 
 function App() {
   return (
     <div>
       <Navbar />
       <Routes>
+        <Route path="chats" element={<Chat />}>
+          <Route path=":chatId" element={<Chatting />} />
+        </Route>
         <Route path="find-dev" element={<FindDev />} />
         <Route path="forum" element={<Forum />}>
           <Route

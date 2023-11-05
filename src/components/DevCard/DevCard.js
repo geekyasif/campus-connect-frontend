@@ -71,7 +71,7 @@ function DevCard({ user, id }) {
               {user?.personal_details?.fullName}
             </p>
             <div className="flex flex-row items-center">
-              {user?.social_links.github && (
+              {user?.social_links?.github && (
                 <a
                   className="mr-2 md:mr-4 text-xs text-indigo-600"
                   href={user?.social_links?.github}
@@ -81,7 +81,7 @@ function DevCard({ user, id }) {
                   Github
                 </a>
               )}
-              {user?.social_links.linkedin && (
+              {user?.social_links?.linkedin && (
                 <a
                   href={user?.social_links?.linkedin}
                   target="_blank"
@@ -124,8 +124,8 @@ function DevCard({ user, id }) {
           Skills
         </p>
         <div className="flex flex-row flex-wrap">
-          {user?.personal_details?.skills.length !== 0 &&
-            user?.personal_details?.skills.split(",").map((skill, i) => (
+          {user?.personal_details?.skills?.length !== 0 &&
+            user?.personal_details?.skills?.split(",")?.map((skill, i) => (
               <p
                 className="p-1 border rounded mr-1 my-1 text-xs text-indigo-500"
                 key={skill + i}

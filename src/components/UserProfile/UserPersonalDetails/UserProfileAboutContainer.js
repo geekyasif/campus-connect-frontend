@@ -37,33 +37,41 @@ function UserProfileAboutContainer({ user }) {
   };
 
   return (
-    <div className="p-2 md:w-[85%]">
-      <div className="flex justify-between">
+    <div className="p-2 w-full md:w-[85%]">
+      <div className="flex flex-col lg:flex-row justify-between">
         <div className="">
-          <p className="text-lg lg:text-3xl font-bold flex items-center gap-2">
-            {user?.user?.personal_details?.fullName}
+          <div className="flex flex-row gap-2 items-center">
+            <p className="text-base lg:text-3xl font-bold flex items-center gap-2">
+              {user?.user?.personal_details?.fullName}
+            </p>
             {current_user === user?.id && isOpenToCollab && (
-              <span className="bg-green-700 text-sm text-white px-2 rounded-full">
+              <p className="bg-green-700 text-[8px] lg:text-sm text-white px-1 lg:px-2 rounded-full">
                 Open For Collaboration
-              </span>
+              </p>
             )}
-          </p>
+          </div>
 
           {user?.user?.personal_details?.expertise_in && (
             <p className="text-xs lg:text-base text-gray-500 font-semibold flex gap-2 my-2">
               <ImFire /> {user?.user?.personal_details?.expertise_in}
             </p>
           )}
+          {user?.user?.personal_details?.city && (
+            <p className="text-xs lg:text-base text-gray-500 font-semibold flex gap-2 items-center ">
+              <ImLocation />
+              {user?.user?.personal_details?.city}
+            </p>
+          )}
         </div>
-        <div>
-          <div className="flex gap-2">
-            <button className="flex gap-2 items-center text-xs px-2 py-1 rounded border-blue-500 border-[1px]">
+        <div className="mt-2 lg:mt-0">
+          <div className="flex flex-row gap-2">
+            <button className="flex gap-2 items-center text-xs px-2 py-1 rounded border-blue-500 border-[1px] flex-grow justify-center">
               <ImShare2 className="text-xs" size={10} />
               Share
             </button>
             {current_user === user?.id && (
               <button
-                className="flex gap-2 items-center text-xs border px-2 py-1  rounded bg-red-600 text-white"
+                className="flex gap-2 items-center text-xs border px-2 py-1  rounded bg-red-600 text-white flex-grow justify-center"
                 onClick={() => showModal(<UserPersonalDetails />)}
               >
                 <ImPencil />
@@ -87,14 +95,8 @@ function UserProfileAboutContainer({ user }) {
       </div>
 
       <div>
-        {user?.user?.personal_details?.city && (
-          <p className="text-xs lg:text-base text-gray-500 font-semibold flex gap-2 items-center ">
-            <ImLocation />
-            {user?.user?.personal_details?.city}
-          </p>
-        )}
         {user?.user?.personal_details?.skills && (
-          <div className="flex flex-row gap-2 my-4 pb-2">
+          <div className="flex flex-wrap flex-row gap-2 my-4 pb-2">
             {user?.user?.personal_details?.skills?.split(",")?.map((skill) => (
               <p className="px-2 py-1 text-xs lg:text-base rounded bg-blue-50 text-blue-500 font-medium">
                 {skill}
@@ -103,7 +105,7 @@ function UserProfileAboutContainer({ user }) {
           </div>
         )}
         <div className="flex flex-col lg:flex-row lg:flex-wrap lg:justify-between lg:items-center border-t-2 py-2 mt-2">
-          <div className="flex flex-wrap gap-1 justify-between items-center mb-2 border-b-2 pb-2 lg:border-b-0 lg:pb-0">
+          <div className="flex flex-wrap gap-2 items-center mb-2 border-b-2 pb-2 lg:border-b-0 lg:pb-0">
             <SocialIcon
               link={user?.user?.social_links?.github}
               element={<ImGithub />}
