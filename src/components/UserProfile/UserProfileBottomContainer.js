@@ -18,6 +18,8 @@ import Modal from "../Modal/Modal";
 import UserQueriesContainer from "./UserQuery/UserQueriesContainer";
 import UserMyProfileProjectContainer from "./UserProject/UserMyProfileProjectContainer";
 import UserProfileCertificateContainer from "./UserCertificate/UserProfileCertificateContainer";
+import UserAcademicCard from "./UserAcademic/UserAcademicCard";
+import UserAcademics from "./EditProfile/UserAcademics";
 
 function UserProfileBottomContainer({ user }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -28,11 +30,13 @@ function UserProfileBottomContainer({ user }) {
     setModalTitle(title);
     setElement(el);
     setIsModalOpen(true);
+    document.body.style.overflow = "hidden";
   };
 
   const closeModal = () => {
     setElement(null);
     setIsModalOpen(false);
+    document.body.style.overflow = "auto";
   };
 
   return (
@@ -64,7 +68,7 @@ function UserProfileBottomContainer({ user }) {
         button={
           <AddButton
             callback={showModal}
-            element={<UserCertificates />}
+            element={<UserAcademics />}
             title="Add Academic"
           />
         }

@@ -40,7 +40,7 @@ function Navbar() {
   return (
     <div className="bg-white p-4 border-b-2 sticky top-0 z-10">
       <Toaster position="top-right" reverseOrder={false} />
-      <div className="container mx-auto flex flex-row justify-between items-center relative flex-wrap">
+      <div className="container mx-auto flex flex-row justify-between items-center relative flex-wrap gap-3">
         <LeftNavbar />
         {pathname.split("/")[1] === "find-dev" && (
           <div>

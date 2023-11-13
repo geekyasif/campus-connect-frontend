@@ -10,19 +10,41 @@ import TextInput from "./TextInput";
 import InputRow from "./InputRow";
 import SubmitButton from "./SubmitButton";
 import useLoading from "../../../hooks/useLoading";
+import useUser from "../../../hooks/user/useUser";
 
 function UserSocialLinks() {
   const { loading, startLoading, stopLoading } = useLoading();
   const dispatch = useDispatch();
-  const { user } = useSelector((state) => state.auth);
+  const { user, user_id } = useUser();
   const [socialLinksData, setSocialLinksData] = useState({
-    github: user?.user?.social_links?.github,
-    linkedin: user?.user?.social_links?.linkedin,
-    leetcode: user?.user?.social_links?.leetcode,
-    hackerrank: user?.user?.social_links?.hackerrank,
-    codechef: user?.user?.social_links?.codechef,
-    geeksforgeek: user?.user?.social_links?.geeksforgeek,
-    portfolio: user?.user?.social_links?.portfolio,
+    github:
+      user?.social_links?.github !== undefined
+        ? user?.social_links?.github
+        : "",
+    linkedin:
+      user?.social_links?.linkedin !== undefined
+        ? user?.social_links?.linkedin
+        : "",
+    leetcode:
+      user?.social_links?.leetcode !== undefined
+        ? user?.social_links?.leetcode
+        : "",
+    hackerrank:
+      user?.social_links?.hackerrank !== undefined
+        ? user?.social_links?.hackerrank
+        : "",
+    codechef:
+      user?.social_links?.codechef !== undefined
+        ? user?.social_links?.codechef
+        : "",
+    geeksforgeek:
+      user?.social_links?.geeksforgeek !== undefined
+        ? user?.social_links?.geeksforgeek
+        : "",
+    portfolio:
+      user?.social_links?.portfolio !== undefined
+        ? user?.social_links?.portfolio
+        : "",
   });
 
   const handleUserSocialLinksInputChange = (e) => {
@@ -35,7 +57,7 @@ function UserSocialLinks() {
     try {
       startLoading();
       await setDoc(
-        doc(db, "users", user?.user?.personal_details.email.split("@")[0]),
+        doc(db, "users", user_id),
         {
           social_links: {
             github: socialLinksData.github,
@@ -51,10 +73,11 @@ function UserSocialLinks() {
       );
 
       stopLoading();
-      dispatch(updateUserData(user?.user?.personal_details.email.split("@")[0]));
+      dispatch(updateUserData(user_id));
       toast.success("Profile upadated successfully!");
     } catch (err) {
       stopLoading();
+      console.log(err);
       toast.error("Something went wrong!");
     }
   };

@@ -30,7 +30,7 @@ function FindDev() {
   }, []);
 
   return (
-    <div className="container mx-auto md:flex md:flex-row md:flex-wrap relative">
+    <div className="container mx-auto md:flex md:flex-row md:flex-wrap relative gap-2 lg:my-4 p-2 lg:p-0 my-2">
       {loading &&
         Array(6)
           .fill(0)
@@ -49,12 +49,7 @@ function FindDev() {
         </div>
       )}
       {devsData?.map(({ data, id }) => (
-        <div
-          className="border shadow m-2 px-4 pt-2 rounded bg-white lg:w-[48%] md:w-full"
-          key={id}
-        >
-          <DevCard user={data} id={id}/>
-        </div>
+        <DevCard user={data} id={id} key={id} />
       ))}
     </div>
   );

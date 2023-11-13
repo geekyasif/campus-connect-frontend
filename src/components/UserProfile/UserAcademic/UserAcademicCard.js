@@ -9,7 +9,7 @@ import { useLocation } from "react-router-dom";
 import useUser from "../../../hooks/user/useUser";
 import { BiDotsVerticalRounded } from "react-icons/bi";
 
-function UserAcademicCard({ academics }) {
+function UserAcademicCard({ academic, id }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { pathname } = useLocation();
   const user_id = pathname?.split("/")[2];
@@ -42,18 +42,25 @@ function UserAcademicCard({ academics }) {
           <FontAwesomeIcon icon={faUniversity} />
         </div>
         <div className="w-[90%] ">
-          <p className="text-xl font-bold">{academics?.enrol_in_branch_name}</p>
-          <div className="flex justify-between w-full ">
-            <p className="text-base text-gray-500">
-              {academics?.university_name},<span>{academics?.location} </span>
+          <div className="flex justify-between w-full mt-4">
+            <p className="text-xl font-bold">
+              {academic?.degree} | {academic?.qualification}
             </p>
 
             <div className="flex">
-              <p className="text-xs lg:text-base">{academics?.current_year}-</p>
-              <p className="text-xs lg:text-base">
-                {academics?.year_of_passing}
-              </p>
+              <p className="text-xs lg:text-base">{academic?.start_year}-</p>
+              <p className="text-xs lg:text-base">{academic?.end_year}</p>
             </div>
+          </div>
+          <p className="text-base text-gray-500">
+            {academic?.percentage} % | {academic?.cgpa} CGPA
+          </p>
+
+          <div>
+            <p className="text-base text-gray-500">
+              {academic?.university_name}
+            </p>
+            <p className="text-base text-gray-500">{academic?.location}</p>
           </div>
         </div>
       </div>
