@@ -6,7 +6,7 @@ const initialState = {
   user: null,
   loading: false,
   error: null,
-  authToken: null,
+  authToken: "12345",
   isSideNavbarOpen: false,
   isChatOpen: false,
   userChat: null,

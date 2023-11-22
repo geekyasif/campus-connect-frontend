@@ -31,20 +31,13 @@ function App() {
     <div>
       <Navbar />
       <Routes>
-        <Route path="chats" element={<Chat />}>
-          <Route path=":chatId" element={<Chatting />} />
-        </Route>
-        <Route path="find-dev" element={<FindDev />} />
-        <Route path="forum" element={<Forum />}>
-          <Route
-            index
-            element={<ForumContainer title="Recent Queries" type="default" />}
-          />
-          <Route path="category/:category" element={<ForumCategory />} />
-          <Route path="tag/:tag" element={<ForumTag />} />
-          <Route path=":category/:username/:id" element={<QueryDetails />} />
-          <Route path="edit/:username/:id" element={<EditQuery />} />
-        </Route>
+        {/* Public Routes  */}
+        <Route path="/" element={<Home />} />
+        <Route path="login" element={<Login />} />
+        <Route path="register" element={<Register />} />
+        <Route path="forgot-password" element={<ForgotPassword />} />
+
+        {/* Authenticated Routes  */}
         <Route element={<AuthRoute />}>
           <Route path="find-dev/:username" element={<DevDetails />} />
           <Route path="profile/:username" element={<MyProfile />} />
@@ -57,10 +50,22 @@ function App() {
             <Route path="change-password" element={<UserChangePassword />} />
           </Route>
         </Route>
-        <Route path="/" element={<Home />} />
-        <Route path="login" element={<Login />} />
-        <Route path="register" element={<Register />} />
-        <Route path="forgot-password" element={<ForgotPassword />} />
+
+        <Route path="chats" element={<Chat />}>
+          <Route path=":chatId" element={<Chatting />} />
+        </Route>
+
+        <Route path="find-dev" element={<FindDev />} />
+        <Route path="forum" element={<Forum />}>
+          <Route
+            index
+            element={<ForumContainer title="Recent Queries" type="default" />}
+          />
+          <Route path="category/:category" element={<ForumCategory />} />
+          <Route path="tag/:tag" element={<ForumTag />} />
+          <Route path=":category/:username/:id" element={<QueryDetails />} />
+          <Route path="edit/:username/:id" element={<EditQuery />} />
+        </Route>
       </Routes>
       <Footer />
     </div>

@@ -1,20 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
-import { closeSideNavbar, setUser } from "../../features/authSlice";
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth, db } from "../../services/firebase";
+import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
+import { closeSideNavbar } from "../../features/authSlice";
 import { Toaster, toast } from "react-hot-toast";
-import { doc, setDoc } from "firebase/firestore";
-import { setAuthToken } from "../../features/authSlice";
 import AuthInput from "../../components/AuthenticationForm/AuthInput";
 import AuthButton from "../../components/AuthenticationForm/AuthButton";
+import useRegister from "../../hooks/authentication/registration/useRegister";
 
 const Register = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const { authToken } = useSelector((state) => state.auth);
-  const [loading, setLoading] = useState(false);
+  const { loading, RegisterApi } = useRegister();
   const [userRegistration, setUserRegistration] = useState({
     fullName: "",
     email: "",
@@ -32,78 +27,24 @@ const Register = () => {
 
   const handleRegistrationFormData = async (e) => {
     e.preventDefault();
-    try {
-      setLoading(true);
-      const { fullName, email, password, confirm_password } = userRegistration;
-      if (
-        fullName !== "" ||
-        email !== "" ||
-        password !== "" ||
-        confirm_password !== ""
-      ) {
-        if (password === confirm_password) {
-          const { user } = await createUserWithEmailAndPassword(
-            auth,
-            email,
-            password
-          );
-
-          const data = {
-            personal_details: {
-              fullName: userRegistration.fullName,
-              username: user?.email.split("@")[0],
-              email: user?.email,
-              phone: "",
-              city: "",
-              profile_url: "",
-              resume: "",
-              skills: "",
-              expertise_in: "",
-              about: "",
-            },
-            is_online: false,
-            open_for_collab: false,
-            show_email: false,
-            show_phone: false,
-          };
-
-          await setDoc(doc(db, "users", user?.email.split("@")[0]), data);
-
-          dispatch(setAuthToken(user?.accessToken));
-          dispatch(setUser({ id: user?.email.split("@")[0], user: data }));
-
-          setUserRegistration({
-            fullName: "",
-            email: "",
-            password: "",
-            confirm_password: "",
-          });
-          toast.success("User registered successfully! Login to continue.");
-          setLoading(false);
-          navigate("/login", {
-            state: "User registered successfully! Login to continue.",
-          });
-        } else {
-          setLoading(false);
-          toast.error("Password doesn't matched!");
-        }
-      } else {
-        setLoading(false);
-        toast.error("All fields are required!");
-      }
-    } catch (error) {
-      setLoading(false);
-      toast.error(error.code);
+    const error = await RegisterApi(userRegistration);
+    if (error) {
+      console.log(error);
+      toast.error(error.toString());
+      return;
     }
+
+    setUserRegistration({
+      fullName: "",
+      email: "",
+      password: "",
+      confirm_password: "",
+    });
   };
 
   useEffect(() => {
     dispatch(closeSideNavbar(false));
   }, []);
-
-  if (authToken) {
-    return navigate("/");
-  }
 
   return (
     <div className=" container mx-auto p-8 m-8 h-full flex justify-center items-center lg:h-screen">

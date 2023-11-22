@@ -23,6 +23,18 @@ const Login = () => {
     password: "",
   });
 
+  // const url = new URL(window.location.href);
+  // const is_email_verified = url.searchParams.get("email-verified");
+  // const email = url.searchParams.get("email");
+  // const token = url.searchParams.get("token");
+
+  // useEffect(() => {
+  //   if (is_email_verified) {
+  //     toast.success("You email is verified! Now you can login!");
+  //     // send request to backend to get user details
+  //   }
+  // }, []);
+
   // custom hooks
   const { startLoading, stopLoading, loading } = useLoading();
   const { firebaseLogin } = useFirebaseLogin();
@@ -35,6 +47,14 @@ const Login = () => {
     });
   };
 
+  async function handleUpdateUserOnlineStatus() {
+    const username = user?.personal_details?.username;
+    const docRef = doc(db, "users", username);
+    await updateDoc(docRef, {
+      is_online: true,
+    });
+  }
+
   // Handling Login Form
   const handleFormSubmit = async (e) => {
     e.preventDefault();
@@ -45,6 +65,7 @@ const Login = () => {
       userCredential.password
     );
     if (res) {
+      console.log(res);
       toast.error(res);
     }
     stopLoading();
@@ -53,14 +74,6 @@ const Login = () => {
   useEffect(() => {
     dispatch(closeSideNavbar(false));
   }, []);
-
-  async function handleUpdateUserOnlineStatus() {
-    const username = user?.personal_details?.username;
-    const docRef = doc(db, "users", username);
-    await updateDoc(docRef, {
-      is_online: true,
-    });
-  }
 
   // Redirect to login page if token is null
   if (authToken) {

@@ -74,13 +74,13 @@ function DevCard({ user, id }) {
                 />
               )}
             </div>
-            <button
+            {/* <button
               className="border rounded p-1 text-xs  bg-indigo-500 text-center text-white absolute top-[65px] left-2"
               onClick={handleChatBox}
             >
               <FontAwesomeIcon icon={faMessage} className="mr-2" />
               Message
-            </button>
+            </button> */}
           </div>
           <div className="w-[70%] lg:flex-grow px-2">
             <div className="text-center flex flex-row justify-between items-center">
