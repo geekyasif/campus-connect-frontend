@@ -2,7 +2,7 @@ import { faMessage } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import Avatar from "react-avatar";
-import toast, { Toaster } from "react-hot-toast";
+import { Toaster } from "react-hot-toast";
 import { useDispatch } from "react-redux";
 import { setOpenChatBox, setUserChat } from "../../features/authSlice";
 
